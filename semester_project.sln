@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2005
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{A0786B88-2ADB-4C21-ABE8-AA2D79766269}") = "web_server", "web_server\web_server.phpproj", "{56A46626-940B-45AB-841F-F2BF54A0BAED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "app_android", "app_android\app_android.csproj", "{0C5F8AE0-B401-4DD0-B1D9-A6CB86B136C3}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "app_lib", "app_lib\app_lib.shproj", "{B28A06A4-FAF4-47A7-8836-12A0C44E5726}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		app_lib\app_lib.projitems*{b28a06a4-faf4-47a7-8836-12a0c44e5726}*SharedItemsImports = 13
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{56A46626-940B-45AB-841F-F2BF54A0BAED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56A46626-940B-45AB-841F-F2BF54A0BAED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C5F8AE0-B401-4DD0-B1D9-A6CB86B136C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C5F8AE0-B401-4DD0-B1D9-A6CB86B136C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C5F8AE0-B401-4DD0-B1D9-A6CB86B136C3}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{0C5F8AE0-B401-4DD0-B1D9-A6CB86B136C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C5F8AE0-B401-4DD0-B1D9-A6CB86B136C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C5F8AE0-B401-4DD0-B1D9-A6CB86B136C3}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AE900917-F972-42E2-8589-ED01E3B5F73A}
+	EndGlobalSection
+EndGlobal
