@@ -9,6 +9,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "app_android", "app_android\
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "app_lib", "app_lib\app_lib.shproj", "{B28A06A4-FAF4-47A7-8836-12A0C44E5726}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "database", "database", "{A6A69A10-4D6A-4FBE-B731-18C60FA20BE5}"
+	ProjectSection(SolutionItems) = preProject
+		_items\database\database_diagram.png = _items\database\database_diagram.png
+		_items\database\setup.sql = _items\database\setup.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		app_lib\app_lib.projitems*{b28a06a4-faf4-47a7-8836-12a0c44e5726}*SharedItemsImports = 13
