@@ -55,7 +55,6 @@ class DatabaseTest implements ITest {
         return mysqli_fetch_assoc(mysqli_query($this->db_cmd, $sql));;
     }
 
-
 	public function TblMatadata_Insert() {
         $obj = new TblMetadata('test_key_insert', 'test_value_insert');
 
@@ -143,6 +142,97 @@ class DatabaseTest implements ITest {
             'test_value',
             "The value isn't as expected"
         );
+    }
+
+    public function TblClass_Insert() {
+        $obj = new TblClass(-1, 'test_class_insert');
+
+        Assert::IsTrue($obj->ValidateAsInsert(), 'The values can be used for a insert');
+
+        $result     = RdgClass::Insret($obj);
+        $last_error = DatabaseCMD::GetErrorMessage();
+
+        Assert::IsTrue($result, 'The insert into the database failed [' . $last_error . ']');
+
+        $db_result = self::DbGet('tbl_class', "4" , 'id');
+
+        Assert::AreEqual(
+            $db_result['id'],
+            '4',
+            "The id isn't as expected"
+        );
+
+        Assert::AreEqual(
+            $db_result['class'],
+            'test_class_insert',
+            "The id isn't as expected"
+        );
+    }
+
+    public function TblClass_Update() {
+        Assert::AreEqual(
+            self::DbGet('tbl_class', "1")['class'],
+            'test_class_update',
+            'The init value from the database is no as expected'
+        );
+
+        $obj = new TblClass(1, 'test_class_update_done');
+        Assert::IsTrue($obj->ValidateAsUpdate(), "The object can't be used for an update");
+        Assert::IsTrue(RdgClass::Update($obj), 'The update as failed');
+
+        Assert::AreEqual(
+            self::DbGet('tbl_class', "1")['class'],
+            'test_class_update_done',
+            'The value after the update from the database is no as expected'
+        );
+    }
+
+    public function TblClass_Delete() {
+        Assert::AreNotEqual(
+            self::DbGet('tbl_class', '2'),
+            null,
+            "The value to be delete doesn't exist"
+        );
+
+        Assert::IsTrue(RdgClass::Delete(2), 'The delete failed');
+
+        Assert::AreEqual(
+            self::DbGet('tbl_class', '2'),
+            null,
+            "The value wasn't delete"
+        );
+    }
+
+    public function TblClass_Select() {
+        $temp = self::DbGet('tbl_class', '3');
+        Assert::AreEqual(
+            $temp['id'],
+            '3',
+            "The database doesn't have the select row"
+        );
+
+        Assert::AreEqual(
+            $temp['class'],
+            'test_class_select',
+            "The database doesn't have the select row"
+        );
+
+        $test = function($result, $type) {
+            Assert::AreEqual(
+                $result->id,
+                3,
+                "The key isn't as expected - Select by " . $type
+            );
+
+            Assert::AreEqual(
+                $result->class,
+                'test_class_select',
+                "The key isn't as expected - Select by " . $type
+            );
+        };
+
+        $test(RdgClass::Select(3), 'default');
+        $test(RdgClass::SelectByClass('test_class_select'), 'class');
     }
 }
 
