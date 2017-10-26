@@ -20,7 +20,7 @@ create table tbl_student(
     pass_hass nvarchar(255) not null,
     validate bool default false,
     class int not null,
-    device_uuid_v4 nvarchar(36),
+    device_uuid_v4 nvarchar(36) unique not null,
     cache_statistics text not null
 );
 

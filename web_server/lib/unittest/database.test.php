@@ -7,6 +7,8 @@ use ccg\unittesting\UnitTest;
 require_once '../autoload.php';
 require_once './unittest.php';
 
+echo 'Setting the database up - pleas wait...';
+
 $db_setup = file_get_contents('./db_setup.sql');
 $db_data  = file_get_contents('./db_data.sql');
 
@@ -14,14 +16,21 @@ $db_cmd = mysqli_connect('127.0.0.1', 'dev', 'dev1234');
 
 mysqli_multi_query($db_cmd, $db_setup . $db_data);
 $e = mysqli_error($db_cmd);
+
+do {
+	if ($result = mysqli_store_result($db_cmd)) {
+    	mysqli_free_result($result);
+    }
+
+} while(mysqli_next_result($db_cmd));
+
 if (strlen($e) > 0) {
     throw new \Exception($e);
 }
+
 mysqli_close($db_cmd);
 unset($db_data);
 unset($db_data);
-sleep(2);
-
 
 class DatabaseTest implements ITest {
     protected $test_name_identifier;
@@ -55,6 +64,7 @@ class DatabaseTest implements ITest {
         return mysqli_fetch_assoc(mysqli_query($this->db_cmd, $sql));;
     }
 
+    #region TblMtatdata
 	public function TblMatadata_Insert() {
         $obj = new TblMetadata('test_key_insert', 'test_value_insert');
 
@@ -89,7 +99,7 @@ class DatabaseTest implements ITest {
 
         $obj = new TblMetadata('test_key_update', 'test_value_update');
         Assert::IsTrue($obj->ValidateAsUpdate(), "The object can't be used for an update");
-        Assert::IsTrue(RdgMetadata::Update($obj), 'The update as failed');
+        Assert::IsTrue(RdgMetadata::Update($obj), 'The update has failed');
 
         Assert::AreEqual(
             self::DbGet('tbl_metadata', "'test_key_update'" , 'key')['value'],
@@ -143,7 +153,9 @@ class DatabaseTest implements ITest {
             "The value isn't as expected"
         );
     }
+    #endregion
 
+    #region TblClass
     public function TblClass_Insert() {
         $obj = new TblClass(-1, 'test_class_insert');
 
@@ -154,11 +166,11 @@ class DatabaseTest implements ITest {
 
         Assert::IsTrue($result, 'The insert into the database failed [' . $last_error . ']');
 
-        $db_result = self::DbGet('tbl_class', "4" , 'id');
+        $db_result = self::DbGet('tbl_class', "5" , 'id');
 
         Assert::AreEqual(
             $db_result['id'],
-            '4',
+            '5',
             "The id isn't as expected"
         );
 
@@ -178,7 +190,7 @@ class DatabaseTest implements ITest {
 
         $obj = new TblClass(1, 'test_class_update_done');
         Assert::IsTrue($obj->ValidateAsUpdate(), "The object can't be used for an update");
-        Assert::IsTrue(RdgClass::Update($obj), 'The update as failed');
+        Assert::IsTrue(RdgClass::Update($obj), 'The update has failed');
 
         Assert::AreEqual(
             self::DbGet('tbl_class', "1")['class'],
@@ -234,6 +246,207 @@ class DatabaseTest implements ITest {
         $test(RdgClass::Select(3), 'default');
         $test(RdgClass::SelectByClass('test_class_select'), 'class');
     }
+    #endregion
+
+    #region TblStudent
+    public function TblStudent_Insert() {
+        $obj = new TblStudent(-1, 'test_firstename_insert', 'test_surname_insert',
+            'test_email_insert', 'test_pass_hass_insert', false, 4, 'test_device_uuid_v4_insert',
+            'test_cache_statistics_insert');
+
+        Assert::IsTrue($obj->ValidateAsInsert(), 'The values can be used for a insert');
+
+        $result     = RdgStudent::Insret($obj);
+        $last_error = DatabaseCMD::GetErrorMessage();
+
+        Assert::IsTrue($result, 'The insert into the database failed [' . $last_error . ']');
+
+        $db_result = self::DbGet('tbl_student', "5" , 'id');
+
+        Assert::AreEqual(
+            $db_result['id'],
+            '5',
+            "The id isn't as expected"
+        );
+
+        Assert::AreEqual(
+            $db_result['firstname'],
+            'test_firstename_insert',
+            "The firstname isn't as expected"
+        );
+
+        Assert::AreEqual(
+            $db_result['surname'],
+            'test_surname_insert',
+            "The surname isn't as expected"
+        );
+
+        Assert::AreEqual(
+            $db_result['email'],
+            'test_email_insert',
+            "The email isn't as expected"
+        );
+
+        Assert::AreEqual(
+            $db_result['pass_hass'],
+            'test_pass_hass_insert',
+            "The pass_hass isn't as expected"
+        );
+
+        Assert::AreEqual(
+            $db_result['validate'],
+            '0',
+            "The validate isn't as expected"
+        );
+
+        Assert::AreEqual(
+            $db_result['class'],
+            '4',
+            "The class isn't as expected"
+        );
+
+        Assert::AreEqual(
+            $db_result['device_uuid_v4'],
+            'test_device_uuid_v4_insert',
+            "The device_uuid_v4 isn't as expected"
+        );
+
+        Assert::AreEqual(
+            $db_result['cache_statistics'],
+            'test_cache_statistics_insert',
+            "The cache_statistics isn't as expected"
+        );
+    }
+
+    public function TblStudent_Update() {
+        $db_result     = self::DbGet('tbl_student', '3');
+        $test_db_value = function($column, $value, $expected, $init = true) {
+            Assert::AreEqual(
+                $expected[$column],
+                $value,
+                sprintf(
+                    $init ?
+                        'The init value from the database is not as expected - %s' :
+                        'The value after the update from the database is not as expected - %s'
+               , $column)
+            );
+        };
+
+        $test_db_value('id', '3', $db_result);
+        $test_db_value('firstname', 'test_firstename_update', $db_result);
+        $test_db_value('surname', 'test_surname_update', $db_result);
+        $test_db_value('email', 'test_email_update', $db_result);
+        $test_db_value('pass_hass', 'test_pass_hass_update', $db_result);
+        $test_db_value('validate', '0', $db_result);
+        $test_db_value('class', '4', $db_result);
+        $test_db_value('device_uuid_v4', 'test_device_uuid_v4_update', $db_result);
+        $test_db_value('cache_statistics', 'test_cache_statistics_update', $db_result);
+
+        $obj = new TblStudent(3, 'test_firstename_update_done', 'test_surname_update_done',
+            'test_email_update_done', 'test_pass_hass_update_done', true, 4,
+            'test_device_uuid_v4_update_done', 'test_cache_statistics_update_done');
+
+        Assert::IsTrue($obj->ValidateAsUpdate(), "The object can't be used for an update");
+        Assert::IsTrue(RdgStudent::Update($obj), 'The update has failed');
+
+        $db_result = self::DbGet('tbl_student', '3');
+
+        $test_db_value('id', '3', $db_result, false);
+        $test_db_value('firstname', 'test_firstename_update_done', $db_result, false);
+        $test_db_value('surname', 'test_surname_update_done', $db_result, false);
+        $test_db_value('email', 'test_email_update_done', $db_result, false);
+        $test_db_value('pass_hass', 'test_pass_hass_update_done', $db_result, false);
+        $test_db_value('validate', '1', $db_result, false);
+        $test_db_value('class', '4', $db_result, false);
+        $test_db_value('device_uuid_v4', 'test_device_uuid_v4_update_done', $db_result, false);
+        $test_db_value('cache_statistics', 'test_cache_statistics_update_done', $db_result,
+            false);
+    }
+
+    public function TblStudent_Delete() {
+        Assert::AreNotEqual(
+            self::DbGet('tbl_student', '1'),
+            null,
+            "The value to be delete doesn't exist"
+        );
+
+        Assert::IsTrue(RdgClass::Delete(1), 'The delete failed');
+
+        Assert::AreEqual(
+            self::DbGet('tbl_class', '1'),
+            null,
+            "The value wasn't delete"
+        );
+    }
+
+    public function TblStudent_Select() {
+        Assert::AreEqual(
+            self::DbGet('tbl_student', '2')['id'],
+            '2',
+            "The database doesn't have the row"
+        );
+
+        $test_db = function($value, $type) {
+            Assert::AreEqual(
+                $value->id,
+                2,
+                "The id isn't as expected - " . $type
+            );
+
+            Assert::AreEqual(
+                $value->firstname,
+                'test_firstename_select',
+                "The firstname isn't as expected - " . $type
+            );
+
+            Assert::AreEqual(
+                $value->surname,
+                'test_surname_select',
+                "The surname isn't as expected - " . $type
+            );
+
+            Assert::AreEqual(
+                $value->email,
+                'test_email_select',
+                "The email isn't as expected - " . $type
+            );
+
+            Assert::AreEqual(
+                $value->pass_hass,
+                'test_pass_hass_select',
+                "The pass_hass isn't as expected - " . $type
+            );
+
+            Assert::AreEqual(
+                $value->validate,
+                false,
+                "The validate isn't as expected - " . $type
+            );
+
+            Assert::AreEqual(
+                $value->class,
+                '4',
+                "The class isn't as expected - " . $type
+            );
+
+            Assert::AreEqual(
+                $value->device_uuid_v4,
+                'test_device_uuid_v4_select',
+                "The device_uuid_v4 isn't as expected - " . $type
+            );
+
+            Assert::AreEqual(
+                $value->cache_statistics,
+                'test_cache_statistics_select',
+                "The cache_statistics isn't as expected - " . $type
+            );
+        };
+
+        $test_db(RdgStudent::Select(2), 'default');
+        $test_db(RdgStudent::SelectByDeviceUuid('test_device_uuid_v4_select'), 'Device UUID');
+        $test_db(RdgStudent::SelectByEmail('test_email_select'), 'Email');
+    }
+    #endregion
 }
 
 $obj = new DatabaseTest('db');
