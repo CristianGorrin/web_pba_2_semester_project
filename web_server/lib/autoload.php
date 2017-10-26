@@ -9,7 +9,9 @@ class Autoload {
         'StudentCheckIn\\TblMetadata'  => '/database/tbl_metadata.php',
         'StudentCheckIn\\RdgMetadata'  => '/database/tbl_metadata.php',
         'StudentCheckIn\\TblClass'     => '/database/tbl_class.php',
-        'StudentCheckIn\\RdgClass'     => '/database/tbl_class.php'
+        'StudentCheckIn\\RdgClass'     => '/database/tbl_class.php',
+        'StudentCheckIn\\RdgStudent'   => '/database/tbl_student.php',
+        'StudentCheckIn\\TblStudent'   => '/database/tbl_student.php'
     );
 
     public static function Loaded($class) {
