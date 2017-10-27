@@ -3,7 +3,7 @@ create database StudentCheckIn;
 use StudentCheckIn;
 
 create table tbl_metadata(
-	`key` nvarchar(64)  primary key,
+	`key` nvarchar(64) primary key,
     `value` nvarchar(128) not null
 );
 
@@ -54,7 +54,7 @@ create table tbl_teacher(
 	id int auto_increment primary key,
     firstname nvarchar(128) not null,
     surname nvarchar(128) not null,
-    email nvarchar(256) not null,
+    email nvarchar(256) unique not null,
     hass_pass nvarchar(255) not null
 );
 

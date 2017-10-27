@@ -7,7 +7,7 @@ use ccg\unittesting\UnitTest;
 require_once '../autoload.php';
 require_once './unittest.php';
 
-echo 'Setting the database up - pleas wait...';
+echo 'Setting the database up - pleas wait...' . PHP_EOL;
 
 $db_setup = file_get_contents('./db_setup.sql');
 $db_data  = file_get_contents('./db_data.sql');
@@ -445,6 +445,146 @@ class DatabaseTest implements ITest {
         $test_db(RdgStudent::Select(2), 'default');
         $test_db(RdgStudent::SelectByDeviceUuid('test_device_uuid_v4_select'), 'Device UUID');
         $test_db(RdgStudent::SelectByEmail('test_email_select'), 'Email');
+    }
+    #endregion
+
+    #region TblTeacher
+    public function TblTeacher_Insert() {
+        $obj = new TblTeacher(-1, 'test_firstname_insert', 'test_surname_insert',
+            'test_email_insert', 'test_pass_hass_insert');
+
+        Assert::IsTrue($obj->ValidateAsInsert(), 'The values can be used for a insert');
+
+        $result     = RdgTeacher::Insret($obj);
+        $last_error = DatabaseCMD::GetErrorMessage();
+
+        Assert::IsTrue($result, 'The insert into the database failed [' . $last_error . ']');
+
+        $db_result = self::DbGet('tbl_teacher', "5" , 'id');
+        Assert::AreEqual(
+            $db_result['id'],
+            '5',
+            "The id isn't as expected"
+        );
+
+        Assert::AreEqual(
+            $db_result['firstname'],
+            'test_firstname_insert',
+            "The firstname isn't as expected"
+        );
+
+        Assert::AreEqual(
+            $db_result['surname'],
+            'test_surname_insert',
+            "The surname isn't as expected"
+        );
+
+        Assert::AreEqual(
+            $db_result['email'],
+            'test_email_insert',
+            "The email isn't as expected"
+        );
+
+        Assert::AreEqual(
+            $db_result['hass_pass'],
+            'test_pass_hass_insert',
+            "The pass_hass isn't as expected"
+        );
+    }
+
+    public function TblTeacher_Update() {
+        $db_result = self::DbGet('tbl_teacher', "2");
+
+        $test_db_value = function($column, $value, $expected, $init = true) {
+            Assert::AreEqual(
+                $expected[$column],
+                $value,
+                sprintf(
+                    $init ?
+                        'The init value from the database is not as expected - %s' :
+                        'The value after the update from the database is not as expected - %s'
+               , $column)
+            );
+        };
+
+        $test_db_value('id', '2', $db_result);
+        $test_db_value('firstname', 'test_firstname_udapte', $db_result);
+        $test_db_value('surname', 'test_surname_update', $db_result);
+        $test_db_value('email', 'test_eamil_update', $db_result);
+        $test_db_value('hass_pass', 'test_hass_pass_update', $db_result);
+
+        $obj = new TblTeacher(2, 'test_firstname_udapte_done', 'test_surname_update_done',
+            'test_eamil_update_done', 'test_hass_pass_update_done');
+
+        Assert::IsTrue($obj->ValidateAsUpdate(), "The object can't be used for an update");
+        Assert::IsTrue(RdgTeacher::Update($obj), 'The update has failed');
+
+        $db_result = self::DbGet('tbl_teacher', '2');
+
+        $test_db_value('id', '2', $db_result);
+        $test_db_value('firstname', 'test_firstname_udapte_done', $db_result, false);
+        $test_db_value('surname', 'test_surname_update_done', $db_result, false);
+        $test_db_value('email', 'test_eamil_update_done', $db_result, false);
+        $test_db_value('hass_pass', 'test_hass_pass_update_done', $db_result, false);
+    }
+
+    public function TblTeacher_Delete() {
+        Assert::AreNotEqual(
+           self::DbGet('tbl_teacher', '3'),
+           null,
+           "The value to be delete doesn't exist"
+       );
+
+        Assert::IsTrue(RdgTeacher::Delete(3), 'The delete failed');
+
+        Assert::AreEqual(
+            self::DbGet('tbl_teacher', '3'),
+            null,
+            "The value wasn't delete"
+        );
+    }
+
+    public function TblTeacher_Select() {
+        Assert::AreEqual(
+            self::DbGet('tbl_teacher', '1')['id'],
+            '1',
+            "The database doesn't have the row"
+        );
+
+        $test_db = function($value, $type) {
+            Assert::AreEqual(
+                $value->id,
+                1,
+                "The id isn't as expected - " . $type
+            );
+
+            Assert::AreEqual(
+                $value->firstname,
+                'test_firstname_select',
+                "The firstname isn't as expected - " . $type
+            );
+
+            Assert::AreEqual(
+                $value->surname,
+                'test_surname_select',
+                "The surname isn't as expected - " . $type
+            );
+
+            Assert::AreEqual(
+                $value->email,
+                'test_eamil_select',
+                "The email isn't as expected - " . $type
+            );
+
+            Assert::AreEqual(
+                $value->pass_hass,
+                'test_hass_pass_select',
+                "The hass_pass isn't as expected - " . $type
+            );
+        };
+
+        $test_db(RdgTeacher::Select(1), 'default');
+        $test_db(RdgTeacher::SelectByEmail('test_eamil_select'), 'email');
     }
     #endregion
 }
