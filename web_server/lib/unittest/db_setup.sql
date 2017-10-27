@@ -38,7 +38,7 @@ create table tbl_subject_class(
 
 create table tbl_subject(
 	id int auto_increment primary key,
-    `subject` nvarchar(128) not null
+    `subject` nvarchar(128) unique not null
 );
 
 create table tbl_class_log(

@@ -20,3 +20,9 @@ insert into tbl_teacher (firstname, surname, email, hass_pass) values ('test_fir
 insert into tbl_teacher (firstname, surname, email, hass_pass) values ('test_firstname_udapte', 'test_surname_update', 'test_eamil_update', 'test_hass_pass_update');
 insert into tbl_teacher (firstname, surname, email, hass_pass) values ('test_firstname_delete', 'test_surname_delete', 'test_eamil_delete', 'test_hass_pass_delete');
 insert into tbl_teacher (firstname, surname, email, hass_pass) values ('test_firstname_fk', 'test_surname_fk', 'test_eamil_fk', 'test_hass_pass_fk');
+
+/* tbl_subject */
+insert into tbl_subject (`subject`) values ('test_subject_select');
+insert into tbl_subject (`subject`) values ('test_subject_update');
+insert into tbl_subject (`subject`) values ('test_subject_delete');
+insert into tbl_subject (`subject`) values ('test_subject_fk');

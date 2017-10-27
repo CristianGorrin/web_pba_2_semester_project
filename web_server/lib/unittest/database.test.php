@@ -587,6 +587,102 @@ class DatabaseTest implements ITest {
         $test_db(RdgTeacher::SelectByEmail('test_eamil_select'), 'email');
     }
     #endregion
+
+    #region TblSubject
+    public function TblSubject_Insert() {
+        $obj = new TblSubject(-1, 'test_subject_insert');
+
+        Assert::IsTrue($obj->ValidateAsInsert(), 'The values can be used for a insert');
+
+        $result     = RdgSubject::Insret($obj);
+        $last_error = DatabaseCMD::GetErrorMessage();
+
+        Assert::IsTrue($result, 'The insert into the database failed [' . $last_error . ']');
+
+        $db_result = self::DbGet('tbl_subject', "5" , 'id');
+        Assert::AreEqual(
+            $db_result['id'],
+            '5',
+            "The id isn't as expected"
+        );
+
+        Assert::AreEqual(
+            $db_result['subject'],
+            'test_subject_insert',
+            "The subject isn't as expected"
+        );
+    }
+
+    public function TblSubject_Update() {
+        $db_result = self::DbGet('tbl_subject', "2");
+
+        $test_db_value = function($column, $value, $expected, $init = true) {
+            Assert::AreEqual(
+              $expected[$column],
+              $value,
+              sprintf(
+                  $init ?
+                      'The init value from the database is not as expected - %s' :
+                      'The value after the update from the database is not as expected - %s'
+             , $column)
+          );
+        };
+
+        $test_db_value('id', '2', $db_result);
+        $test_db_value('subject', 'test_subject_update', $db_result);
+
+        $obj = new TblSubject(2, 'test_subject_update_done');
+
+        Assert::IsTrue($obj->ValidateAsUpdate(), "The object can't be used for an update");
+        Assert::IsTrue(RdgSubject::Update($obj), 'The update has failed');
+
+        $db_result = self::DbGet('tbl_subject', "2");
+
+        $test_db_value('id', '2', $db_result);
+        $test_db_value('subject', 'test_subject_update_done', $db_result);
+    }
+
+    public function TblSubject_Delete() {
+        Assert::AreNotEqual(
+            self::DbGet('tbl_subject', '3'),
+            null,
+            "The value to be delete doesn't exist"
+        );
+
+        Assert::IsTrue(RdgSubject::Delete(3), 'The delete failed');
+
+        Assert::AreEqual(
+            self::DbGet('tbl_subject', '3'),
+            null,
+            "The value wasn't delete"
+        );
+    }
+
+    public function TblSubject_Select() {
+        Assert::AreEqual(
+            self::DbGet('tbl_teacher', '1')['id'],
+            '1',
+            "The database doesn't have the row"
+        );
+
+        $test_db = function($value, $type) {
+            Assert::AreEqual(
+                $value->id,
+                1,
+                "The id isn't as expected - " . $type
+            );
+
+            Assert::AreEqual(
+                $value->subject,
+                'test_subject_select',
+                "The id isn't as expected - " . $type
+            );
+        };
+
+        $test_db(RdgSubject::Select(1), 'default');
+        $test_db(RdgSubject::SelectBySubject('test_subject_select'), 'subject');
+    }
+    #endregion
 }
 
 $obj = new DatabaseTest('db');
