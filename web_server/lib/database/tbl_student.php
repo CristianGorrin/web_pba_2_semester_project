@@ -52,7 +52,7 @@ class TblStudent implements IEntity {
         $this->cache_statistics = $cache_statistics;
     }
 
-    #region graasten_ringridning\IEntity Members
+    #region StudentCheckIn\IEntity Members
     function ValidateAsUpdate() {
         if (!is_int($this->id)) {
         	return false;
@@ -113,7 +113,7 @@ class RdgStudent implements IRDG {
     const _DELETE_BY = "delete from tbl_student where id = %s;";
     const _INSERT_BY = "insert into tbl_student (firstname, surname, email, pass_hass, validate, class, device_uuid_v4, cache_statistics) values ('%s', '%s', '%s', '%s', %s, %s, '%s', '%s');";
 
-    #region graasten_ringridning\IRDG Members
+    #region StudentCheckIn\IRDG Members
     /**
      * Insert the object into the table
      *

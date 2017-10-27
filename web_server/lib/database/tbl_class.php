@@ -23,7 +23,7 @@ class TblClass implements IEntity {
         $this->class = $class;
     }
 
-    #region graasten_ringridning\IEntity Members
+    #region StudentCheckIn\IEntity Members
     function ValidateAsUpdate() {
         if (!is_int($this->id)) {
         	return false;
@@ -56,7 +56,7 @@ class RdgClass implements IRDG {
     const _DELETE_BY = "delete from tbl_class where id = '%s'";
     const _INSERT_BY = "insert into tbl_class (class) values ('%s');";
 
-    #region graasten_ringridning\IRDG Members
+    #region StudentCheckIn\IRDG Members
     /**
      * Insret the object into the table
      *

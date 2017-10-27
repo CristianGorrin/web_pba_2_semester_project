@@ -21,7 +21,7 @@ class TblMetadata implements IEntity {
         $this->value = $value;
     }
 
-    #region graasten_ringridning\IEntity Members
+    #region StudentCheckIn\IEntity Members
     function ValidateAsUpdate() {
         return $this->Validate();
     }
@@ -54,7 +54,7 @@ class RdgMetadata implements IRDG {
     const _DELETE_BY = "delete from tbl_metadata where `key` = '%s'";
     const _INSERT_BY = "insert into tbl_metadata  (`key`, `value`) values ('%s', '%s');";
 
-    #region graasten_ringridning\IRDG Members
+    #region StudentCheckIn\IRDG Members
     /**
      * Insret the object into the table
      *
