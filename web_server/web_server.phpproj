@@ -40,9 +40,9 @@
     <Compile Include="lib\database\tbl_metadata.php" />
     <Compile Include="lib\database\tbl_class.php" />
     <Compile Include="lib\database\tbl_student.php" />
-    <Compile Include="lib\database\_tbl_class_log.php" />
+    <Compile Include="lib\database\tbl_class_log.php" />
     <Compile Include="lib\database\_tbl_roll_call.php" />
-    <Compile Include="lib\database\_tbl_subject.php" />
+    <Compile Include="lib\database\tbl_subject.php" />
     <Compile Include="lib\database\_tbl_subject_class.php" />
     <Compile Include="lib\database\tbl_teacher.php" />
     <Compile Include="lib\database\_tbl_teacher_class.php" />
