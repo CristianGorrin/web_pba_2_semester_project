@@ -44,7 +44,7 @@
     <Compile Include="lib\database\_tbl_roll_call.php" />
     <Compile Include="lib\database\_tbl_subject.php" />
     <Compile Include="lib\database\_tbl_subject_class.php" />
-    <Compile Include="lib\database\_tbl_teacher.php" />
+    <Compile Include="lib\database\tbl_teacher.php" />
     <Compile Include="lib\database\_tbl_teacher_class.php" />
     <Compile Include="lib\unittest\database.test.php" />
     <Compile Include="lib\unittest\unittest.php" />
