@@ -36,6 +36,7 @@ insert into tbl_subject (`subject`) values ('test_subject_fk_alt_one_more');
 insert into tbl_subject_class (class, `subject`) values (4, 4);
 insert into tbl_subject_class (class, `subject`) values (5, 4);
 insert into tbl_subject_class (class, `subject`) values (4, 5);
+insert into tbl_subject_class (class, `subject`) values (4, 6);
 
 /* tbl_class_log */
 insert into tbl_class_log (qr_code, subject_class, teacher_by, unix_time, weight) values ('dbe9ed21-2c61-4937-95c8-5656975e8c1d', 5, 5, 1509129410, 4);

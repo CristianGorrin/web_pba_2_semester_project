@@ -697,10 +697,10 @@ class DatabaseTest implements ITest {
 
         Assert::IsTrue($result, 'The insert into the database failed [' . $last_error . ']');
 
-        $db_result = self::DbGet('tbl_subject_class', "4" , 'id');
+        $db_result = self::DbGet('tbl_subject_class', "5" , 'id');
         Assert::AreEqual(
             $db_result['id'],
-            '4',
+            '5',
             "The id isn't as expected"
         );
 
