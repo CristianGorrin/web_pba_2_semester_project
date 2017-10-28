@@ -32,11 +32,13 @@ class DatabaseCMD {
         }
     }
 
+
     /**
      * Summary of ExecutedStatement
      * Executed a query and returns the result
      *
      * @param string $query
+     * @throws \Exception
      * @return mixed
      */
     public static function ExecutedStatement($query) {
@@ -45,7 +47,13 @@ class DatabaseCMD {
         $result = mysqli_query(self::$db_cmd, $query);
 
         self::$latest_error = mysqli_error(self::$db_cmd);
-        
+
+        if (strlen(self::$latest_error) > 0) {
+            throw new \Exception(
+                sprintf('%s: in the execution of query("%s")', self::$latest_error, $query)
+            );
+        }
+
         return $result;
     }
 
