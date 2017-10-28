@@ -42,6 +42,9 @@ class DatabaseCMD {
      * @return mixed
      */
     public static function ExecutedStatement($query) {
+        #region TODO remove - it only used for unit testing
+        \ccg\unittesting\UnitTest::Log(sprintf('Query: "%s"', $query));
+        #endregion
         self::$latest_error = '';
 
         $result = mysqli_query(self::$db_cmd, $query);
