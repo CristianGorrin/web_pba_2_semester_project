@@ -235,10 +235,27 @@ class RdgStudent implements IRDG {
         return self::SelectBy('email', sprintf("'%s'", DatabaseCMD::EscapeString($email)));
     }
 
+    /**
+     * Summary of SelectByDeviceUuid
+     * @param string $uuid 
+     * @return TblStudent
+     */
     public static function SelectByDeviceUuid($uuid) {
         return self::SelectBy(
             'device_uuid_v4',
             sprintf("'%s'", DatabaseCMD::EscapeString($uuid))
+        );
+    }
+
+    /**
+     * Summary of SelectByPassHass
+     * @param string $pass_hass
+     * @return TblStudent
+     */
+    public static function SelectByPassHass($pass_hass) {
+        return self::SelectBy(
+            'pass_hass',
+            sprintf("'%s'", DatabaseCMD::EscapeString($pass_hass))
         );
     }
 }

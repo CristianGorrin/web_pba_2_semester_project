@@ -445,6 +445,7 @@ class DatabaseTest implements ITest {
         $test_db(RdgStudent::Select(2), 'default');
         $test_db(RdgStudent::SelectByDeviceUuid('test_device_uuid_v4_select'), 'Device UUID');
         $test_db(RdgStudent::SelectByEmail('test_email_select'), 'Email');
+        $test_db(RdgStudent::SelectByPassHass('test_pass_hass_select'), 'Pass hass');
     }
     #endregion
 
