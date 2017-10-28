@@ -97,13 +97,13 @@ class DatabaseTest implements ITest {
             'The init value from the database is no as expected'
         );
 
-        $obj = new TblMetadata('test_key_update', 'test_value_update');
+        $obj = new TblMetadata('test_key_update', 'test_value_update_done');
         Assert::IsTrue($obj->ValidateAsUpdate(), "The object can't be used for an update");
         Assert::IsTrue(RdgMetadata::Update($obj), 'The update has failed');
 
         Assert::AreEqual(
             self::DbGet('tbl_metadata', "'test_key_update'" , 'key')['value'],
-            'test_value_update',
+            'test_value_update_done',
             'The value after the update from the database is no as expected'
         );
     }
