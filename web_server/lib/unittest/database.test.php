@@ -15,19 +15,18 @@ $db_data  = file_get_contents('./db_data.sql');
 $db_cmd = mysqli_connect('127.0.0.1', 'dev', 'dev1234');
 
 mysqli_multi_query($db_cmd, $db_setup . $db_data);
-$e = mysqli_error($db_cmd);
 
 do {
 	if ($result = mysqli_store_result($db_cmd)) {
     	mysqli_free_result($result);
     }
 
+    $e = mysqli_error($db_cmd);
+
+    if (strlen($e) > 0) {
+        throw new \Exception($e);
+    }
 } while(mysqli_next_result($db_cmd));
-
-if (strlen($e) > 0) {
-    throw new \Exception($e);
-}
-
 mysqli_close($db_cmd);
 unset($db_data);
 unset($db_data);
@@ -62,6 +61,19 @@ class DatabaseTest implements ITest {
     protected function DbGet($table, $value, $key = 'id') {
         $sql = sprintf("select * from %s where `%s` = %s;", $table, $key, $value);
         return mysqli_fetch_assoc(mysqli_query($this->db_cmd, $sql));;
+    }
+
+    protected static function TestDBValue($column, $expected, $value, $init = true) {
+        Assert::AreEqual(
+            $value[$column],
+            $expected,
+            sprintf(
+                $init ?
+                    'The init value from the database is not as expected - %s' :
+                    'The value after the update from the database is not as expected - %s',
+                $column
+            )
+        );
     }
 
     #region TblMtatdata
@@ -320,27 +332,16 @@ class DatabaseTest implements ITest {
 
     public function TblStudent_Update() {
         $db_result     = self::DbGet('tbl_student', '3');
-        $test_db_value = function($column, $value, $expected, $init = true) {
-            Assert::AreEqual(
-                $expected[$column],
-                $value,
-                sprintf(
-                    $init ?
-                        'The init value from the database is not as expected - %s' :
-                        'The value after the update from the database is not as expected - %s'
-               , $column)
-            );
-        };
 
-        $test_db_value('id', '3', $db_result);
-        $test_db_value('firstname', 'test_firstename_update', $db_result);
-        $test_db_value('surname', 'test_surname_update', $db_result);
-        $test_db_value('email', 'test_email_update', $db_result);
-        $test_db_value('pass_hass', 'test_pass_hass_update', $db_result);
-        $test_db_value('validate', '0', $db_result);
-        $test_db_value('class', '4', $db_result);
-        $test_db_value('device_uuid_v4', 'test_device_uuid_v4_update', $db_result);
-        $test_db_value('cache_statistics', 'test_cache_statistics_update', $db_result);
+        self::TestDBValue('id', '3', $db_result);
+        self::TestDBValue('firstname', 'test_firstename_update', $db_result);
+        self::TestDBValue('surname', 'test_surname_update', $db_result);
+        self::TestDBValue('email', 'test_email_update', $db_result);
+        self::TestDBValue('pass_hass', 'test_pass_hass_update', $db_result);
+        self::TestDBValue('validate', '0', $db_result);
+        self::TestDBValue('class', '4', $db_result);
+        self::TestDBValue('device_uuid_v4', 'test_device_uuid_v4_update', $db_result);
+        self::TestDBValue('cache_statistics', 'test_cache_statistics_update', $db_result);
 
         $obj = new TblStudent(3, 'test_firstename_update_done', 'test_surname_update_done',
             'test_email_update_done', 'test_pass_hass_update_done', true, 4,
@@ -351,15 +352,15 @@ class DatabaseTest implements ITest {
 
         $db_result = self::DbGet('tbl_student', '3');
 
-        $test_db_value('id', '3', $db_result, false);
-        $test_db_value('firstname', 'test_firstename_update_done', $db_result, false);
-        $test_db_value('surname', 'test_surname_update_done', $db_result, false);
-        $test_db_value('email', 'test_email_update_done', $db_result, false);
-        $test_db_value('pass_hass', 'test_pass_hass_update_done', $db_result, false);
-        $test_db_value('validate', '1', $db_result, false);
-        $test_db_value('class', '4', $db_result, false);
-        $test_db_value('device_uuid_v4', 'test_device_uuid_v4_update_done', $db_result, false);
-        $test_db_value('cache_statistics', 'test_cache_statistics_update_done', $db_result,
+        self::TestDBValue('id', '3', $db_result, false);
+        self::TestDBValue('firstname', 'test_firstename_update_done', $db_result, false);
+        self::TestDBValue('surname', 'test_surname_update_done', $db_result, false);
+        self::TestDBValue('email', 'test_email_update_done', $db_result, false);
+        self::TestDBValue('pass_hass', 'test_pass_hass_update_done', $db_result, false);
+        self::TestDBValue('validate', '1', $db_result, false);
+        self::TestDBValue('class', '4', $db_result, false);
+        self::TestDBValue('device_uuid_v4', 'test_device_uuid_v4_update_done', $db_result, false);
+        self::TestDBValue('cache_statistics', 'test_cache_statistics_update_done', $db_result,
             false);
     }
 
@@ -496,23 +497,11 @@ class DatabaseTest implements ITest {
     public function TblTeacher_Update() {
         $db_result = self::DbGet('tbl_teacher', "2");
 
-        $test_db_value = function($column, $value, $expected, $init = true) {
-            Assert::AreEqual(
-                $expected[$column],
-                $value,
-                sprintf(
-                    $init ?
-                        'The init value from the database is not as expected - %s' :
-                        'The value after the update from the database is not as expected - %s'
-               , $column)
-            );
-        };
-
-        $test_db_value('id', '2', $db_result);
-        $test_db_value('firstname', 'test_firstname_udapte', $db_result);
-        $test_db_value('surname', 'test_surname_update', $db_result);
-        $test_db_value('email', 'test_eamil_update', $db_result);
-        $test_db_value('hass_pass', 'test_hass_pass_update', $db_result);
+        self::TestDBValue('id', '2', $db_result);
+        self::TestDBValue('firstname', 'test_firstname_udapte', $db_result);
+        self::TestDBValue('surname', 'test_surname_update', $db_result);
+        self::TestDBValue('email', 'test_eamil_update', $db_result);
+        self::TestDBValue('hass_pass', 'test_hass_pass_update', $db_result);
 
         $obj = new TblTeacher(2, 'test_firstname_udapte_done', 'test_surname_update_done',
             'test_eamil_update_done', 'test_hass_pass_update_done');
@@ -522,11 +511,11 @@ class DatabaseTest implements ITest {
 
         $db_result = self::DbGet('tbl_teacher', '2');
 
-        $test_db_value('id', '2', $db_result);
-        $test_db_value('firstname', 'test_firstname_udapte_done', $db_result, false);
-        $test_db_value('surname', 'test_surname_update_done', $db_result, false);
-        $test_db_value('email', 'test_eamil_update_done', $db_result, false);
-        $test_db_value('hass_pass', 'test_hass_pass_update_done', $db_result, false);
+        self::TestDBValue('id', '2', $db_result);
+        self::TestDBValue('firstname', 'test_firstname_udapte_done', $db_result, false);
+        self::TestDBValue('surname', 'test_surname_update_done', $db_result, false);
+        self::TestDBValue('email', 'test_eamil_update_done', $db_result, false);
+        self::TestDBValue('hass_pass', 'test_hass_pass_update_done', $db_result, false);
     }
 
     public function TblTeacher_Delete() {
@@ -618,20 +607,8 @@ class DatabaseTest implements ITest {
     public function TblSubject_Update() {
         $db_result = self::DbGet('tbl_subject', "2");
 
-        $test_db_value = function($column, $value, $expected, $init = true) {
-            Assert::AreEqual(
-              $expected[$column],
-              $value,
-              sprintf(
-                  $init ?
-                      'The init value from the database is not as expected - %s' :
-                      'The value after the update from the database is not as expected - %s'
-             , $column)
-          );
-        };
-
-        $test_db_value('id', '2', $db_result);
-        $test_db_value('subject', 'test_subject_update', $db_result);
+        self::TestDBValue('id', '2', $db_result);
+        self::TestDBValue('subject', 'test_subject_update', $db_result);
 
         $obj = new TblSubject(2, 'test_subject_update_done');
 
@@ -640,8 +617,8 @@ class DatabaseTest implements ITest {
 
         $db_result = self::DbGet('tbl_subject', "2");
 
-        $test_db_value('id', '2', $db_result);
-        $test_db_value('subject', 'test_subject_update_done', $db_result);
+        self::TestDBValue('id', '2', $db_result);
+        self::TestDBValue('subject', 'test_subject_update_done', $db_result);
     }
 
     public function TblSubject_Delete() {
@@ -720,21 +697,9 @@ class DatabaseTest implements ITest {
     public function TblSubjectClass_Update() {
         $db_result = self::DbGet('tbl_subject_class', "1");
 
-        $test_db_value = function($column, $value, $expected, $init = true) {
-            Assert::AreEqual(
-              $expected[$column],
-              $value,
-              sprintf(
-                  $init ?
-                      'The init value from the database is not as expected - %s' :
-                      'The value after the update from the database is not as expected - %s'
-             , $column)
-          );
-        };
-
-        $test_db_value('id', '1', $db_result);
-        $test_db_value('class', '4', $db_result);
-        $test_db_value('subject', '4', $db_result);
+        self::TestDBValue('id', '1', $db_result);
+        self::TestDBValue('class', '4', $db_result);
+        self::TestDBValue('subject', '4', $db_result);
 
         $obj = new TblSubjectClass(1, 5, 5);
 
@@ -743,9 +708,9 @@ class DatabaseTest implements ITest {
 
         $db_result = self::DbGet('tbl_subject_class', "1");
 
-        $test_db_value('id', '1', $db_result);
-        $test_db_value('class', '5', $db_result);
-        $test_db_value('subject', '5', $db_result);
+        self::TestDBValue('id', '1', $db_result);
+        self::TestDBValue('class', '5', $db_result);
+        self::TestDBValue('subject', '5', $db_result);
     }
 
     public function TblSubjectClass_Delete() {
@@ -798,19 +763,145 @@ class DatabaseTest implements ITest {
 
     #region TblClassLog
     public function TblClassLog_Insert() {
+        $time = time();
 
+        $obj = new TblClassLog(-1, '6458e19f-c47f-4366-b9aa-e1d6067e38b3', 5, 4, $time, 12);
+
+        Assert::IsTrue($obj->ValidateAsInsert(), 'The values can be used for a insert');
+
+        $result     = RdgClassLog::Insret($obj);
+        $last_error = DatabaseCMD::GetErrorMessage();
+
+        Assert::IsTrue($result, 'The insert into the database failed [' . $last_error . ']');
+
+        $db_result = self::DbGet('tbl_class_log', "6" , 'id');
+        Assert::AreEqual(
+            $db_result['id'],
+            '6',
+            "The id isn't as expected"
+        );
+
+        Assert::AreEqual(
+            $db_result['qr_code'],
+            '6458e19f-c47f-4366-b9aa-e1d6067e38b3',
+            "The qr_code isn't as expected"
+        );
+
+        Assert::AreEqual(
+            $db_result['subject_class'],
+            '5',
+            "The subject_class isn't as expected"
+        );
+
+        Assert::AreEqual(
+            $db_result['teacher_by'],
+            '4',
+            "The teacher_by isn't as expected"
+        );
+
+        Assert::AreEqual(
+            $db_result['unix_time'],
+            strval($time),
+            "The unix_time isn't as expected"
+        );
+
+        Assert::AreEqual(
+            $db_result['weight'],
+            '12',
+            "The unix_time isn't as expected"
+        );
     }
 
     public function TblClassLog_Update() {
+        $db_result = self::DbGet('tbl_class_log', "1");
+        //id, qr_code, subject_class, teacher_by, unix_timem, weight
 
+        self::TestDBValue('id', '1', $db_result);
+        self::TestDBValue('qr_code', 'dbe9ed21-2c61-4937-95c8-5656975e8c1d', $db_result);
+        self::TestDBValue('subject_class', '3', $db_result);
+        self::TestDBValue('teacher_by', '5', $db_result);
+        self::TestDBValue('unix_time', '1509129410', $db_result);
+        self::TestDBValue('weight', '1', $db_result);
+
+        $time = time();
+        $obj = new TblClassLog(1, '38b09f05-da77-483b-a5b7-2e570b3c0d86', 4, 4, $time, 56);
+
+        Assert::IsTrue($obj->ValidateAsUpdate(), "The object can't be used for an update");
+        Assert::IsTrue(RdgClassLog::Update($obj), 'The update has failed');
+
+        $db_result = self::DbGet('tbl_class_log', "1");
+
+        self::TestDBValue('id', '1', $db_result, true);
+        self::TestDBValue('qr_code', '38b09f05-da77-483b-a5b7-2e570b3c0d86', $db_result, true);
+        self::TestDBValue('subject_class', '4', $db_result, true);
+        self::TestDBValue('teacher_by', '4', $db_result, true);
+        self::TestDBValue('unix_time', strval($time), $db_result, true);
+        self::TestDBValue('weight', '56', $db_result, true);
     }
 
     public function TblClassLog_Delete() {
+        Assert::AreNotEqual(
+           self::DbGet('tbl_class_log', '2'),
+           null,
+           "The value to be delete doesn't exist"
+       );
 
+        Assert::IsTrue(RdgClassLog::Delete(2), 'The delete failed');
+
+        Assert::AreEqual(
+            self::DbGet('tbl_class_log', '2'),
+            null,
+            "The value wasn't delete"
+        );
     }
 
     public function TblClassLog_Select() {
+        Assert::AreEqual(
+           self::DbGet('tbl_class_log', '3')['id'],
+           '3',
+           "The database doesn't have the row"
+        );
 
+        $test_db = function($value, $type) {
+            Assert::AreEqual(
+                $value->id,
+                3,
+                "The id isn't as expected - " . $type
+            );
+
+            Assert::AreEqual(
+                $value->qr_code,
+                '39903d35-7f41-474d-a03a-47cbd8fefc2f',
+                "The qr_code isn't as expected - " . $type
+            );
+
+            Assert::AreEqual(
+                $value->subject_class,
+                3,
+                "The subject_class isn't as expected - " . $type
+            );
+
+            Assert::AreEqual(
+                $value->teacher_by,
+                5,
+                "The teacher_by isn't as expected - " . $type
+            );
+
+            Assert::AreEqual(
+                $value->unix_time,
+                1509129412,
+                "The unix_time isn't as expected - " . $type
+            );
+
+            Assert::AreEqual(
+                $value->weight,
+                3,
+                "The weight isn't as expected - " . $type
+            );
+        };
+
+        $test_db(RdgClassLog::Select(3), 'default');
+        $test_db(RdgClassLog::SelectByQrCode('39903d35-7f41-474d-a03a-47cbd8fefc2f'), 'qr_code');
     }
     #endregion
 }
