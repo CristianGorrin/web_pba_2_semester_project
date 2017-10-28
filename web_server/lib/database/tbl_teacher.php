@@ -192,4 +192,16 @@ class RdgTeacher implements IRDG {
     public static function SelectByEmail($email) {
         return self::SelectBy('email', sprintf("'%s'", DatabaseCMD::EscapeString($email)));
     }
+
+    /**
+     * Summary of SelectByHassPass
+     * @param string $hass_pass 
+     * @return TblTeacher
+     */
+    public static function SelectByHassPass($hass_pass) {
+        return self::SelectBy(
+            'hass_pass', 
+            sprintf("'%s'", DatabaseCMD::EscapeString($hass_pass))
+        );
+    }
 }

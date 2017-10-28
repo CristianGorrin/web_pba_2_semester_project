@@ -586,6 +586,7 @@ class DatabaseTest implements ITest {
 
         $test_db(RdgTeacher::Select(1), 'default');
         $test_db(RdgTeacher::SelectByEmail('test_eamil_select'), 'email');
+        $test_db(RdgTeacher::SelectByHassPass('test_hass_pass_select'), 'hass pass');
     }
     #endregion
 
