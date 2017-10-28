@@ -600,10 +600,10 @@ class DatabaseTest implements ITest {
 
         Assert::IsTrue($result, 'The insert into the database failed [' . $last_error . ']');
 
-        $db_result = self::DbGet('tbl_subject', "6" , 'id');
+        $db_result = self::DbGet('tbl_subject', "7" , 'id');
         Assert::AreEqual(
             $db_result['id'],
-            '6',
+            '7',
             "The id isn't as expected"
         );
 
@@ -687,7 +687,7 @@ class DatabaseTest implements ITest {
 
     #region tbl_subject_class
     public function TblSubjectClass_Insert() {
-        $obj = new TblSubjectClass(-1, 5, 4);
+        $obj = new TblSubjectClass(-1, 5, 6);
 
         Assert::IsTrue($obj->ValidateAsInsert(), 'The values can be used for a insert');
 
@@ -696,10 +696,10 @@ class DatabaseTest implements ITest {
 
         Assert::IsTrue($result, 'The insert into the database failed [' . $last_error . ']');
 
-        $db_result = self::DbGet('tbl_subject_class', "6" , 'id');
+        $db_result = self::DbGet('tbl_subject_class', "4" , 'id');
         Assert::AreEqual(
             $db_result['id'],
-            '6',
+            '4',
             "The id isn't as expected"
         );
 
@@ -711,7 +711,7 @@ class DatabaseTest implements ITest {
 
         Assert::AreEqual(
             $db_result['subject'],
-            '4',
+            '6',
             "The class isn't as expected"
         );
     }
@@ -735,7 +735,7 @@ class DatabaseTest implements ITest {
         $test_db_value('class', '4', $db_result);
         $test_db_value('subject', '4', $db_result);
 
-        $obj = new TblSubjectClass(1, 5, 4);
+        $obj = new TblSubjectClass(1, 5, 5);
 
         Assert::IsTrue($obj->ValidateAsUpdate(), "The object can't be used for an update");
         Assert::IsTrue(RdgSubjectClass::Update($obj), 'The update has failed');
@@ -744,7 +744,7 @@ class DatabaseTest implements ITest {
 
         $test_db_value('id', '1', $db_result);
         $test_db_value('class', '5', $db_result);
-        $test_db_value('subject', '4', $db_result);
+        $test_db_value('subject', '5', $db_result);
     }
 
     public function TblSubjectClass_Delete() {
@@ -785,12 +785,13 @@ class DatabaseTest implements ITest {
 
             Assert::AreEqual(
                 $value->subject,
-                4,
-                "The class isn't as expected - " . $type
+                5,
+                "The subject isn't as expected - " . $type
             );
         };
 
         $test_db(RdgSubjectClass::Select(3), 'default');
+        $test_db(RdgSubjectClass::SelectByClassAndSubject(4, 5), 'class and subject');
     }
     #endregion
 

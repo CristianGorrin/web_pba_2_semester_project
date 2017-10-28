@@ -137,7 +137,7 @@ class RdgSubjectClass implements IRDG {
      * @return TblSubjectClass
      */
     public static function ResultToObject($input) {
-        return new TblSubjectClass(intval($input['id']), intval($input['class']), 
+        return new TblSubjectClass(intval($input['id']), intval($input['class']),
             intval($input['subject']));
     }
     #endregion
@@ -154,5 +154,22 @@ class RdgSubjectClass implements IRDG {
     protected static function SelectBy($by, $value) {
         $result = DatabaseCMD::ExecutedStatement(sprintf(self::_SELECT_BY, $by, $value));
         return self::ResultToObject(mysqli_fetch_assoc($result));
+    }
+
+    /**
+     * Summary of SelectByClassAndSubject
+     * @param int $class
+     * @param int $subject
+     * @return TblSubjectClass
+     */
+    public static function SelectByClassAndSubject($class, $subject) {
+        return self::SelectBy(
+            'class', 
+            sprintf(
+                '%s and subject = %s', 
+                DatabaseCMD::EscapeString($class), 
+                DatabaseCMD::EscapeString($subject)
+            )
+        );
     }
 }

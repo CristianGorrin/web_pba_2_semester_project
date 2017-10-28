@@ -30,11 +30,16 @@ insert into tbl_subject (`subject`) values ('test_subject_update');
 insert into tbl_subject (`subject`) values ('test_subject_delete');
 insert into tbl_subject (`subject`) values ('test_subject_fk');
 insert into tbl_subject (`subject`) values ('test_subject_fk_alt');
+insert into tbl_subject (`subject`) values ('test_subject_fk_alt_one_more');
 
 /* tbl_subject_class */
 insert into tbl_subject_class (class, `subject`) values (4, 4);
-insert into tbl_subject_class (class, `subject`) values (4, 4);
-insert into tbl_subject_class (class, `subject`) values (4, 4);
-insert into tbl_subject_class (class, `subject`) values (4, 4);
-insert into tbl_subject_class (class, `subject`) values (4, 4);
+insert into tbl_subject_class (class, `subject`) values (5, 4);
+insert into tbl_subject_class (class, `subject`) values (4, 5);
 
+/* tbl_class_log */
+insert into tbl_class_log (qr_code, subject_class, teacher_by, unix_time, weight) values ('dbe9ed21-2c61-4937-95c8-5656975e8c1d', 5, 5, 1509129410, 4);
+insert into tbl_class_log (qr_code, subject_class, teacher_by, unix_time, weight) values ('94cc6e91-dea0-4bbe-8277-035454345397', 5, 5, 1509129411, 4);
+insert into tbl_class_log (qr_code, subject_class, teacher_by, unix_time, weight) values ('39903d35-7f41-474d-a03a-47cbd8fefc2f', 5, 5, 1509129412, 4);
+insert into tbl_class_log (qr_code, subject_class, teacher_by, unix_time, weight) values ('9b2e5417-b8a3-4076-96e6-5c082c0c2e13', 5, 5, 1509129413, 4);
+insert into tbl_class_log (qr_code, subject_class, teacher_by, unix_time, weight) values ('086cdf19-9ac0-44f1-9323-e5ceaaf60348', 5, 5, 1509129414, 4);
