@@ -44,3 +44,8 @@ insert into tbl_class_log (qr_code, subject_class, teacher_by, unix_time, weight
 insert into tbl_class_log (qr_code, subject_class, teacher_by, unix_time, weight) values ('39903d35-7f41-474d-a03a-47cbd8fefc2f', 3, 5, 1509129412, 3);
 insert into tbl_class_log (qr_code, subject_class, teacher_by, unix_time, weight) values ('9b2e5417-b8a3-4076-96e6-5c082c0c2e13', 3, 5, 1509129413, 4);
 insert into tbl_class_log (qr_code, subject_class, teacher_by, unix_time, weight) values ('086cdf19-9ac0-44f1-9323-e5ceaaf60348', 3, 5, 1509129414, 5);
+
+/* tbl_teacher_class */
+insert into tbl_teacher_class (class, teacher) values (4, 4);
+insert into tbl_teacher_class (class, teacher) values (5, 5);
+insert into tbl_teacher_class (class, teacher) values (5, 1);
