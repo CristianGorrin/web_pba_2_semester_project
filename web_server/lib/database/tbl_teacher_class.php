@@ -163,16 +163,6 @@ class RdgTeacherClass implements IRDG {
         return self::ResultToObject(mysqli_fetch_assoc($result));
     }
 
-    /**
-     * Summary of SelectByClass
-     * select a row by class
-     *
-     * @param string $class
-     * @return TblTeacherClass
-     */
-    public static function SelectByClass($class) {
-    }
-
     public static function SelectByClassAndTeacher($class, $teacher) {
         return self::SelectBy(
             'class',
