@@ -21,7 +21,9 @@ class Autoload {
         'StudentCheckIn\\TblClassLog'     => '/database/tbl_class_log.php',
         'StudentCheckIn\\RdgClassLog'     => '/database/tbl_class_log.php',
         'StudentCheckIn\\TblTeacherClass' => '/database/tbl_teacher_class.php',
-        'StudentCheckIn\\RdgTeacherClass' => '/database/tbl_teacher_class.php'
+        'StudentCheckIn\\RdgTeacherClass' => '/database/tbl_teacher_class.php',
+        'StudentCheckIn\\TblRollCall'     => '/database/tbl_roll_call.php',
+        'StudentCheckIn\\RdgRollCall'     => '/database/tbl_roll_call.php'
     );
 
     public static function Loaded($class) {
