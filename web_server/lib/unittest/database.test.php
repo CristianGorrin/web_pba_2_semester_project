@@ -371,10 +371,10 @@ class DatabaseTest implements ITest {
             "The value to be delete doesn't exist"
         );
 
-        Assert::IsTrue(RdgClass::Delete(1), 'The delete failed');
+        Assert::IsTrue(RdgStudent::Delete(1), 'The delete failed');
 
         Assert::AreEqual(
-            self::DbGet('tbl_class', '1'),
+            self::DbGet('tbl_student', '1'),
             null,
             "The value wasn't delete"
         );
@@ -997,8 +997,12 @@ class DatabaseTest implements ITest {
                 "The teacher isn't as expected - " . $type
             );
         };
+
+        $test_db(RdgTeacherClass::Select(3), 'default');
+        $test_db(RdgTeacherClass::SelectByClassAndTeacher(5, 1));
     }
     #endregion
+
 }
 
 $obj = new DatabaseTest('db');
