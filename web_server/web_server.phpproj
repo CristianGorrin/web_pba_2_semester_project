@@ -24,6 +24,7 @@
     <Folder Include="lib\" />
     <Folder Include="lib\database\" />
     <Folder Include="lib\conf\" />
+    <Folder Include="lib\util\" />
     <Folder Include="lib\unittest\" />
   </ItemGroup>
   <ItemGroup>
@@ -48,6 +49,8 @@
     <Compile Include="lib\database\tbl_teacher_class.php" />
     <Compile Include="lib\unittest\database.test.php" />
     <Compile Include="lib\unittest\unittest.php" />
+    <Compile Include="lib\unittest\util.test.php" />
+    <Compile Include="lib\util\uuid.php" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\DEVSENSE\PHP Tools\VS$(VisualStudioVersion)\Devsense.PHP.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
