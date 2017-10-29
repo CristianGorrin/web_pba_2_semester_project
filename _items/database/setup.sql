@@ -63,10 +63,11 @@ create table tbl_teacher(
 create table tbl_roll_call(
 	id int auto_increment primary key,
     class_log int not null,
-    student int not null
+    student int not null,
+    unique(class_log, student)
 );
 
-insert into tbl_metadata (`key`, `value`) values ('database_version', '1.0.2');
+insert into tbl_metadata (`key`, `value`) values ('database_version', '1.0.3');
 insert into tbl_metadata (`key`, `value`) values ('last_update_cache_statistics', convert(unix_timestamp(now()), char));
 
 alter table tbl_student add foreign key (class) references tbl_class(id);
