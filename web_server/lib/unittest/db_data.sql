@@ -49,3 +49,8 @@ insert into tbl_class_log (qr_code, subject_class, teacher_by, unix_time, weight
 insert into tbl_teacher_class (class, teacher) values (4, 4);
 insert into tbl_teacher_class (class, teacher) values (5, 5);
 insert into tbl_teacher_class (class, teacher) values (5, 1);
+
+/* tbl_roll_call */
+insert into tbl_roll_call (class_log, student) values(5, 2);
+insert into tbl_roll_call (class_log, student) values(5, 4);
+insert into tbl_roll_call (class_log, student) values(5, 5);

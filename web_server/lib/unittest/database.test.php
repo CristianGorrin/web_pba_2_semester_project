@@ -999,10 +999,108 @@ class DatabaseTest implements ITest {
         };
 
         $test_db(RdgTeacherClass::Select(3), 'default');
-        $test_db(RdgTeacherClass::SelectByClassAndTeacher(5, 1));
+        $test_db(RdgTeacherClass::SelectByClassAndTeacher(5, 1), 'class and teacher');
     }
     #endregion
 
+    #region TblRollCall
+    public function TblRollCall_Insert() {
+        $obj = new TblRollCall(-1, 4, 2);
+
+        Assert::IsTrue($obj->ValidateAsInsert(), 'The values can be used for a insert');
+
+        $result     = RdgRollCall::Insret($obj);
+        $last_error = DatabaseCMD::GetErrorMessage();
+
+        Assert::IsTrue($result, 'The insert into the database failed [' . $last_error . ']');
+
+        $db_result = self::DbGet('tbl_roll_call', '4');
+
+        Assert::AreEqual(
+            $db_result['id'],
+            '4',
+            "The id isn't as expected"
+        );
+
+        Assert::AreEqual(
+            $db_result['class_log'],
+            '4',
+            "The class_log isn't as expected"
+        );
+
+        Assert::AreEqual(
+            $db_result['student'],
+            '2',
+            "The student isn't as expected"
+        );
+    }
+
+    public function TblRollCall_Update() {
+        $db_result = self::DbGet('tbl_roll_call', "1");
+
+        self::TestDBValue('id', '1', $db_result);
+        self::TestDBValue('class_log', '5', $db_result);
+        self::TestDBValue('student', '2', $db_result);
+
+        $obj = new TblRollCall(1, 4, 5);
+
+        Assert::IsTrue($obj->ValidateAsUpdate(), "The object can't be used for an update");
+        Assert::IsTrue(RdgRollCall::Update($obj), 'The update has failed');
+
+        $db_result = self::DbGet('tbl_roll_call', "1");
+
+        self::TestDBValue('id', '1', $db_result, false);
+        self::TestDBValue('class_log', '4', $db_result, false);
+        self::TestDBValue('student', '5', $db_result, false);
+    }
+
+    public function TblRollCall_Delete() {
+        Assert::AreNotEqual(
+            self::DbGet('tbl_roll_call', '2'),
+            null,
+            "The value to be delete doesn't exist"
+        );
+
+        Assert::IsTrue(RdgRollCall::Delete(2), 'The delete failed');
+
+        Assert::AreEqual(
+            self::DbGet('tbl_roll_call', '2'),
+            null,
+            "The value wasn't delete"
+        );
+    }
+
+    public function TblRollCall_Select() {
+        Assert::AreEqual(
+           self::DbGet('tbl_roll_call', '3')['id'],
+           '3',
+           "The database doesn't have the row"
+        );
+
+        $test_db = function($value, $type) {
+            Assert::AreEqual(
+                $value->id,
+                3,
+                "The id isn't as expected - " . $type
+            );
+
+            Assert::AreEqual(
+                $value->class_log,
+                5,
+                "The class_log isn't as expected - " . $type
+            );
+
+            Assert::AreEqual(
+                $value->student,
+                5,
+                "The student isn't as expected - " . $type
+            );
+        };
+
+        $test_db(RdgRollCall::Select(3), 'default');
+        $test_db(RdgRollCall::SelectByClassLogAndStudent(5, 5), 'class log and student');
+    }
+    #endregion
 }
 
 $obj = new DatabaseTest('db');
