@@ -1,3 +1,0 @@
-php passwrod length - https://stackoverflow.com/questions/21479655/maximum-length-of-generated-hash-when-using-password-hash
-Xamarin Android Tutorial - Scan QR Code by Camera using Google Vision - https://www.youtube.com/watch?v=u59RpIp9y-A
-QR code - https://en.wikipedia.org/wiki/QR_code
