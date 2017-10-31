@@ -45,7 +45,7 @@ create table tbl_subject(
 
 create table tbl_class_log(
 	id int auto_increment primary key,
-    qr_code nvarchar(36) unique not null,
+    class_uuid_v4 nvarchar(36) unique not null,
     subject_class int not null,
     teacher_by int not null,
     unix_time int not null,
@@ -64,10 +64,12 @@ create table tbl_roll_call(
 	id int auto_increment primary key,
     class_log int not null,
     student int not null,
+    latitude decimal(8, 6) not null,
+    longitude decimal(9, 6) not null,
     unique(class_log, student)
 );
 
-insert into tbl_metadata (`key`, `value`) values ('database_version', '1.0.3');
+insert into tbl_metadata (`key`, `value`) values ('database_version', '1.0.4');
 insert into tbl_metadata (`key`, `value`) values ('last_update_cache_statistics', convert(unix_timestamp(now()), char));
 
 alter table tbl_student add foreign key (class) references tbl_class(id);

@@ -7,29 +7,7 @@ use ccg\unittesting\UnitTest;
 require_once '../autoload.php';
 require_once './unittest.php';
 
-echo 'Setting the database up - pleas wait...' . PHP_EOL;
-
-$db_setup = file_get_contents('./db_setup.sql');
-$db_data  = file_get_contents('./db_data.sql');
-
-$db_cmd = mysqli_connect('127.0.0.1', 'dev', 'dev1234');
-
-mysqli_multi_query($db_cmd, $db_setup . $db_data);
-
-do {
-	if ($result = mysqli_store_result($db_cmd)) {
-    	mysqli_free_result($result);
-    }
-
-    $e = mysqli_error($db_cmd);
-
-    if (strlen($e) > 0) {
-        throw new \Exception($e);
-    }
-} while(mysqli_next_result($db_cmd));
-mysqli_close($db_cmd);
-unset($db_data);
-unset($db_data);
+require './db_setup.php';
 
 class DatabaseTest implements ITest {
     protected $test_name_identifier;
@@ -782,9 +760,9 @@ class DatabaseTest implements ITest {
         );
 
         Assert::AreEqual(
-            $db_result['qr_code'],
+            $db_result['class_uuid_v4'],
             '6458e19f-c47f-4366-b9aa-e1d6067e38b3',
-            "The qr_code isn't as expected"
+            "The class_uuid_v4 isn't as expected"
         );
 
         Assert::AreEqual(
@@ -816,7 +794,7 @@ class DatabaseTest implements ITest {
         $db_result = self::DbGet('tbl_class_log', "1");
 
         self::TestDBValue('id', '1', $db_result);
-        self::TestDBValue('qr_code', 'dbe9ed21-2c61-4937-95c8-5656975e8c1d', $db_result);
+        self::TestDBValue('class_uuid_v4', 'dbe9ed21-2c61-4937-95c8-5656975e8c1d', $db_result);
         self::TestDBValue('subject_class', '3', $db_result);
         self::TestDBValue('teacher_by', '5', $db_result);
         self::TestDBValue('unix_time', '1509129410', $db_result);
@@ -831,7 +809,7 @@ class DatabaseTest implements ITest {
         $db_result = self::DbGet('tbl_class_log', "1");
 
         self::TestDBValue('id', '1', $db_result, false);
-        self::TestDBValue('qr_code', '38b09f05-da77-483b-a5b7-2e570b3c0d86', $db_result, false);
+        self::TestDBValue('class_uuid_v4', '38b09f05-da77-483b-a5b7-2e570b3c0d86', $db_result, false);
         self::TestDBValue('subject_class', '4', $db_result, false);
         self::TestDBValue('teacher_by', '4', $db_result, false);
         self::TestDBValue('unix_time', strval($time), $db_result, false);
@@ -869,7 +847,7 @@ class DatabaseTest implements ITest {
             );
 
             Assert::AreEqual(
-                $value->qr_code,
+                $value->class_uuid,
                 '39903d35-7f41-474d-a03a-47cbd8fefc2f',
                 "The qr_code isn't as expected - " . $type
             );
@@ -900,7 +878,10 @@ class DatabaseTest implements ITest {
         };
 
         $test_db(RdgClassLog::Select(3), 'default');
-        $test_db(RdgClassLog::SelectByQrCode('39903d35-7f41-474d-a03a-47cbd8fefc2f'), 'qr_code');
+        $test_db(
+            RdgClassLog::SelectByClassUuid('39903d35-7f41-474d-a03a-47cbd8fefc2f'),
+            'qr_code'
+        );
     }
     #endregion
 
@@ -1005,7 +986,7 @@ class DatabaseTest implements ITest {
 
     #region TblRollCall
     public function TblRollCall_Insert() {
-        $obj = new TblRollCall(-1, 4, 2);
+        $obj = new TblRollCall(-1, 4, 2, '7.546412', '103.546412');
 
         Assert::IsTrue($obj->ValidateAsInsert(), 'The values can be used for a insert');
 
@@ -1033,6 +1014,18 @@ class DatabaseTest implements ITest {
             '2',
             "The student isn't as expected"
         );
+
+        Assert::AreEqual(
+            $db_result['latitude'],
+            '7.546412',
+            "The latitude isn't as expected"
+        );
+
+        Assert::AreEqual(
+            $db_result['longitude'],
+            '103.546412',
+            "The longitude isn't as expected"
+        );
     }
 
     public function TblRollCall_Update() {
@@ -1041,8 +1034,10 @@ class DatabaseTest implements ITest {
         self::TestDBValue('id', '1', $db_result);
         self::TestDBValue('class_log', '5', $db_result);
         self::TestDBValue('student', '2', $db_result);
+        self::TestDBValue('latitude', '56.546412', $db_result);
+        self::TestDBValue('longitude', '100.546412', $db_result);
 
-        $obj = new TblRollCall(1, 4, 5);
+        $obj = new TblRollCall(1, 4, 5, '6.546412', '18.546412');
 
         Assert::IsTrue($obj->ValidateAsUpdate(), "The object can't be used for an update");
         Assert::IsTrue(RdgRollCall::Update($obj), 'The update has failed');
@@ -1052,6 +1047,8 @@ class DatabaseTest implements ITest {
         self::TestDBValue('id', '1', $db_result, false);
         self::TestDBValue('class_log', '4', $db_result, false);
         self::TestDBValue('student', '5', $db_result, false);
+        self::TestDBValue('latitude', '6.546412', $db_result);
+        self::TestDBValue('longitude', '18.546412', $db_result);
     }
 
     public function TblRollCall_Delete() {
