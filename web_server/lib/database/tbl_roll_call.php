@@ -14,11 +14,23 @@ class TblRollCall implements IEntity {
     public $id;
     public $class_log;
     public $student;
+    public $latitude;
+    public $longitude;
 
-    public function __construct($id, $class_log, $student) {
+    /**
+     * Summary of __construct
+     * @param int $id
+     * @param int $class_log
+     * @param int $student
+     * @param string $latitude
+     * @param string $longitude
+     */
+    public function __construct($id, $class_log, $student, $latitude, $longitude) {
         $this->id        = $id;
         $this->class_log = $class_log;
         $this->student   = $student;
+        $this->latitude  = $latitude;
+        $this->longitude = $longitude;
     }
 
     #region StudentCheckIn\IEntity Members
@@ -48,15 +60,23 @@ class TblRollCall implements IEntity {
         	return false;
         }
 
+        if (!is_string($this->longitude)) {
+        	return false;
+        }
+
+        if (!is_string($this->latitude)) {
+        	return false;
+        }
+
         return true;
     }
 }
 
 class RdgRollCall implements IRDG {
-    const _SELECT_BY = "select id, class_log, student from tbl_roll_call where %s = %s;";
-    const _UPDATE_BY = "update tbl_roll_call set class_log = %s, student = %s where id = %s;";
+    const _SELECT_BY = "select id, class_log, student, latitude, longitude from tbl_roll_call where %s = %s;";
+    const _UPDATE_BY = "update tbl_roll_call set class_log = %s, student = %s, latitude = %s, longitude = %s where id = %s;";
     const _DELETE_BY = "delete from tbl_roll_call where id = %s;";
-    const _INSERT_BY = "insert into tbl_roll_call (class_log, student) values (%s, %s);";
+    const _INSERT_BY = "insert into tbl_roll_call (class_log, student, latitude, longitude) values (%s, %s, %s, %s);";
 
     #region StudentCheckIn\IRDG Members
     /**
@@ -73,7 +93,9 @@ class RdgRollCall implements IRDG {
             sprintf(
                 self::_INSERT_BY,
                 DatabaseCMD::EscapeString($object->class_log),
-                DatabaseCMD::EscapeString($object->student)
+                DatabaseCMD::EscapeString($object->student),
+                DatabaseCMD::EscapeString($object->latitude),
+                DatabaseCMD::EscapeString($object->longitude)
             )
         );
 
@@ -96,6 +118,8 @@ class RdgRollCall implements IRDG {
                 self::_UPDATE_BY,
                 DatabaseCMD::EscapeString($object->class_log),
                 DatabaseCMD::EscapeString($object->student),
+                DatabaseCMD::EscapeString($object->latitude),
+                DatabaseCMD::EscapeString($object->longitude),
                 DatabaseCMD::EscapeString($object->id)
             )
         );
@@ -138,7 +162,7 @@ class RdgRollCall implements IRDG {
      */
     public static function ResultToObject($input) {
         return new TblRollCall(intval($input['id']), intval($input['class_log']),
-            intval($input['student']));
+            intval($input['student']), $input['latitude'], $input['longitude']);
     }
     #endregion
 
@@ -158,8 +182,8 @@ class RdgRollCall implements IRDG {
 
     /**
      * Summary of SelectByClassLogAndStudent
-     * @param int $class_log 
-     * @param int $student 
+     * @param int $class_log
+     * @param int $student
      * @return TblRollCall
      */
     public static function SelectByClassLogAndStudent($class_log, $student) {

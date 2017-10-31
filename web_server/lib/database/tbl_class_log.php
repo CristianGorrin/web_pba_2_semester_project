@@ -15,7 +15,7 @@ namespace StudentCheckIn;
  */
 class TblClassLog implements IEntity {
     public $id;
-    public $qr_code;
+    public $class_uuid;
     public $subject_class;
     public $teacher_by;
     public $unix_time;
@@ -30,9 +30,9 @@ class TblClassLog implements IEntity {
      * @param int $unix_time
      * @param int $weight
      */
-    public function __construct($id, $qr_code, $subject_class, $teacher_by, $unix_time, $weight) {
+    public function __construct($id, $class_uuid, $subject_class, $teacher_by, $unix_time, $weight) {
         $this->id            = $id;
-        $this->qr_code       = $qr_code;
+        $this->class_uuid    = $class_uuid;
         $this->subject_class = $subject_class;
         $this->teacher_by    = $teacher_by;
         $this->unix_time     = $unix_time;
@@ -58,7 +58,7 @@ class TblClassLog implements IEntity {
      * @return boolean
      */
     protected function Validate() {
-        if (!is_string($this->qr_code)) {
+        if (!is_string($this->class_uuid)) {
         	return false;
         }
 
@@ -83,10 +83,10 @@ class TblClassLog implements IEntity {
 }
 
 class RdgClassLog implements IRDG {
-    const _SELECT_BY = "select id, qr_code, subject_class, teacher_by, unix_time, weight from tbl_class_log where %s = %s;";
-    const _UPDATE_BY = "update tbl_class_log set qr_code = '%s', subject_class = %s, teacher_by = %s, unix_time = %s, weight = %s where id = %s;";
+    const _SELECT_BY = "select id, class_uuid_v4, subject_class, teacher_by, unix_time, weight from tbl_class_log where %s = %s;";
+    const _UPDATE_BY = "update tbl_class_log set class_uuid_v4 = '%s', subject_class = %s, teacher_by = %s, unix_time = %s, weight = %s where id = %s;";
     const _DELETE_BY = "delete from tbl_class_log where id = %s;";
-    const _INSERT_BY = "insert into tbl_class_log (qr_code, subject_class, teacher_by, unix_time, weight) values ('%s', %s, %s, %s, %s);";
+    const _INSERT_BY = "insert into tbl_class_log (class_uuid_v4, subject_class, teacher_by, unix_time, weight) values ('%s', %s, %s, %s, %s);";
 
     #region StudentCheckIn\IRDG Members
     /**
@@ -102,7 +102,7 @@ class RdgClassLog implements IRDG {
         DatabaseCMD::ExecutedStatement(
             sprintf(
                 self::_INSERT_BY,
-                DatabaseCMD::EscapeString($object->qr_code),
+                DatabaseCMD::EscapeString($object->class_uuid),
                 DatabaseCMD::EscapeString($object->subject_class),
                 DatabaseCMD::EscapeString($object->teacher_by),
                 DatabaseCMD::EscapeString($object->unix_time),
@@ -127,7 +127,7 @@ class RdgClassLog implements IRDG {
         DatabaseCMD::ExecutedStatement(
             sprintf(
                 self::_UPDATE_BY,
-                DatabaseCMD::EscapeString($object->qr_code),
+                DatabaseCMD::EscapeString($object->class_uuid),
                 DatabaseCMD::EscapeString($object->subject_class),
                 DatabaseCMD::EscapeString($object->teacher_by),
                 DatabaseCMD::EscapeString($object->unix_time),
@@ -173,7 +173,7 @@ class RdgClassLog implements IRDG {
      * @return TblClassLog
      */
     public static function ResultToObject($input) {
-        return new TblClassLog(intval($input['id']), $input['qr_code'],
+        return new TblClassLog(intval($input['id']), $input['class_uuid_v4'],
             intval($input['subject_class']), intval($input['teacher_by']),
             intval($input['unix_time']), intval($input['weight']));
     }
@@ -195,10 +195,10 @@ class RdgClassLog implements IRDG {
 
     /**
      * Summary of SelectByQrCode
-     * @param string $qr_code 
+     * @param string $qr_code
      * @return TblClassLog
      */
-    public static function SelectByQrCode($qr_code) {
-        return self::SelectBy('qr_code', sprintf("'%s'", DatabaseCMD::EscapeString($qr_code)));
+    public static function SelectByClassUuid($qr_code) {
+        return self::SelectBy('class_uuid_v4', sprintf("'%s'", DatabaseCMD::EscapeString($qr_code)));
     }
 }
