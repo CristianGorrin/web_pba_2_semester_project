@@ -128,6 +128,10 @@ class RdgSubject implements IRDG {
      * @return TblSubject
      */
     public static function ResultToObject($input) {
+        if (is_null($input)) {
+        	return null;
+        }
+
         return new TblSubject(intval($input['id']), $input['subject']);
     }
     #endregion

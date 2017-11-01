@@ -137,6 +137,10 @@ class RdgMetadata implements IRDG {
      * @return TblMetadata
      */
     public static function ResultToObject($input) {
+        if (is_null($input)) {
+        	return null;
+        }
+        
         return new TblMetadata($input['key'], $input['value']);
     }
     #endregion

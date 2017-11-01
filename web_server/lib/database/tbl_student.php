@@ -204,6 +204,10 @@ class RdgStudent implements IRDG {
      * @return TblStudent
      */
     public static function ResultToObject($input) {
+        if (is_null($input)) {
+        	return null;
+        }
+        
         return new TblStudent(intval($input['id']), $input['firstname'], $input['surname'],
             $input['email'], $input['pass_hass'], boolval($input['validate']),
             $input['class'], $input['device_uuid_v4'], $input['cache_statistics']);
@@ -237,7 +241,7 @@ class RdgStudent implements IRDG {
 
     /**
      * Summary of SelectByDeviceUuid
-     * @param string $uuid 
+     * @param string $uuid
      * @return TblStudent
      */
     public static function SelectByDeviceUuid($uuid) {

@@ -144,6 +144,10 @@ class RdgTeacherClass implements IRDG {
      * @return TblTeacherClass
      */
     public static function ResultToObject($input) {
+        if (is_null($input)) {
+        	return null;
+        }
+        
         return new TblTeacherClass(intval($input['id']), intval($input['class']),
             intval($input['teacher']));
     }
@@ -167,7 +171,7 @@ class RdgTeacherClass implements IRDG {
         return self::SelectBy(
             'class',
             sprintf(
-                "%s and teacher = %s", 
+                "%s and teacher = %s",
                 DatabaseCMD::EscapeString($class),
                 DatabaseCMD::EscapeString($teacher)
             )

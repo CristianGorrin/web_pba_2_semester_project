@@ -173,6 +173,10 @@ class RdgClassLog implements IRDG {
      * @return TblClassLog
      */
     public static function ResultToObject($input) {
+        if (is_null($input)) {
+        	return null;
+        }
+        
         return new TblClassLog(intval($input['id']), $input['class_uuid_v4'],
             intval($input['subject_class']), intval($input['teacher_by']),
             intval($input['unix_time']), intval($input['weight']));

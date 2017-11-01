@@ -163,6 +163,10 @@ class RdgTeacher implements IRDG {
      * @return TblTeacher
      */
     public static function ResultToObject($input) {
+        if (is_null($input)) {
+        	return null;
+        }
+
         return new TblTeacher(intval($input['id']), $input['firstname'], $input['surname'],
             $input['email'], $input['hass_pass']);
     }

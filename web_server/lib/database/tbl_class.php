@@ -133,6 +133,10 @@ class RdgClass implements IRDG {
      * @return TblClass
      */
     public static function ResultToObject($input) {
+        if (is_null($input)) {
+        	return null;
+        }
+
         return new TblClass(intval($input['id']), $input['class']);
     }
     #endregion

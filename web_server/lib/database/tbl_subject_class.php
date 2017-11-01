@@ -137,6 +137,10 @@ class RdgSubjectClass implements IRDG {
      * @return TblSubjectClass
      */
     public static function ResultToObject($input) {
+        if (is_null($input)) {
+        	return null;
+        }
+        
         return new TblSubjectClass(intval($input['id']), intval($input['class']),
             intval($input['subject']));
     }
@@ -164,10 +168,10 @@ class RdgSubjectClass implements IRDG {
      */
     public static function SelectByClassAndSubject($class, $subject) {
         return self::SelectBy(
-            'class', 
+            'class',
             sprintf(
-                '%s and subject = %s', 
-                DatabaseCMD::EscapeString($class), 
+                '%s and subject = %s',
+                DatabaseCMD::EscapeString($class),
                 DatabaseCMD::EscapeString($subject)
             )
         );

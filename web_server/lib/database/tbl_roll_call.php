@@ -161,6 +161,10 @@ class RdgRollCall implements IRDG {
      * @return TblRollCall
      */
     public static function ResultToObject($input) {
+        if (is_null($input)) {
+        	return null;
+        }
+        
         return new TblRollCall(intval($input['id']), intval($input['class_log']),
             intval($input['student']), $input['latitude'], $input['longitude']);
     }
