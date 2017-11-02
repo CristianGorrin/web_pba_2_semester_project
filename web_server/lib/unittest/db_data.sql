@@ -20,9 +20,10 @@ insert into tbl_student (firstname, surname, email, pass_hass, validate, class, 
 /* tbl_teacher */
 insert into tbl_teacher (firstname, surname, email, hass_pass) values ('test_firstname_select', 'test_surname_select', 'test_eamil_select', 'test_hass_pass_select');
 insert into tbl_teacher (firstname, surname, email, hass_pass) values ('test_firstname_udapte', 'test_surname_update', 'test_eamil_update', 'test_hass_pass_update');
-insert into tbl_teacher (firstname, surname, email, hass_pass) values ('test_firstname_delete', 'test_surname_delete', 'test_eamil_delete', 'test_hass_pass_delete');
+insert into tbl_teacher (firstname, surname, email, hass_pass) values ('test_firstname_delete', 'test_surname_delete', 'test_eamil_delete', '$2y$10$5/FZikjHed74jGxtVxZ45.fEMFU.uZ45CWgdtrJGijUWLOlXiVrfK');
 insert into tbl_teacher (firstname, surname, email, hass_pass) values ('test_firstname_fk', 'test_surname_fk', 'test_eamil_fk', 'test_hass_pass_fk');
 insert into tbl_teacher (firstname, surname, email, hass_pass) values ('test_firstname_fk_alt', 'test_surname_fk_alt', 'test_eamil_fk_alt', 'test_hass_pass_fk_alt');
+insert into tbl_teacher (firstname, surname, email, hass_pass) values ('test_acc_firstname', 'test_acc_surname', 'test_acc_email', '$2y$10$QKmH9mz7vtO6UiL4QO3v6u1idNu05qFauxiWwI32UVm6D8HYhb9/G');
 
 /* tbl_subject */
 insert into tbl_subject (`subject`) values ('test_subject_select');
