@@ -77,8 +77,57 @@ abstract class AccStudent {
         return password_verify($password, $acc->pass_hass);
     }
 
-    public static function UpdatePassword() {
+    public static function UpdatePassword($old_password, $new_password, $email) {
+        $acc = null;
+        try {
+            $acc = RdgStudent::SelectByEmail($email);
+        }
+        catch (Exception $exception) {
+            #region TODO remove - it only used for unit testing
+            \ccg\unittesting\UnitTest::Log(
+                sprintf("Can't find a acc with the email \"%s\"", $email),
+                \ccg\unittesting\UnitTest::WARNING
+            );
+            #endregion
+            return false;
+        }
 
+        if (!self::VerifyPassword($email, $old_password, $acc)) {
+            #region TODO remove - it only used for unit testing
+            \ccg\unittesting\UnitTest::Log(
+                "Can't verify old password...",
+                \ccg\unittesting\UnitTest::WARNING
+            );
+            #endregion
+        	return false;
+        }
+
+        $hass_pass = '';
+        do {
+            $hass_pass = password_hash($new_password, PASSWORD_BCRYPT);
+            #region TODO remove - it only used for unit testing
+            \ccg\unittesting\UnitTest::Log(
+                sprintf('Hashing the password: "%s" => "%s"', $new_password, $hass_pass)
+            );
+            #endregion
+        } while (!is_null(RdgStudent::SelectByPassHass($hass_pass)));
+
+        $acc->pass_hass = $hass_pass;
+
+        try {
+            RdgStudent::Update($acc);
+        }
+        catch (Exception $exception) {
+            #region TODO remove - it only used for unit testing
+            \ccg\unittesting\UnitTest::Log(
+                "Can't update the new hashed password...",
+                \ccg\unittesting\UnitTest::WARNING
+            );
+            #endregion
+            return false;
+        }
+
+        return true;
     }
 
     public static function ValidateAcc() {
