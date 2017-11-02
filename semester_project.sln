@@ -15,6 +15,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "database", "database", "{A6
 		_items\database\setup.sql = _items\database\setup.sql
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Items", "Items", "{C86FDBB8-5ABC-47C9-A2E5-C68F52601952}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "prototypes", "prototypes", "{B2B80DD7-1D17-4345-A0CE-42D7D9EC92AE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "wireframe", "wireframe", "{DBF460F9-684A-4C03-8C7F-466DE29F9020}"
+	ProjectSection(SolutionItems) = preProject
+		_items\prototypes\wireframe\history.jpg = _items\prototypes\wireframe\history.jpg
+		_items\prototypes\wireframe\login.jpg = _items\prototypes\wireframe\login.jpg
+		_items\prototypes\wireframe\main.css = _items\prototypes\wireframe\main.css
+		_items\prototypes\wireframe\main.html = _items\prototypes\wireframe\main.html
+		_items\prototypes\wireframe\main.js = _items\prototypes\wireframe\main.js
+		_items\prototypes\wireframe\menu.jpg = _items\prototypes\wireframe\menu.jpg
+		_items\prototypes\wireframe\qr_scanner.jpg = _items\prototypes\wireframe\qr_scanner.jpg
+		_items\prototypes\wireframe\qr_scanner_completed.jpg = _items\prototypes\wireframe\qr_scanner_completed.jpg
+		_items\prototypes\wireframe\statistics.jpg = _items\prototypes\wireframe\statistics.jpg
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		app_lib\app_lib.projitems*{b28a06a4-faf4-47a7-8836-12a0c44e5726}*SharedItemsImports = 13
@@ -35,6 +52,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A6A69A10-4D6A-4FBE-B731-18C60FA20BE5} = {C86FDBB8-5ABC-47C9-A2E5-C68F52601952}
+		{B2B80DD7-1D17-4345-A0CE-42D7D9EC92AE} = {C86FDBB8-5ABC-47C9-A2E5-C68F52601952}
+		{DBF460F9-684A-4C03-8C7F-466DE29F9020} = {B2B80DD7-1D17-4345-A0CE-42D7D9EC92AE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AE900917-F972-42E2-8589-ED01E3B5F73A}

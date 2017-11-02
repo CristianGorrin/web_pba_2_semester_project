@@ -24,6 +24,7 @@
     <Folder Include="lib\" />
     <Folder Include="lib\database\" />
     <Folder Include="lib\conf\" />
+    <Folder Include="lib\controller\" />
     <Folder Include="lib\util\" />
     <Folder Include="lib\unittest\" />
   </ItemGroup>
@@ -35,6 +36,8 @@
   <ItemGroup>
     <Compile Include="lib\autoload.php" />
     <Compile Include="lib\conf\database.php" />
+    <Compile Include="lib\controller\acc_student.php" />
+    <Compile Include="lib\controller\acc_teacher.php" />
     <Compile Include="lib\database\database_cmd.php" />
     <Compile Include="lib\database\i_entity.php" />
     <Compile Include="lib\database\i_rdg.php" />
@@ -47,7 +50,9 @@
     <Compile Include="lib\database\tbl_subject_class.php" />
     <Compile Include="lib\database\tbl_teacher.php" />
     <Compile Include="lib\database\tbl_teacher_class.php" />
+    <Compile Include="lib\unittest\controller.acc_teacher.test.php" />
     <Compile Include="lib\unittest\database.test.php" />
+    <Compile Include="lib\unittest\db_setup.php" />
     <Compile Include="lib\unittest\unittest.php" />
     <Compile Include="lib\unittest\util.test.php" />
     <Compile Include="lib\util\uuid.php" />
