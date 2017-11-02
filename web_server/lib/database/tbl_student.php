@@ -210,7 +210,7 @@ class RdgStudent implements IRDG {
         
         return new TblStudent(intval($input['id']), $input['firstname'], $input['surname'],
             $input['email'], $input['pass_hass'], boolval($input['validate']),
-            $input['class'], $input['device_uuid_v4'], $input['cache_statistics']);
+            intval($input['class']), $input['device_uuid_v4'], $input['cache_statistics']);
     }
     #endregion
 
