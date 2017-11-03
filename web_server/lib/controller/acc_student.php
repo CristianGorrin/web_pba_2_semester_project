@@ -4,11 +4,14 @@ namespace StudentCheckIn;
 abstract class AccStudent {
     /**
      * Summary of Singup
+     * Create a new student account
+     *
      * @param string $first_name
      * @param string $surname
      * @param string $email
      * @param string $password
      * @param string $class_id
+     *
      * @return \boolean|string
      */
     public static function Singup($first_name, $surname, $email, $password, $class_id) {
@@ -54,6 +57,16 @@ abstract class AccStudent {
         return $device_uuid;
     }
 
+    /**
+     * Summary of VerifyPassword
+     * Verify if password is valid
+     *
+     * @param string $email
+     * @param string $password
+     * @param string $acc
+     *
+     * @return boolean
+     */
     public static function VerifyPassword($email, $password, $acc = null) {
         if (!is_null($acc)) {
             if ($acc->email != $email) {
@@ -77,6 +90,15 @@ abstract class AccStudent {
         return password_verify($password, $acc->pass_hass);
     }
 
+    /**
+     * Summary of UpdatePassword
+     * Update the password
+     *
+     * @param string $old_password
+     * @param string $new_password
+     * @param string $email
+     * @return boolean
+     */
     public static function UpdatePassword($old_password, $new_password, $email) {
         $acc = null;
         try {
@@ -130,8 +152,31 @@ abstract class AccStudent {
         return true;
     }
 
-    public static function ValidateAcc() {
+    /**
+     * Summary of ValidateAcc
+     * Update account to valid stat
+     *
+     * @param string $email
+     *
+     * @return boolean
+     */
+    public static function ValidateAcc($email) {
+        $acc = null;
+        try {
+            $acc = RdgStudent::SelectByEmail($email);
+        }
+        catch (Exception $exception) {
+            return false;
+        }
 
+        $acc->validate = true;
+
+        try {
+            return RdgStudent::Update($acc);	
+        }
+        catch (Exception $exception) {
+            return false;
+        }
     }
 
     public static function UpdateCacheStatistics() {
