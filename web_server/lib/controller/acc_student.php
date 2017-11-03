@@ -172,7 +172,7 @@ abstract class AccStudent {
         $acc->validate = true;
 
         try {
-            return RdgStudent::Update($acc);	
+            return RdgStudent::Update($acc);
         }
         catch (Exception $exception) {
             return false;
@@ -187,7 +187,58 @@ abstract class AccStudent {
 
     }
 
-    public static function PairDevice() {
+    /**
+     * Summary of PairDevice
+     * This will create a new device UUID for student account
+     * The result is a UUID as string - but it can't is false
+     *
+     * @param int $acc_id
+     *
+     * @return \boolean|string
+     */
+    public static function PairDevice($acc_id) {
+        $acc = null;
+        try {
+            $acc = RdgStudent::Select($acc_id);
+        }
+        catch (Exception $exception) {
+            #region TODO remove - it only used for unit testing
+            \ccg\unittesting\UnitTest::Log(
+                sprintf("Error in RdgStudent::Select(%s)", $acc_id)
+            );
+            #endregion
+            return false;
+        }
 
+        if (is_null($acc)) {
+            #region TODO remove - it only used for unit testing
+            \ccg\unittesting\UnitTest::Log(
+                "Can't faint the student account with the id of " . $acc_id
+            );
+            #endregion
+        	return false;
+        }
+
+        $uuid = null;
+        do {
+        	$uuid = UUID::CreateV4();
+        } while(!is_null(RdgStudent::SelectByDeviceUuid($uuid)));
+
+        $acc->device_uuid_v4 = $uuid;
+
+        try {
+        	RdgStudent::Update($acc);
+        }
+        catch (Exception $exception) {
+            #region TODO remove - it only used for unit testing
+            \ccg\unittesting\Log::ConsolePrintVarDump(
+                $acc, 
+                "Can't update the student account..."
+            );
+            #endregion
+            return false;
+        }
+
+        return $uuid;
     }
 }
