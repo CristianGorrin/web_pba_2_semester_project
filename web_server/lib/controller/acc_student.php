@@ -232,7 +232,7 @@ abstract class AccStudent {
         catch (Exception $exception) {
             #region TODO remove - it only used for unit testing
             \ccg\unittesting\Log::ConsolePrintVarDump(
-                $acc, 
+                $acc,
                 "Can't update the student account..."
             );
             #endregion
@@ -240,5 +240,39 @@ abstract class AccStudent {
         }
 
         return $uuid;
+    }
+
+    /**
+     * Summary of IsDeviceOf
+     * Test if the device UUID from the account - based on the eamil 
+     * 
+     * @param string $email 
+     * @param string $device_uuid 
+     * @return boolean
+     */
+    public static function IsDeviceOf($email, $device_uuid) {
+        $acc = null;
+        try {
+        	$acc = RdgStudent::SelectByEmail($email);
+        }
+        catch (Exception $exception) {
+            #region TODO remove - it only used for unit testing
+            \ccg\unittesting\UnitTest::Log(
+                sprintf("RdgStudent::SelectByEmail(%s) failed", $email)
+            );
+            #endregion
+            return false;
+        }
+
+        if (is_null($acc)) {
+        	#region TODO remove - it only used for unit testing
+            \ccg\unittesting\UnitTest::Log(
+                "Can't faint the student account with the email of " . $email
+            );
+            #endregion
+            return false;
+        }
+
+        return $device_uuid == $acc->device_uuid_v4;
     }
 }
