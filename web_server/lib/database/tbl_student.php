@@ -113,6 +113,8 @@ class RdgStudent implements IRDG {
     const _DELETE_BY = "delete from tbl_student where id = %s;";
     const _INSERT_BY = "insert into tbl_student (firstname, surname, email, pass_hass, validate, class, device_uuid_v4, cache_statistics) values ('%s', '%s', '%s', '%s', %s, %s, '%s', '%s');";
 
+    const _SELECT_ALL_IDS = "select id from tbl_student;";
+
     #region StudentCheckIn\IRDG Members
     /**
      * Insert the object into the table
@@ -207,7 +209,7 @@ class RdgStudent implements IRDG {
         if (is_null($input)) {
         	return null;
         }
-        
+
         return new TblStudent(intval($input['id']), $input['firstname'], $input['surname'],
             $input['email'], $input['pass_hass'], boolval($input['validate']),
             intval($input['class']), $input['device_uuid_v4'], $input['cache_statistics']);
@@ -261,5 +263,18 @@ class RdgStudent implements IRDG {
             'pass_hass',
             sprintf("'%s'", DatabaseCMD::EscapeString($pass_hass))
         );
+    }
+
+    /**
+     * Summary of GetAllIds
+     * Get all the ids in this table
+     *
+     * @return int[]
+     * @yield
+     */
+    public static function GetAllIds() {
+        foreach (DatabaseCMD::ExecutedStatement(self::_SELECT_ALL_IDS) as $item) {
+        	yield intval($item['id']);
+        }
     }
 }
