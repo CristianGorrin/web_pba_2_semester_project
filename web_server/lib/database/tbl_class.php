@@ -56,6 +56,8 @@ class RdgClass implements IRDG {
     const _DELETE_BY = "delete from tbl_class where id = '%s'";
     const _INSERT_BY = "insert into tbl_class (class) values ('%s');";
 
+    const _SELECT_ALL = "select id, class from tbl_class;";
+
     #region StudentCheckIn\IRDG Members
     /**
      * Insret the object into the table
@@ -164,5 +166,20 @@ class RdgClass implements IRDG {
      */
     public static function SelectByClass($class) {
         return self::SelectBy('class', sprintf("'%s'", DatabaseCMD::EscapeString($class)));
+    }
+
+    /**
+     * Summary of GetAll
+     * Get all class
+     * 
+     * @return TblClass[]
+     * @yield
+     */
+    public static function GetAll() {
+        $result = DatabaseCMD::ExecutedStatement(self::_SELECT_ALL);
+
+        foreach ($result as $value) {
+            yield self::ResultToObject($value);
+        }
     }
 }
