@@ -179,12 +179,121 @@ abstract class AccStudent {
         }
     }
 
-    public static function UpdateCacheStatistics() {
+    /**
+     * Summary of UpdateAllCacheStatistics
+     * Update the cache statistics of all students
+     */
+    public static function UpdateAllCacheStatistics() {
+        $update_cache = array(
+            'tbl_class'     => array(),
+            'tbl_subject'   => array(),
+            'subject_class' => array(), //grouped by class
+            'class_log'     => array()  //grouped by subject_class
+        );
 
+        foreach (RdgStudent::GetAllIds() as $value) {
+            $temp_student = null;
+            $temp_result = array(
+                "subjects" => array(),
+            );
+
+            try {
+                $temp_student = RdgStudent::Select($value);
+            }
+            catch (Exception $exception) {
+                continue;
+            }
+
+            if (is_null($temp_student)) continue;
+
+            //TODO skip student if not in rolled
+
+            if (!isset($update_cache['tbl_class'][$temp_student->class])) {
+                $update_cache['tbl_class'][$temp_student->class] =
+                    RdgClass::Select($temp_student->class);
+            }
+
+            if (!isset($update_cache['subject_class'][$temp_student->class])) {
+                $update_cache['subject_class'][$temp_student->class] = array();
+                foreach (RdgSubjectClass::GetAll($temp_student->class) as $value) {
+                    $update_cache['subject_class'][$temp_student->class][$value->id] = $value;
+
+                    if (!isset($update_cache['tbl_subject'][$value->subject])) {
+                        $update_cache['tbl_subject'][$value->subject] =
+                            RdgSubject::Select($value->subject);
+                    }
+                }
+            }
+
+            /** @var TblSubjectClass $subject_class */
+            foreach ($update_cache['subject_class'][$temp_student->class] as $subject_class) {
+                if (!isset($update_cache['class_log'][$subject_class->id])) {
+                    $update_cache['class_log'][$subject_class->id] = array();
+                    foreach (RdgClassLog::GetAll($subject_class->id) as $value) {
+                        $update_cache['class_log'][$subject_class->id][$value->id] = $value;
+                    }
+                }
+
+                /** @var TblClassLog $value */
+                foreach ($update_cache['class_log'][$subject_class->id] as $value) {
+                    $subject_name =
+                        $update_cache['tbl_subject'][$subject_class->subject]->subject;
+
+                    if (!isset($temp_result["subjects"][$subject_name])) {
+                        $temp_result["subjects"][$subject_name] = array(
+                            "_id"    => $update_cache['tbl_subject'][$subject_class->subject]->id,
+                            "_stats" => array(
+                                "total"    => 0,
+                                "absences" => 0
+                            )
+                        );
+                    }
+
+                    $is_absenct = null == RdgRollCall::SelectByClassLogAndStudent(
+                        $value->id,
+                        $temp_student->id
+                    );
+
+                    $temp_result["subjects"][$subject_name]["_stats"]["total"] += $value->weight;
+                    if ($is_absenct) {
+                        $temp_result["subjects"][$subject_name]["_stats"]["absences"] +=
+                            $value->weight;
+                    }
+
+                    $temp_result["subjects"][$subject_name][$value->class_uuid] = !$is_absenct;
+                }
+            }
+
+            $temp_student->cache_statistics = json_encode($temp_result);
+            RdgStudent::Update($temp_student);
+        }
+
+        $meta = RdgMetadata::Select('last_update_cache_statistics');
+        $meta->value = time();
+        RdgMetadata::Update($meta);
     }
 
-    public static function UpdateAllCacheStatistics() {
+    /**
+     * Summary of GetCacheStatistics
+     * Get the cache statistics
+     *
+     * @param int $student_id
+     *
+     * @return string|null
+     */
+    public static function GetCacheStatistics($student_id) {
+        try {
+            $obj = RdgStudent::Select($student_id);
+        }
+        catch (Exception $exception) {
+            return null;
+        }
 
+        if ($obj == null) {
+        	return null;
+        } else {
+            return $obj->cache_statistics;
+        }
     }
 
     /**
@@ -244,10 +353,10 @@ abstract class AccStudent {
 
     /**
      * Summary of IsDeviceOf
-     * Test if the device UUID from the account - based on the eamil 
-     * 
-     * @param string $email 
-     * @param string $device_uuid 
+     * Test if the device UUID from the account - based on the eamil
+     *
+     * @param string $email
+     * @param string $device_uuid
      * @return boolean
      */
     public static function IsDeviceOf($email, $device_uuid) {

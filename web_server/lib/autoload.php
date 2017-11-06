@@ -23,8 +23,10 @@ class Autoload {
         'StudentCheckIn\\TblTeacherClass' => '/database/tbl_teacher_class.php',
         'StudentCheckIn\\RdgTeacherClass' => '/database/tbl_teacher_class.php',
         'StudentCheckIn\\TblRollCall'     => '/database/tbl_roll_call.php',
+        'StudentCheckIn\\RdgRollCall'     => '/database/tbl_roll_call.php',
         'StudentCheckIn\\UUID'            => '/util/uuid.php',
-        'StudentCheckIn\\AccTeacher'      => '/controller/acc_teacher.php'
+        'StudentCheckIn\\AccTeacher'      => '/controller/acc_teacher.php',
+        'StudentCheckIn\\AccStudent'      => '/controller/acc_student.php'
     );
 
     public static function Loaded($class) {

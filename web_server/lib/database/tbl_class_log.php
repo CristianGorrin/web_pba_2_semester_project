@@ -88,6 +88,8 @@ class RdgClassLog implements IRDG {
     const _DELETE_BY = "delete from tbl_class_log where id = %s;";
     const _INSERT_BY = "insert into tbl_class_log (class_uuid_v4, subject_class, teacher_by, unix_time, weight) values ('%s', %s, %s, %s, %s);";
 
+    const _SELECT_ALL = "select id, class_uuid_v4, subject_class, teacher_by, unix_time, weight from tbl_class_log where subject_class = %s;";
+
     #region StudentCheckIn\IRDG Members
     /**
      * Insert the object into the table
@@ -176,7 +178,7 @@ class RdgClassLog implements IRDG {
         if (is_null($input)) {
         	return null;
         }
-        
+
         return new TblClassLog(intval($input['id']), $input['class_uuid_v4'],
             intval($input['subject_class']), intval($input['teacher_by']),
             intval($input['unix_time']), intval($input['weight']));
@@ -204,5 +206,24 @@ class RdgClassLog implements IRDG {
      */
     public static function SelectByClassUuid($qr_code) {
         return self::SelectBy('class_uuid_v4', sprintf("'%s'", DatabaseCMD::EscapeString($qr_code)));
+    }
+
+    /**
+     * Summary of GetAll
+     * Gets all - based on the subject_class id
+     *
+     * @param int $subject_class
+     *
+     * @return TblClassLog[]
+     * @yield
+     */
+    public static function GetAll($subject_class) {
+        $result = DatabaseCMD::ExecutedStatement(
+            sprintf(self::_SELECT_ALL, DatabaseCMD::EscapeString($subject_class))
+        );
+
+        foreach ($result as $value) {
+        	yield self::ResultToObject($value);
+        }
     }
 }

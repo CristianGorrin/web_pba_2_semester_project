@@ -1,18 +1,15 @@
 ﻿<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Name>web_server</Name>
-    <ProjectGuid>56a46626-940b-45ab-841f-f2bf54a0baed</ProjectGuid>
-    <OutputType>Console</OutputType>
-    <OutputPath>.</OutputPath>
+    <Name>web_server_</Name>
+    <ProjectGuid>a7171d3f-8b11-4263-babd-e458edd82dd9</ProjectGuid>
+    <OutputType>Library</OutputType>
     <RootNamespace>
     </RootNamespace>
     <ProjectTypeGuids>{A0786B88-2ADB-4C21-ABE8-AA2D79766269}</ProjectTypeGuids>
-    <StartupFile>
-    </StartupFile>
+    <AssemblyName>web_server_</AssemblyName>
     <Runtime>PHP</Runtime>
-    <RuntimeVersion>7.1</RuntimeVersion>
+    <RuntimeVersion>7.0</RuntimeVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <IncludeDebugInformation>true</IncludeDebugInformation>
@@ -21,19 +18,6 @@
     <IncludeDebugInformation>false</IncludeDebugInformation>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="lib\" />
-    <Folder Include="lib\database\" />
-    <Folder Include="lib\conf\" />
-    <Folder Include="lib\controller\" />
-    <Folder Include="lib\util\" />
-    <Folder Include="lib\unittest\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="lib\.htaccess" />
-    <Content Include="lib\unittest\db_data.sql" />
-    <Content Include="lib\unittest\db_setup.sql" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="lib\autoload.php" />
     <Compile Include="lib\conf\database.php" />
     <Compile Include="lib\controller\acc_student.php" />
@@ -41,15 +25,16 @@
     <Compile Include="lib\database\database_cmd.php" />
     <Compile Include="lib\database\i_entity.php" />
     <Compile Include="lib\database\i_rdg.php" />
-    <Compile Include="lib\database\tbl_metadata.php" />
     <Compile Include="lib\database\tbl_class.php" />
-    <Compile Include="lib\database\tbl_student.php" />
     <Compile Include="lib\database\tbl_class_log.php" />
+    <Compile Include="lib\database\tbl_metadata.php" />
     <Compile Include="lib\database\tbl_roll_call.php" />
+    <Compile Include="lib\database\tbl_student.php" />
     <Compile Include="lib\database\tbl_subject.php" />
     <Compile Include="lib\database\tbl_subject_class.php" />
     <Compile Include="lib\database\tbl_teacher.php" />
     <Compile Include="lib\database\tbl_teacher_class.php" />
+    <Compile Include="lib\unittest\controller.acc_student.test.php" />
     <Compile Include="lib\unittest\controller.acc_teacher.test.php" />
     <Compile Include="lib\unittest\database.test.php" />
     <Compile Include="lib\unittest\db_setup.php" />
@@ -57,13 +42,17 @@
     <Compile Include="lib\unittest\util.test.php" />
     <Compile Include="lib\util\uuid.php" />
   </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath32)\DEVSENSE\PHP Tools\VS$(VisualStudioVersion)\Devsense.PHP.targets" />
-  <!-- Uncomment the CoreCompile target to enable the Build command in
-       Visual Studio and specify your pre- and post-build commands in
-       the BeforeBuild and AfterBuild targets below. -->
-  <!--<Target Name="CoreCompile" />-->
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
+  <ItemGroup>
+    <Folder Include="lib\" />
+    <Folder Include="lib\conf\" />
+    <Folder Include="lib\controller\" />
+    <Folder Include="lib\database\" />
+    <Folder Include="lib\unittest\" />
+    <Folder Include="lib\util\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="lib\.htaccess" />
+    <Content Include="lib\unittest\db_data.sql" />
+    <Content Include="lib\unittest\db_setup.sql" />
+  </ItemGroup>
 </Project>
