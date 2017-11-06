@@ -33,7 +33,7 @@ abstract class AccTeacher {
             #endregion
             RdgTeacher::Insret($new_acc);
         }
-        catch (Exception $exception) {
+        catch (\Exception $exception) {
             #region TODO remove - it only used for unit testing
             \ccg\unittesting\UnitTest::Log(
                 'Failed to creating a new teacher acc',
@@ -68,7 +68,7 @@ abstract class AccTeacher {
         	try {
                 $acc = RdgTeacher::SelectByEmail($email);
             }
-            catch (Exception $exception) {
+            catch (\Exception $exception) {
                 #region TODO remove - it only used for unit testing
                 \ccg\unittesting\UnitTest::Log(
                     sprintf("Can't find a acc with the email \"%s\"", $email),
@@ -96,7 +96,7 @@ abstract class AccTeacher {
         try {
             $acc = RdgTeacher::SelectByEmail($email);
         }
-        catch (Exception $exception) {
+        catch (\Exception $exception) {
             #region TODO remove - it only used for unit testing
             \ccg\unittesting\UnitTest::Log(
                 sprintf("Can't find a acc with the email \"%s\"", $email),
@@ -131,7 +131,7 @@ abstract class AccTeacher {
         try {
             RdgTeacher::Update($acc);
         }
-        catch (Exception $exception) {
+        catch (\Exception $exception) {
             #region TODO remove - it only used for unit testing
             \ccg\unittesting\UnitTest::Log(
                 "Can't update the new hashed password...",

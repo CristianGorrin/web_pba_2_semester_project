@@ -47,7 +47,7 @@ abstract class AccStudent {
         try {
         	RdgStudent::Insret($obj);
         }
-        catch (Exception $exception) {
+        catch (\Exception $exception) {
             #region TODO remove - it only used for unit testing
             \ccg\unittesting\UnitTest::Log('The insert of new student failed');
             #endregion
@@ -76,7 +76,7 @@ abstract class AccStudent {
         	try {
                 $acc = RdgStudent::SelectByEmail($email);
             }
-            catch (Exception $exception) {
+            catch (\Exception $exception) {
                 #region TODO remove - it only used for unit testing
                 \ccg\unittesting\UnitTest::Log(
                     sprintf("Can't find a acc with the email \"%s\"", $email),
@@ -104,7 +104,7 @@ abstract class AccStudent {
         try {
             $acc = RdgStudent::SelectByEmail($email);
         }
-        catch (Exception $exception) {
+        catch (\Exception $exception) {
             #region TODO remove - it only used for unit testing
             \ccg\unittesting\UnitTest::Log(
                 sprintf("Can't find a acc with the email \"%s\"", $email),
@@ -139,7 +139,7 @@ abstract class AccStudent {
         try {
             RdgStudent::Update($acc);
         }
-        catch (Exception $exception) {
+        catch (\Exception $exception) {
             #region TODO remove - it only used for unit testing
             \ccg\unittesting\UnitTest::Log(
                 "Can't update the new hashed password...",
@@ -165,7 +165,7 @@ abstract class AccStudent {
         try {
             $acc = RdgStudent::SelectByEmail($email);
         }
-        catch (Exception $exception) {
+        catch (\Exception $exception) {
             return false;
         }
 
@@ -174,7 +174,7 @@ abstract class AccStudent {
         try {
             return RdgStudent::Update($acc);
         }
-        catch (Exception $exception) {
+        catch (\Exception $exception) {
             return false;
         }
     }
@@ -200,7 +200,7 @@ abstract class AccStudent {
             try {
                 $temp_student = RdgStudent::Select($value);
             }
-            catch (Exception $exception) {
+            catch (\Exception $exception) {
                 continue;
             }
 
@@ -285,7 +285,7 @@ abstract class AccStudent {
         try {
             $obj = RdgStudent::Select($student_id);
         }
-        catch (Exception $exception) {
+        catch (\Exception $exception) {
             return null;
         }
 
@@ -310,7 +310,7 @@ abstract class AccStudent {
         try {
             $acc = RdgStudent::Select($acc_id);
         }
-        catch (Exception $exception) {
+        catch (\Exception $exception) {
             #region TODO remove - it only used for unit testing
             \ccg\unittesting\UnitTest::Log(
                 sprintf("Error in RdgStudent::Select(%s)", $acc_id)
@@ -338,7 +338,7 @@ abstract class AccStudent {
         try {
         	RdgStudent::Update($acc);
         }
-        catch (Exception $exception) {
+        catch (\Exception $exception) {
             #region TODO remove - it only used for unit testing
             \ccg\unittesting\Log::ConsolePrintVarDump(
                 $acc,
@@ -364,7 +364,7 @@ abstract class AccStudent {
         try {
         	$acc = RdgStudent::SelectByEmail($email);
         }
-        catch (Exception $exception) {
+        catch (\Exception $exception) {
             #region TODO remove - it only used for unit testing
             \ccg\unittesting\UnitTest::Log(
                 sprintf("RdgStudent::SelectByEmail(%s) failed", $email)
