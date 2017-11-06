@@ -11,11 +11,12 @@ insert into tbl_class (class) values ('test_class_fk');
 insert into tbl_class (class) values ('test_class_fk_alt');
 
 /* tbl_student */
-insert into tbl_student (firstname, surname, email, pass_hass, validate, class, device_uuid_v4, cache_statistics) values ('test_firstename_delete', 'test_surname_delete', 'test_email_delete', 'test_pass_hass_delete', false, 4, 'test_device_uuid_v4_delete', 'test_cache_statistics_delete');
+insert into tbl_student (firstname, surname, email, pass_hass, validate, class, device_uuid_v4, cache_statistics) values ('test_firstename_delete', 'test_surname_delete', 'test_email_delete', '$2y$10$ynnKWXI0p.67/KM0diULQuFNvQ8/p61o0nii2jRo4ft6JPd/u1m8m', false, 4, 'test_device_uuid_v4_delete', 'test_cache_statistics_delete');
 insert into tbl_student (firstname, surname, email, pass_hass, validate, class, device_uuid_v4, cache_statistics) values ('test_firstename_select', 'test_surname_select', 'test_email_select', 'test_pass_hass_select', false, 4, 'test_device_uuid_v4_select', 'test_cache_statistics_select');
 insert into tbl_student (firstname, surname, email, pass_hass, validate, class, device_uuid_v4, cache_statistics) values ('test_firstename_update', 'test_surname_update', 'test_email_update', 'test_pass_hass_update', false, 4, 'test_device_uuid_v4_update', 'test_cache_statistics_update');
 insert into tbl_student (firstname, surname, email, pass_hass, validate, class, device_uuid_v4, cache_statistics) values ('test_firstename_fk', 'test_surname_fk', 'test_email_fk', 'test_pass_hass_fk', false, 4, 'test_device_uuid_v4_fk', 'test_cache_statistics_fk');
-insert into tbl_student (firstname, surname, email, pass_hass, validate, class, device_uuid_v4, cache_statistics) values ('test_firstename_fk_alt', 'test_surname_fk_alt', 'test_email_fk_alt', 'test_pass_hass_fk_alt', false, 4, 'test_device_uuid_v4_fk_alt', 'test_cache_statistics_fk_alt');
+insert into tbl_student (firstname, surname, email, pass_hass, validate, class, device_uuid_v4, cache_statistics) values ('test_firstename_fk_alt', 'test_surname_fk_alt', 'test_email_fk_alt', '$2y$10$Z80VWN4O/K4pe7r/0J2OmeN/uVrpZZ.nURv8G7esN8EhVB20ngzaa', false, 4, 'c474cd60-efd8-4f3b-a015-d81f9f7fa87c', 'test_cache_statistics_fk_alt');
+
 
 /* tbl_teacher */
 insert into tbl_teacher (firstname, surname, email, hass_pass) values ('test_firstname_select', 'test_surname_select', 'test_eamil_select', 'test_hass_pass_select');
