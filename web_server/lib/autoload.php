@@ -26,7 +26,8 @@ class Autoload {
         'StudentCheckIn\\RdgRollCall'     => '/database/tbl_roll_call.php',
         'StudentCheckIn\\UUID'            => '/util/uuid.php',
         'StudentCheckIn\\AccTeacher'      => '/controller/acc_teacher.php',
-        'StudentCheckIn\\AccStudent'      => '/controller/acc_student.php'
+        'StudentCheckIn\\AccStudent'      => '/controller/acc_student.php',
+        'StudentCheckIn\\ManageClasses'   => '/controller/manage_class.php'
     );
 
     public static function Loaded($class) {
