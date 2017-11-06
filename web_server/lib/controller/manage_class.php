@@ -29,4 +29,20 @@ abstract class ManageClasses {
             return false;
         }
     }
+
+    /**
+     * Summary of GetAllClass
+     * Get list of all class as json
+     * 
+     * @return string
+     */
+    public static function GetAllClass() {
+        $result = array();
+
+        foreach (RdgClass::GetAll() as $value) {
+            $result[$value->id] = $value->class;
+        }
+
+        return json_encode($result);
+    }
 }
