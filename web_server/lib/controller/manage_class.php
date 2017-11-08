@@ -168,4 +168,112 @@ abstract class ManageClasses {
 
         return true;
     }
+
+    /**
+     * Summary of GetClassLogInfo
+     * Get all the information based on class logs as json
+     *
+     * @param array $class_uuid An array of class_log uuids
+     *
+     * @return string
+     */
+    public static function GetClassLogInfo($class_uuid) {
+        $cache = array(
+            "tbl_class_log"     => array(),
+            "tbl_subject_class" => array(),
+            "tbl_class"         => array(),
+            "tbl_subject"       => array(),
+            "tbl_teacher"       => array()
+        );
+
+        foreach ($class_uuid as $uuid) {
+            try {
+            	$class_log = RdgClassLog::SelectByClassUuid($uuid);
+                if (is_null($class_log)) {
+                    $cache["tbl_class_log"][$uuid] = null;
+                    continue;
+                }
+
+                $cache["tbl_class_log"][$uuid] = array(
+                    "subject_class" => $class_log->subject_class,
+                    "unix_time"     => $class_log->unix_time,
+                    "weight"        => $class_log->weight,
+                    "teacher_by"    => $class_log->teacher_by
+                );
+
+                if (!isset($cache["teacher_by"][$class_log->teacher_by])) {
+                    try {
+                        $teacher = RdgTeacher::Select($class_log->teacher_by);
+
+                        if (is_null($teacher)) {
+                            $cache["teacher_by"][$class_log->teacher_by] = null;
+                        } else {
+                            $cache["teacher_by"][$class_log->teacher_by] = array(
+                                "firstname" => $teacher->firstname,
+                                "surname"   => $teacher->surname,
+                                "email"     => $teacher->email
+                            );
+                        }
+                    } catch (\Exception $exception) {
+                        $cache["teacher_by"][$class_log->teacher_by] = null;
+                    }
+                }
+
+                if (!isset($cache["tbl_subject_class"][$class_log->subject_class])) {
+                    try {
+                        $temp_subject_class = RdgSubjectClass::Select($class_log->subject_class);
+
+                        if (!is_null($temp_subject_class)) {
+                            $cache["tbl_subject_class"][$class_log->subject_class] = array(
+                                "class"   => $temp_subject_class->class,
+                                "subject" => $temp_subject_class->subject
+                            );
+
+                            if (!isset($cache["tbl_class"][$temp_subject_class->class])) {
+                                try {
+                                    $temp_class = RdgClass::Select($temp_subject_class->class);
+
+                                    if (!is_null($temp_class)) {
+                                        $cache["tbl_class"][$temp_subject_class->class] = array(
+                                            "class" => $temp_class->class
+                                        );
+                                    } else {
+                                        $cache["tbl_class"][$temp_subject_class->class] = null;
+                                    }
+                                } catch (\Exception $exception) {
+                                    $cache["tbl_class"][$temp_subject_class->class] = null;
+                                }
+                            }
+
+                            if (!isset($cache["tbl_subject"][$temp_subject_class->class])) {
+                                try {
+                                    $temp_sub = RdgSubject::Select($temp_subject_class->class);
+
+                                    if (!is_null($temp_sub)) {
+                                        $cache["tbl_subject"][$temp_subject_class->class] = array(
+                                            "subject" => $temp_sub->subject
+                                        );
+                                    } else {
+                                        $cache["tbl_subject"][$temp_subject_class->class] = null;
+                                    }
+                                }
+                                catch (\Exception $exception) {
+                                    $cache["tbl_subject"][$temp_subject_class->class] = null;
+                                }
+                            }
+                        } else {
+                    	    $cache["tbl_subject_class"][$class_log->subject_class] = null;
+                        }
+                    } catch (\Exception $exception) {
+                        $cache["tbl_subject_class"][$class_log->subject_class] = null;
+                    }
+                }
+
+            } catch (\Exception $exception) {
+                $cache["tbl_class_log"][$uuid] = null;
+            }
+        }
+
+        return json_encode($cache);
+    }
 }
