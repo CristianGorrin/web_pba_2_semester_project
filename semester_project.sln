@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2006
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{A0786B88-2ADB-4C21-ABE8-AA2D79766269}") = "web_server", "web_server\web_server.phpproj", "{56A46626-940B-45AB-841F-F2BF54A0BAED}"
+Project("{A0786B88-2ADB-4C21-ABE8-AA2D79766269}") = "web_server", "web_server\web_server.phpproj", "{A7171D3F-8B11-4263-BABD-E458EDD82DD9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "app_android", "app_android\app_android.csproj", "{0C5F8AE0-B401-4DD0-B1D9-A6CB86B136C3}"
 EndProject
@@ -33,6 +33,31 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "wireframe", "wireframe", "{
 		_items\prototypes\wireframe\statistics.jpg = _items\prototypes\wireframe\statistics.jpg
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "php", "php", "{F4F5E043-5B76-42C3-9540-D732B7978FD3}"
+	ProjectSection(SolutionItems) = preProject
+		_items\prototypes\php_prototype\demo.flv = _items\prototypes\php_prototype\demo.flv
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{3C1FEC7E-F7A1-48E4-AAE6-D374A7340D17}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "css", "css", "{886CB84F-EA8C-48E1-BE49-741671426FD1}"
+	ProjectSection(SolutionItems) = preProject
+		_items\prototypes\php_prototype\app\css\main.css = _items\prototypes\php_prototype\app\css\main.css
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "img", "img", "{11D17427-6477-4D14-9F45-DF1F79347B1B}"
+	ProjectSection(SolutionItems) = preProject
+		_items\prototypes\php_prototype\app\img\camera.mp4 = _items\prototypes\php_prototype\app\img\camera.mp4
+		_items\prototypes\php_prototype\app\img\check.png = _items\prototypes\php_prototype\app\img\check.png
+		_items\prototypes\php_prototype\app\img\loading.gif = _items\prototypes\php_prototype\app\img\loading.gif
+		_items\prototypes\php_prototype\app\img\menu.png = _items\prototypes\php_prototype\app\img\menu.png
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "js", "js", "{2CB5B4F7-FDF0-4EC2-AD63-5A28F7B3C736}"
+	ProjectSection(SolutionItems) = preProject
+		_items\prototypes\php_prototype\app\js\main.js = _items\prototypes\php_prototype\app\js\main.js
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		app_lib\app_lib.projitems*{b28a06a4-faf4-47a7-8836-12a0c44e5726}*SharedItemsImports = 13
@@ -42,8 +67,8 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{56A46626-940B-45AB-841F-F2BF54A0BAED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{56A46626-940B-45AB-841F-F2BF54A0BAED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7171D3F-8B11-4263-BABD-E458EDD82DD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7171D3F-8B11-4263-BABD-E458EDD82DD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C5F8AE0-B401-4DD0-B1D9-A6CB86B136C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0C5F8AE0-B401-4DD0-B1D9-A6CB86B136C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C5F8AE0-B401-4DD0-B1D9-A6CB86B136C3}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
@@ -58,6 +83,11 @@ Global
 		{A6A69A10-4D6A-4FBE-B731-18C60FA20BE5} = {C86FDBB8-5ABC-47C9-A2E5-C68F52601952}
 		{B2B80DD7-1D17-4345-A0CE-42D7D9EC92AE} = {C86FDBB8-5ABC-47C9-A2E5-C68F52601952}
 		{DBF460F9-684A-4C03-8C7F-466DE29F9020} = {B2B80DD7-1D17-4345-A0CE-42D7D9EC92AE}
+		{F4F5E043-5B76-42C3-9540-D732B7978FD3} = {B2B80DD7-1D17-4345-A0CE-42D7D9EC92AE}
+		{3C1FEC7E-F7A1-48E4-AAE6-D374A7340D17} = {F4F5E043-5B76-42C3-9540-D732B7978FD3}
+		{886CB84F-EA8C-48E1-BE49-741671426FD1} = {3C1FEC7E-F7A1-48E4-AAE6-D374A7340D17}
+		{11D17427-6477-4D14-9F45-DF1F79347B1B} = {3C1FEC7E-F7A1-48E4-AAE6-D374A7340D17}
+		{2CB5B4F7-FDF0-4EC2-AD63-5A28F7B3C736} = {3C1FEC7E-F7A1-48E4-AAE6-D374A7340D17}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AE900917-F972-42E2-8589-ED01E3B5F73A}

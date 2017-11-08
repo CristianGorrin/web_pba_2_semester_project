@@ -19,10 +19,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="lib\autoload.php" />
+    <Compile Include="lib\conf\cron.php" />
     <Compile Include="lib\conf\database.php" />
     <Compile Include="lib\controller\acc_student.php" />
     <Compile Include="lib\controller\acc_teacher.php" />
     <Compile Include="lib\controller\manage_class.php" />
+    <Compile Include="lib\cron\manage.php" />
+    <Compile Include="lib\cron\run_all.php" />
+    <Compile Include="lib\cron\scripts\student_cache_update.php" />
     <Compile Include="lib\database\database_cmd.php" />
     <Compile Include="lib\database\i_entity.php" />
     <Compile Include="lib\database\i_rdg.php" />
@@ -38,6 +42,7 @@
     <Compile Include="lib\unittest\controller.acc_student.test.php" />
     <Compile Include="lib\unittest\controller.acc_teacher.test.php" />
     <Compile Include="lib\unittest\controller.manage_class.test.php" />
+    <Compile Include="lib\unittest\cron.test.php" />
     <Compile Include="lib\unittest\database.test.php" />
     <Compile Include="lib\unittest\db_setup.php" />
     <Compile Include="lib\unittest\unittest.php" />
@@ -48,7 +53,9 @@
     <Folder Include="lib\" />
     <Folder Include="lib\conf\" />
     <Folder Include="lib\controller\" />
+    <Folder Include="lib\cron\scripts\" />
     <Folder Include="lib\database\" />
+    <Folder Include="lib\cron\" />
     <Folder Include="lib\unittest\" />
     <Folder Include="lib\util\" />
   </ItemGroup>
