@@ -27,7 +27,8 @@ class Autoload {
         'StudentCheckIn\\UUID'            => '/util/uuid.php',
         'StudentCheckIn\\AccTeacher'      => '/controller/acc_teacher.php',
         'StudentCheckIn\\AccStudent'      => '/controller/acc_student.php',
-        'StudentCheckIn\\ManageClasses'   => '/controller/manage_class.php'
+        'StudentCheckIn\\ManageClasses'   => '/controller/manage_class.php',
+        'StudentCheckIn\\ConfCron'        => '/conf/cron.php'
     );
 
     public static function Loaded($class) {
