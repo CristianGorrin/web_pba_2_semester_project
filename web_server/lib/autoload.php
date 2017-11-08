@@ -1,7 +1,7 @@
 <?php
 namespace StudentCheckIn;
-class Autoload {
-    protected static $classes = array(
+abstract class Autoload {
+    protected static $classes             = array(
         'StudentCheckIn\\ConfDatabase'    => '/conf/database.php',
         'StudentCheckIn\\DatabaseCMD'     => '/database/database_cmd.php',
         'StudentCheckIn\\IEntity'         => '/database/i_entity.php',
@@ -28,7 +28,9 @@ class Autoload {
         'StudentCheckIn\\AccTeacher'      => '/controller/acc_teacher.php',
         'StudentCheckIn\\AccStudent'      => '/controller/acc_student.php',
         'StudentCheckIn\\ManageClasses'   => '/controller/manage_class.php',
-        'StudentCheckIn\\ConfCron'        => '/conf/cron.php'
+        'StudentCheckIn\\ConfCron'        => '/conf/cron.php',
+        'StudentCheckIn\\ConfAltoRouter'  => '/conf/alto_router.php',
+        'AltoRouter'                      => '/dependencies/alto_router/AltoRouter.php'
     );
 
     public static function Loaded($class) {

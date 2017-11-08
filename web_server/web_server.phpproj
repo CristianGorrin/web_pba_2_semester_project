@@ -18,7 +18,9 @@
     <IncludeDebugInformation>false</IncludeDebugInformation>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="api\index.php" />
     <Compile Include="lib\autoload.php" />
+    <Compile Include="lib\conf\alto_router.php" />
     <Compile Include="lib\conf\cron.php" />
     <Compile Include="lib\conf\database.php" />
     <Compile Include="lib\controller\acc_student.php" />
@@ -39,6 +41,7 @@
     <Compile Include="lib\database\tbl_subject_class.php" />
     <Compile Include="lib\database\tbl_teacher.php" />
     <Compile Include="lib\database\tbl_teacher_class.php" />
+    <Compile Include="lib\dependencies\alto_router\AltoRouter.php" />
     <Compile Include="lib\unittest\controller.acc_student.test.php" />
     <Compile Include="lib\unittest\controller.acc_teacher.test.php" />
     <Compile Include="lib\unittest\controller.manage_class.test.php" />
@@ -56,11 +59,17 @@
     <Folder Include="lib\cron\scripts\" />
     <Folder Include="lib\database\" />
     <Folder Include="lib\cron\" />
+    <Folder Include="lib\dependencies\" />
+    <Folder Include="lib\dependencies\alto_router\" />
     <Folder Include="lib\unittest\" />
     <Folder Include="lib\util\" />
+    <Folder Include="api\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="api\.htaccess" />
     <Content Include="lib\.htaccess" />
+    <Content Include="lib\dependencies\alto_router\composer.json" />
+    <Content Include="lib\dependencies\alto_router\README.md" />
     <Content Include="lib\unittest\db_data.sql" />
     <Content Include="lib\unittest\db_setup.sql" />
   </ItemGroup>
