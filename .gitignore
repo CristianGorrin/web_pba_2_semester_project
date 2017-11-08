@@ -1,5 +1,6 @@
 # VS
 .vs/
+*/*.phpproj.user
 
 # VS Build results
 [Dd]ebug/
