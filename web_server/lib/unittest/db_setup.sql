@@ -69,8 +69,11 @@ create table tbl_roll_call(
     unique(class_log, student)
 );
 
-insert into tbl_metadata (`key`, `value`) values ('database_version', '1.0.4');
+insert into tbl_metadata (`key`, `value`) values ('database_version', '1.0.5');
 insert into tbl_metadata (`key`, `value`) values ('last_update_cache_statistics', convert(unix_timestamp(now()), char));
+insert into tbl_metadata (`key`, `value`) values ('cron_last_run_hourly', convert(unix_timestamp(now()), char));
+insert into tbl_metadata (`key`, `value`) values ('cron_last_run_daly', convert(unix_timestamp(now()), char));
+insert into tbl_metadata (`key`, `value`) values ('cron_last_run_monthly', convert(unix_timestamp(now()), char));
 
 alter table tbl_student add foreign key (class) references tbl_class(id);
 alter table tbl_teacher_class add foreign key (class) references tbl_class(id);
