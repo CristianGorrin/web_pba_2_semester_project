@@ -8,5 +8,6 @@ abstract class ConfCron {
     public static $run_all = false;
     public static $scripts = array(
         // [file_name] => self::[HOURLY | DALY | MONTHLY]
+        "student_cache_update.php" => self::DALY
     );
 }
