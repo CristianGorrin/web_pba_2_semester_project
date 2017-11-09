@@ -10,7 +10,7 @@ abstract class AccStudent {
      * @param string $surname
      * @param string $email
      * @param string $password
-     * @param string $class_id
+     * @param int $class_id
      *
      * @return \boolean|string
      */
