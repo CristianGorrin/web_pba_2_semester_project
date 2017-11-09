@@ -58,6 +58,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "js", "js", "{2CB5B4F7-FDF0-
 		_items\prototypes\php_prototype\app\js\main.js = _items\prototypes\php_prototype\app\js\main.js
 	EndProjectSection
 EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "web_server_preprocessor", "web_server_preprocessor\web_server_preprocessor.pyproj", "{B5CA8CA3-3511-4A52-99E3-8FF7A32BC537}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		app_lib\app_lib.projitems*{b28a06a4-faf4-47a7-8836-12a0c44e5726}*SharedItemsImports = 13
@@ -75,6 +77,8 @@ Global
 		{0C5F8AE0-B401-4DD0-B1D9-A6CB86B136C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C5F8AE0-B401-4DD0-B1D9-A6CB86B136C3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0C5F8AE0-B401-4DD0-B1D9-A6CB86B136C3}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{B5CA8CA3-3511-4A52-99E3-8FF7A32BC537}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5CA8CA3-3511-4A52-99E3-8FF7A32BC537}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
