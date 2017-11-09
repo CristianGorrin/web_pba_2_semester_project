@@ -13,3 +13,6 @@ bld/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
+
+#The web server build
+web_server/build/
