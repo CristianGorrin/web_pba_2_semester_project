@@ -63,7 +63,7 @@ abstract class AccStudent {
      *
      * @param string $email
      * @param string $password
-     * @param string $acc
+     * @param TblStudent $acc
      *
      * @return boolean
      */
