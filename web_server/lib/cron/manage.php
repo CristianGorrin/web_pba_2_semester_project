@@ -3,7 +3,6 @@
  * Run this script to execute cron jobs
  */
 namespace StudentCheckIn;
-require_once '../autoload.php';
 
 $last_hourly  = RdgMetadata::Select('cron_last_run_hourly');
 $last_daly    = RdgMetadata::Select('cron_last_run_daly');

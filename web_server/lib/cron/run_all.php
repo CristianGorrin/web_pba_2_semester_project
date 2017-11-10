@@ -1,8 +1,6 @@
 <?php
 namespace StudentCheckIn;
 
-require_once '../autoload.php';
-
 ConfCron::$run_all = true;
 
-require './manage.php';
+require __DIR__ . '/manage.php';
