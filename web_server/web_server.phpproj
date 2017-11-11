@@ -23,6 +23,7 @@
     <Compile Include="lib\conf\alto_router.php" />
     <Compile Include="lib\conf\cron.php" />
     <Compile Include="lib\conf\database.php" />
+    <Compile Include="lib\conf\generic.php" />
     <Compile Include="lib\controller\acc_student.php" />
     <Compile Include="lib\controller\acc_teacher.php" />
     <Compile Include="lib\controller\manage_class.php" />
