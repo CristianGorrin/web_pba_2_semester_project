@@ -183,7 +183,7 @@ abstract class ManageClasses {
             "tbl_subject_class" => array(),
             "tbl_class"         => array(),
             "tbl_subject"       => array(),
-            "tbl_teacher"       => array()
+            "teacher_by"        => array()
         );
 
         foreach ($class_uuid as $uuid) {
