@@ -2,6 +2,8 @@
 namespace StudentCheckIn;
 require '../lib/autoload.php';
 
+header('Content-Type: application/json');
+
 function HeaderBadRequest() {
     header($_SERVER["SERVER_PROTOCOL"] . ' 400 Bad Request');
     die();
@@ -22,17 +24,19 @@ $router->addRoutes(array(
         if (!ConfGeneric::DEBUG_ENVIRONMENT) {
         	HeaderBadRequest();
         }
-        
+
         require '../lib/cron/run_all.php';
         echo '{"result":true}';
     }),
-    array('GET', '/ping', function() { echo 'pong'; }),
+    array('GET', '/ping', function() { echo '{"mgs":"pong"}'; }),
     array('POST', '/acc/students/singup', function() {
         // name, surname, email, password, class_id
         if (!isset($_POST["name"]) || !isset($_POST["surname"]) || !isset($_POST["email"]) ||
             !isset($_POST["password"]) || !isset($_POST["class_id"])) {
             HeaderBadRequest();
         }
+
+        //TODO test if the user has privileges to complete this operation
 
         $result = AccStudent::Singup($_POST["name"], $_POST["surname"], $_POST["email"],
             $_POST["password"], intval($_POST["class_id"]));
@@ -115,6 +119,8 @@ $router->addRoutes(array(
         	HeaderBadRequest();
         }
 
+        //TODO test if the user has privileges to complete this operation
+
         $result = array("result" => false);
         $acc = null;
         try {
@@ -161,6 +167,8 @@ $router->addRoutes(array(
             HeaderBadRequest();
         }
 
+        //TODO test if the user has privileges to complete this operation
+
         $result = AccTeacher::Singup(
             $_POST['name'], $_POST['surname'], $_POST['email'], $_POST['password']
         );
@@ -198,6 +206,8 @@ $router->addRoutes(array(
         	HeaderBadRequest();
         }
 
+        //TODO test if the user has privileges to complete this operation
+
         $acc = null;
 
         try {
@@ -231,6 +241,81 @@ $router->addRoutes(array(
         );
 
         echo json_encode($result);
+    }),
+    array('GET', '/class/list', function() {
+        echo ManageClasses::GetAllClass();
+    }),
+    array('POST', '/class/create', function() {
+        if (!isset($_POST['class_name'])) {
+        	HeaderBadRequest();
+        }
+
+        //TODO test if the user has privileges to complete this operation
+
+        echo json_encode(array("result" => ManageClasses::CreateClass($_POST['class_name'])));
+    }),
+    array('POST', '/class/assign/students', function() {
+        // class_id, student_ids (json)
+        if (!isset($_POST['class_id']) || !isset($_POST['student_ids'])) {
+            HeaderBadRequest();
+        }
+
+        if (!is_numeric($_POST['class_id'])) {
+            HeaderBadRequest();
+        }
+
+        //TODO test if the user has privileges to complete this operation
+
+        $class_id    = intval($_POST['class_id']);
+        $student_ids = json_decode($_POST['student_ids']);
+
+        if (json_last_error() != JSON_ERROR_NONE) {
+            HeaderBadRequest();
+        }
+
+        if (!is_array($student_ids)) {
+        	HeaderBadRequest();
+        }
+
+        echo json_encode(ManageClasses::AssignStudentsToClass($class_id, $student_ids));
+    }),
+    array('POST', '/class/assing/subject', function() {
+        // class_id, subject
+        if (!isset($_POST["class_id"]) || !isset($_POST["subject"])) {
+        	HeaderBadRequest();
+        }
+
+        if (!is_numeric($_POST["class_id"])) {
+        	HeaderBadRequest();
+        }
+
+        //TODO test if the user has privileges to complete this operation
+
+        $result = array(
+            "result" => ManageClasses::AssingClassToSubject(
+                intval($_POST["class_id"]), $_POST["subject"]
+            )
+        );
+
+        echo json_encode($result);
+    }),
+    array('POST', '/class/info/log', function() {
+        if (!isset($_POST['class_uuids'])) {
+            HeaderBadRequest();
+        }
+
+        //TODO test if the user has privileges to complete this operation
+
+        $result = json_decode($_POST['class_uuids']);
+        if (json_last_error() != JSON_ERROR_NONE) {
+            HeaderBadRequest();
+        }
+
+        if (!is_array($result)) {
+        	HeaderBadRequest();
+        }
+
+        echo ManageClasses::GetClassLogInfo($result);
     })
 ));
 
