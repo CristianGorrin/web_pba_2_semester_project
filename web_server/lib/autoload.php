@@ -31,7 +31,8 @@ abstract class Autoload {
         'StudentCheckIn\\ConfCron'        => '/conf/cron.php',
         'StudentCheckIn\\ConfAltoRouter'  => '/conf/alto_router.php',
         'AltoRouter'                      => '/dependencies/alto_router/AltoRouter.php',
-        'StudentCheckIn\\ConfGeneric'     => '/conf/generic.php'
+        'StudentCheckIn\\ConfGeneric'     => '/conf/generic.php',
+        'StudentCheckIn\\LogClass'        => '/controller/log_class.php'
     );
 
     public static function Loaded($class) {

@@ -316,6 +316,69 @@ $router->addRoutes(array(
         }
 
         echo ManageClasses::GetClassLogInfo($result);
+    }),
+    array('POST', '/logging/class', function() {
+        if (!isset($_POST['subject_class_id']) || !isset($_POST['teacher_id']) ||
+            !isset($_POST['weight']) || !isset($_POST['start_time'])) {
+            HeaderBadRequest();
+        }
+
+        if (!is_numeric($_POST['subject_class_id']) || !is_numeric($_POST['teacher_id']) ||
+            !is_numeric($_POST['weight']) || !is_numeric($_POST['start_time'])) {
+            HeaderBadRequest();
+        }
+
+        //TODO test if the user has privileges to complete this operation
+
+        $reult = LogClass::CreateClassLog(intval($_POST['subject_class_id']),
+            intval($_POST['teacher_id']), intval($_POST['weight']), intval($_POST['start_time']));
+
+        echo json_encode(array("result" => $reult));
+    }),
+    array('POST', '/logging/presence', function() {
+        if (!isset($_POST['qr_code']) || !isset($_POST['student_id']) || !isset($_POST['latitude'])
+            || !isset($_POST['longitude'])) {
+        	HeaderBadRequest();
+        }
+
+        if (!is_numeric($_POST['student_id']) || !is_numeric($_POST['latitude']) ||
+            !is_numeric($_POST['longitude'])) {
+            HeaderBadRequest();
+        }
+
+        //TODO test if the user has privileges to complete this operation
+
+        $result = array(
+            'validate_qrcode' => LogClass::ValidateQrcode($_POST['qr_code']),
+            'result'          => false,
+            'class_uuid'      => substr($_POST['qr_code'], 0, 36)
+        );
+
+        if ($result['validate_qrcode']) {
+            $result['result'] = LogClass::RollCall($result['class_uuid'],
+                intval($_POST['student_id']), $_POST['latitude'], $_POST['latitude']);
+        }
+
+        echo json_encode($result);
+    }),
+    array('POST', '/logging/create_codes', function() {
+        if (!isset($_POST["amount"]) || !isset($_POST['class_log_uuid'])) {
+            HeaderBadRequest();
+        }
+
+        if (!is_numeric($_POST["amount"])) {
+            HeaderBadRequest();
+        }
+
+        //TODO test if the user has privileges to complete this operation
+
+        $reuslt = LogClass::CreateQrcodes(intval($_POST["amount"]), $_POST['class_log_uuid']);
+
+        if ($reuslt) {
+            echo $reuslt;
+        } else {
+            echo '{"result": false}';
+        }
     })
 ));
 

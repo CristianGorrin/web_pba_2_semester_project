@@ -26,6 +26,7 @@
     <Compile Include="lib\conf\generic.php" />
     <Compile Include="lib\controller\acc_student.php" />
     <Compile Include="lib\controller\acc_teacher.php" />
+    <Compile Include="lib\controller\log_class.php" />
     <Compile Include="lib\controller\manage_class.php" />
     <Compile Include="lib\cron\manage.php" />
     <Compile Include="lib\cron\run_all.php" />
