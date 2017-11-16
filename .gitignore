@@ -1,6 +1,7 @@
 # VS
 .vs/
 */*.phpproj.user
+packages/
 
 # VS Build results
 [Dd]ebug/
