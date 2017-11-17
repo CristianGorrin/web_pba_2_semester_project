@@ -64,6 +64,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "app", "app\app\app.csproj",
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		app_lib\app_lib.projitems*{76fb3b52-36a8-44b9-abe2-70057b98a1bc}*SharedItemsImports = 4
 		app_lib\app_lib.projitems*{b28a06a4-faf4-47a7-8836-12a0c44e5726}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
