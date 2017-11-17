@@ -6,7 +6,6 @@
         <ListView x:Name="list_view_history"
               ItemSelected="ListItemSelected"
               Grid.Row="0"
-              SeparatorVisibility="None"
               HasUnevenRows="true">
             <ListView.Header>
                 <Grid HeightRequest="0" />
@@ -14,13 +13,12 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Grid Padding="10,5,10,10">
+                        <Grid Padding="5,10,5,0">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto" />
                                 <RowDefinition Height="1" />
                             </Grid.RowDefinitions>
-                            <Grid Grid.Row="0"
-                                  Padding="0">
+                            <Grid Grid.Row="0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="2*" />
                                     <ColumnDefinition Width="1*" />
@@ -75,10 +73,10 @@
                                     </Label.Triggers>
                                 </Label>
                             </Grid>
-                            <BoxView
+                            <!--<BoxView
                                 Grid.Row="1"
                                 BackgroundColor="Gray"
-                                Opacity="0.4" />
+                                Opacity="0.4" />-->
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
