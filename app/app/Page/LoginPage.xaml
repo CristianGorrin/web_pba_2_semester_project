@@ -41,6 +41,7 @@
                         VerticalTextAlignment="Center" 
                         FontSize="Large" />
                     <Entry 
+                        x:Name="txt_email"
                         Grid.Column="1" 
                         Grid.Row="0" 
                         Placeholder="Enter email" 
@@ -53,9 +54,10 @@
                         VerticalTextAlignment="Center" 
                         FontSize="Large" />
                     <Entry 
+                        x:Name="txt_password"
                         Grid.Column="1" 
                         Grid.Row="1" 
-                        Placeholder="Enter passwprd" 
+                        Placeholder="Enter password" 
                         IsPassword="True" />
                 </Grid>
                 <Button 

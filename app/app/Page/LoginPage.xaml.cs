@@ -14,8 +14,19 @@ namespace app.Page {
             InitializeComponent();
         }
 
-        private void ClickLogin(object sender, EventArgs e) {
-            aci_login.IsRunning = !aci_login.IsRunning;
+        private async void ClickLogin(object sender, EventArgs e) {
+            ((Button)sender).IsEnabled = false;
+            txt_password.IsEnabled     = false;
+            txt_email.IsEnabled        = false;
+
+            aci_login.IsRunning = true;
+
+            //TODO remove await
+            await Task.Delay(2000);
+
+            //TODO login
+
+            app.App.Current.MainPage = new StartMasterDetailPage();
         }
     }
 }

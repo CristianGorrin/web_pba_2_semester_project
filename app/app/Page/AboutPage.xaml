@@ -5,44 +5,37 @@
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="50" />
                 <RowDefinition Height="1*" />
+                <RowDefinition Height="3*" />
+                <RowDefinition Height="10*" />
             </Grid.RowDefinitions>
-            <Label Text="The menu bar here..." BackgroundColor="Green" />
-            <Grid Grid.Row="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="1*" />
-                    <RowDefinition Height="3*" />
-                    <RowDefinition Height="10*" />
-                </Grid.RowDefinitions>
-                <Label 
-                    Grid.Row="1" 
-                    Text="About EAL CheckIn" 
-                    VerticalTextAlignment="Center"
-                    HorizontalTextAlignment="Center"
-                    FontSize="38" />
-                <ScrollView
-                    Grid.Row="2">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="auto" />
-                            <RowDefinition Height="10" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="10" />
-                            <ColumnDefinition Width="auto" />
-                            <ColumnDefinition Width="10" />
-                        </Grid.ColumnDefinitions>
-                        <Label 
-                            Grid.Row="0"
-                            Grid.Column="1"
-                            Text="Lalalala...ashjbdfbhjlsadbvc  sadfij sdf saijdfnjs jnkadjkfs k kjnfa nkf anjkfa njkf fnkja fnkjn kjfnkj f anan jf nfkjkn jakn fknjankjn akfj nkjfankjf sadfsdkf sadkf sdafkls dfnsadnfkalsdn sadklfnskafnlkdsnf safsda kfnksldashbds aji sdhdfsbhfs ahj jh hjfsadh jh kj hfkjahkj lasdf hkj lasdf hjk sa dfhjk lsaf dhkj la fsdhj kla fsdhj kas fdhj kfa dsj khl afsdj khsa fdjas fdj hklafs j jkhsadfhsdjh afkjs fsakjfkj safakjs  sakjfbsadbhfdbhj fsda hbjadfshbj sdfa hbjsdfahb jkahb jkafdshb jkfsda"
-                            HorizontalOptions="Center"
-                            VerticalTextAlignment="Start"
-                            FontSize="Large" />
-                    </Grid>
-                </ScrollView>
-            </Grid>
+            <Label 
+                Grid.Row="1" 
+                Text="About EAL CheckIn" 
+                VerticalTextAlignment="Center"
+                HorizontalTextAlignment="Center"
+                FontSize="38" />
+            <ScrollView
+                Grid.Row="2">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="10" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="10" />
+                    </Grid.ColumnDefinitions>
+                    <Label 
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Text="Lalalala...ashjbdfbhjlsadbvc  sadfij sdf saijdfnjs jnkadjkfs k kjnfa nkf anjkfa njkf fnkja fnkjn kjfnkj f anan jf nfkjkn jakn fknjankjn akfj nkjfankjf sadfsdkf sadkf sdafkls dfnsadnfkalsdn sadklfnskafnlkdsnf safsda kfnksldashbds aji sdhdfsbhfs ahj jh hjfsadh jh kj hfkjahkj lasdf hkj lasdf hjk sa dfhjk lsaf dhkj la fsdhj kla fsdhj kas fdhj kfa dsj khl afsdj khsa fdjas fdj hklafs j jkhsadfhsdjh afkjs fsakjfkj safakjs  sakjfbsadbhfdbhj fsda hbjadfshbj sdfa hbjsdfahb jkahb jkafdshb jkfsda"
+                        HorizontalOptions="Center"
+                        VerticalTextAlignment="Start"
+                        FontSize="Large" />
+                </Grid>
+            </ScrollView>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
