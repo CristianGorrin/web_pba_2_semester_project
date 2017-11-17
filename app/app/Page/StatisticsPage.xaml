@@ -1,12 +1,54 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="app.Page.StatisticsPage">
+             x:Class="app.Page.StatisticsPage"
+             Padding="5,10">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to statics"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ListView x:Name="list_view_statiscs"
+              SeparatorVisibility="Default"
+              HasUnevenRows="true"
+              ItemSelected="ItemSelected">
+            <ListView.Header>
+                <StackLayout Padding="0,0,0,25">
+                    <Label x:Name="lab_total"
+                        FontSize="Large" />
+                    <Label x:Name="lab_procent"
+                        FontSize="Large" />
+                </StackLayout>
+            </ListView.Header>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="0,5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                            </Grid.RowDefinitions>
+                            <Label 
+                                Grid.Row="0"
+                                Text="{Binding subject, StringFormat='{0}:'}"/>
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="1*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                </Grid.RowDefinitions>
+                                <Label 
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Text="{Binding total, StringFormat='Total: {0} lectures'}" />
+                                <Label 
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    Text="{Binding procent, StringFormat='Procent: {0}%'}" />
+                            </Grid>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </ContentPage.Content>
 </ContentPage>
