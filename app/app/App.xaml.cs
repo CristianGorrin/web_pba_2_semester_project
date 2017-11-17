@@ -10,7 +10,7 @@ namespace app {
         public App() {
             InitializeComponent();
 
-            MainPage = new Page.StartMasterDetailPage();
+            MainPage = new Page.LoginPage();
         }
 
         protected override void OnStart() {
