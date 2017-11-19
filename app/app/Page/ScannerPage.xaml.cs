@@ -6,33 +6,51 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+
 using ZXing.Net.Mobile.Forms;
 
 namespace app.Page {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ScannerPage : ContentPage {
+        private ZXingScannerView m_zxing;
+
         public ScannerPage () {
-			InitializeComponent ();
+			InitializeComponent();
+        }
 
-            zxsv.OnScanResult += (result) =>
-                Device.BeginInvokeOnMainThread(async () => {
-                    zxsv.IsAnalyzing = false;
+        private void DoResult(ZXing.Result result) {
+            Device.BeginInvokeOnMainThread(async () => {
+                m_zxing.IsAnalyzing = false;
+                await DisplayAlert("Scanned Barcode", result.Text, "OK");
+                m_zxing.IsAnalyzing = true;
+            });
+        }
 
-                    await DisplayAlert("Scanned Barcode", result.Text, "OK");
+        private void CreateQrScanner() {
+            m_zxing = new ZXingScannerView {
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                VerticalOptions   = LayoutOptions.FillAndExpand
+            };
 
-                    zxsv.IsAnalyzing = true;
-                });
+            m_zxing.OnScanResult += DoResult;
+
+            var grid = new Grid {
+                VerticalOptions   = LayoutOptions.FillAndExpand,
+                HorizontalOptions = LayoutOptions.FillAndExpand
+            };
+            grid.Children.Add(m_zxing);
+
+            Content = grid;
         }
 
         protected override void OnAppearing() {
             base.OnAppearing();
-
-            zxsv.IsScanning = true;
+            CreateQrScanner();
+            m_zxing.IsScanning = true;
         }
 
         protected override void OnDisappearing() {
-            zxsv.IsScanning = false;
-
+            m_zxing.IsScanning = false;
             base.OnDisappearing();
         }
     }

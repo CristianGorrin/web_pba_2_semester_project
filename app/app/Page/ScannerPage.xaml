@@ -5,13 +5,5 @@
              x:Class="app.Page.ScannerPage"
              Title="QR Scanner">
     <ContentPage.Content>
-        <Grid>
-            <zxing:ZXingScannerView x:Name="zxsv"
-                HorizontalOptions="FillAndExpand"
-                VerticalOptions="FillAndExpand" />
-            <zxing:ZXingDefaultOverlay 
-                TopText="Hold your phone up to the barcode"
-                BottomText="Scanning will happen automatically" />
-        </Grid>
     </ContentPage.Content>
 </ContentPage>
