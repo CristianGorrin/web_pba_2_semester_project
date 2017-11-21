@@ -247,18 +247,18 @@ abstract class ManageClasses {
 
                             if (!isset($cache["tbl_subject"][$temp_subject_class->class])) {
                                 try {
-                                    $temp_sub = RdgSubject::Select($temp_subject_class->class);
+                                    $temp_sub = RdgSubject::Select($temp_subject_class->subject);
 
                                     if (!is_null($temp_sub)) {
-                                        $cache["tbl_subject"][$temp_subject_class->class] = array(
+                                        $cache["tbl_subject"][$temp_subject_class->subject] = array(
                                             "subject" => $temp_sub->subject
                                         );
                                     } else {
-                                        $cache["tbl_subject"][$temp_subject_class->class] = null;
+                                        $cache["tbl_subject"][$temp_subject_class->subject] = null;
                                     }
                                 }
                                 catch (\Exception $exception) {
-                                    $cache["tbl_subject"][$temp_subject_class->class] = null;
+                                    $cache["tbl_subject"][$temp_subject_class->subject] = null;
                                 }
                             }
                         } else {

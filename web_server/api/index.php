@@ -71,7 +71,10 @@ $router->addRoutes(array(
                     $result["result"] = false;
                 }
 
-                if ($result["result"]) $result["device_uuid"] = AccStudent::PairDevice($acc->id);
+                if ($result["result"]) {
+                    $result["device_uuid"] = AccStudent::PairDevice($acc->id);
+                    $result["acc_id"]      = $acc->id;
+                }
                 break;
         	default:
                 HeaderBadRequest();
@@ -132,7 +135,7 @@ $router->addRoutes(array(
 
         if (!is_null($acc)) {
         	if (AccStudent::VerifyPassword($_POST['email'], $_POST['password'], $acc)) {
-                $result['result'] = true;
+                $result['result']      = true;
                 $result['device_uuid'] = $acc->device_uuid_v4;
             }
         }
