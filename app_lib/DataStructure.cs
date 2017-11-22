@@ -29,6 +29,7 @@ namespace app_lib.DataStructure {
         public bool result { get; set; }
         public string device_uuid { get; set; }
         public int acc_id { get; set; }
+        public string full_name { get; set; }
     }
 
     public class Class : IClassEntity {

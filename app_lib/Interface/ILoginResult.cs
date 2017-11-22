@@ -8,6 +8,7 @@ namespace app_lib.Interface {
         bool result { get; }
         string device_uuid { get; }
         int acc_id { get; }
+        string full_name { get; }
 #pragma warning restore IDE1006 // Naming Styles
     }
 }
