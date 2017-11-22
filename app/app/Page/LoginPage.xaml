@@ -60,7 +60,7 @@
                         Placeholder="Enter password" 
                         IsPassword="True" />
                 </Grid>
-                <Button 
+                <Button x:Name="btn_login"
                     Text="Login"
                     Clicked="ClickLogin" />
                 <ActivityIndicator
