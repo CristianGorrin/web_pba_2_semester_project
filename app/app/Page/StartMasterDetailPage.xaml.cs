@@ -12,7 +12,7 @@ namespace app.Page {
     public partial class StartMasterDetailPage : MasterDetailPage {
         public StartMasterDetailPage() {
             InitializeComponent();
-            MasterPage.ListView.ItemSelected += ListView_ItemSelected;
+            MasterPage.m_list_view.ItemSelected += ListView_ItemSelected;
         }
 
         private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e) {
@@ -26,7 +26,7 @@ namespace app.Page {
             Detail = new NavigationPage(page);
             IsPresented = false;
 
-            MasterPage.ListView.SelectedItem = null;
+            MasterPage.m_list_view.SelectedItem = null;
         }
     }
 }

@@ -23,9 +23,8 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="55"/>
                     </Grid.RowDefinitions>
-                    <Label
+                    <Label x:Name="lab_user_full_name"
                         Grid.Column="1"
-                        Text="users_name"
                         Style="{DynamicResource SubtitleStyle}"
                         VerticalOptions="Center" 
                         FontSize="Large"/>

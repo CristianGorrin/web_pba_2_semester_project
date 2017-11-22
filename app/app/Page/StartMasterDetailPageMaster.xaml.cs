@@ -13,13 +13,15 @@ using Xamarin.Forms.Xaml;
 namespace app.Page {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class StartMasterDetailPageMaster : ContentPage {
-        public ListView ListView;
+        public ListView m_list_view;
 
         public StartMasterDetailPageMaster() {
             InitializeComponent();
 
+            lab_user_full_name.Text = app_lib.Session.FullName;
+
             BindingContext = new StartMasterDetailPageMasterViewModel();
-            ListView       = MenuItemsListView;
+            m_list_view    = MenuItemsListView;
 
             lab_logout.GestureRecognizers.Add(new TapGestureRecognizer {
                 Command = new Command(async () => {
@@ -30,8 +32,9 @@ namespace app.Page {
                     );
 
                     if (result) {
-                        //TODO Clean session
-                        app.App.Current.MainPage = new LoginPage();
+                        app_lib.Session.Logout();
+
+                        App.Current.MainPage = new LoginPage();
                     }
                 })
             });
