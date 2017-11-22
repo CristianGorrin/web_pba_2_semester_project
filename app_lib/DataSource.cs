@@ -159,6 +159,8 @@ namespace app_lib.Datasource {
             var task = temp.Content.ReadAsStringAsync();
             task.Wait();
 
+            if (task.Result == "" || task.Result == "{\"subjects\":[]}") return result;
+
             JsonTextReader reader = new JsonTextReader(new StringReader(task.Result));
             while (reader.Read()) {
                 //subjects
