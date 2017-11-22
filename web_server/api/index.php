@@ -74,6 +74,7 @@ $router->addRoutes(array(
                 if ($result["result"]) {
                     $result["device_uuid"] = AccStudent::PairDevice($acc->id);
                     $result["acc_id"]      = $acc->id;
+                    $result["full_name"]   = $acc->firstname . " " .  $acc->surname;
                 }
                 break;
         	default:
