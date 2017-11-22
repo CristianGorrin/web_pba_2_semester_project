@@ -46,4 +46,12 @@ namespace app_lib.DataStructure {
         public int Absences { get; set; }
         public List<KeyValuePair<string, bool>> Class { get; set; }
     }
+
+    public class QrcodeValidateResult : IQrcodeValidateResult {
+        public bool ValidateQrcode { get; set; }
+        public bool Result { get; set; }
+        public string ClassUuid { get; set; }
+        public string Class { get; set; }
+        public string Subject { get; set; }
+    }
 }

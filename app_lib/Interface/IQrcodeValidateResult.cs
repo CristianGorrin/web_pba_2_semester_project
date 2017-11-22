@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace app_lib.Interface {
-    interface IQrcodeValidateResult {
+    public interface IQrcodeValidateResult {
         bool ValidateQrcode { get; }
         bool Result { get; }
         string ClassUuid { get; }

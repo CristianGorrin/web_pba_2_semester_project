@@ -14,6 +14,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Interface\IClassEntity.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Interface\IHistroryEntity.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Interface\ILoginResult.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interface\IQrcodeValidateResult.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Interface\IStatistics.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Session.cs" />
   </ItemGroup>

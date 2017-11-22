@@ -420,6 +420,92 @@ namespace app_lib.Datasource {
             return new List<IHistroryEntity>(result);
         }
 
+        public static IQrcodeValidateResult Presence(string qr_code, string student_id, 
+            string latitude, string longitude) {
+            var result = new QrcodeValidateResult();
 
+            var temp = AbsenceWebServic.Presence(qr_code, student_id, latitude, latitude);
+
+            if (!temp.IsSuccessStatusCode) {
+                return null;
+            }
+
+            var task = temp.Content.ReadAsStringAsync();
+            task.Wait();
+
+            JsonTextReader reader = new JsonTextReader(new StringReader(task.Result));
+            while (reader.Read()) {
+                if (reader.TokenType == JsonToken.EndObject) break;
+                if (reader.TokenType == JsonToken.StartObject) continue;
+
+                var value_type = (string)reader.Value;
+                reader.Read();
+                if (value_type == "validate_qrcode") {
+                    result.ValidateQrcode = (bool)reader.Value;
+                } else if (value_type == "result") {
+                    result.Result = (bool)reader.Value;
+                } else if (value_type == "class_uuid") {
+                    result.ClassUuid = (string)reader.Value;
+                }
+            }
+
+            temp = AbsenceWebServic.ClassInfo(new string[] { result.ClassUuid });
+
+            if (!temp.IsSuccessStatusCode) {
+                result.Subject = "n/a";
+                result.Class   = "n/a";
+                return result;
+            }
+
+            task = temp.Content.ReadAsStringAsync();
+            task.Wait();
+
+            reader = new JsonTextReader(new StringReader(task.Result));
+            while (reader.Read()) {
+                if (reader.TokenType == JsonToken.EndObject) break;
+                if (reader.TokenType == JsonToken.StartObject) continue;
+
+                switch ((string)reader.Value) {
+                    case "tbl_class":
+                        for (int i = 0; i < 7; i++) {
+                            reader.Read();
+                            if (i == 4) result.Class = (string)reader.Value;
+                        }
+                        break;
+                    case "tbl_subject":
+                        for (int i = 0; i < 7; i++) {
+                            reader.Read();
+                            if (i == 4) result.Subject = (string)reader.Value;
+                        }
+                        break;
+                    default:
+                        var count = 0;
+                        while (reader.Read()) {
+                            switch (reader.TokenType) {
+                                case JsonToken.StartObject:
+                                case JsonToken.StartArray:
+                                case JsonToken.StartConstructor:
+                                    count++;
+                                    break;
+                                case JsonToken.EndObject:
+                                case JsonToken.EndArray:
+                                case JsonToken.EndConstructor:
+                                case JsonToken.Date:
+                                    count--;
+                                    break;
+                                default:
+                                    break;
+                            }
+
+                            if (count < 1) {
+                                break;
+                            }
+                        }
+                        break;
+                }
+            }
+
+            return result;
+        }
     }
 }
