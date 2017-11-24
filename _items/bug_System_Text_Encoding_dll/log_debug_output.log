@@ -1,0 +1,109 @@
+Android application is debugging.
+Loaded assembly: /storage/emulated/0/Android/data/com.companyname.app/files/.__override__/app.Android.dll
+Loaded assembly: /storage/emulated/0/Android/data/com.companyname.app/files/.__override__/app.dll
+11-24 10:34:33.415 I/        (14917): power log dlsym ok
+11-24 10:34:33.421 I/art     (14917): Late-enabling -Xcheck:jni
+11-24 10:34:33.421 I/art     (14917): Reinit property: dalvik.vm.checkjni= false
+11-24 10:34:33.527 W/monodroid(14917): Creating public update directory: `/data/user/0/com.companyname.app/files/.__override__`
+11-24 10:34:33.527 W/monodroid(14917): Using override path: /data/user/0/com.companyname.app/files/.__override__
+11-24 10:34:33.527 W/monodroid(14917): Using override path: /storage/emulated/0/Android/data/com.companyname.app/files/.__override__
+11-24 10:34:33.527 W/monodroid(14917): Trying to load sgen from: /data/user/0/com.companyname.app/files/.__override__/libmonosgen-2.0.so
+11-24 10:34:33.527 W/monodroid(14917): Trying to load sgen from: /storage/emulated/0/Android/data/com.companyname.app/files/.__override__/libmonosgen-2.0.so
+11-24 10:34:33.527 W/monodroid(14917): Trying to load sgen from: /storage/emulated/0/../legacy/Android/data/com.companyname.app/files/.__override__/libmonosgen-2.0.so
+11-24 10:34:33.527 W/monodroid(14917): Trying to load sgen from: /data/app/com.companyname.app-1/lib/arm/libmonosgen-2.0.so
+11-24 10:34:33.527 W/monodroid(14917): Trying to load sgen from: /data/user/0/com.companyname.app/files/.__override__/links/libmonosgen-2.0.so
+11-24 10:34:33.530 W/monodroid-debug(14917): Trying to initialize the debugger with options: --debugger-agent=transport=dt_socket,loglevel=0,address=127.0.0.1:29224,server=y,embedding=1
+11-24 10:34:33.574 W/monodroid-debug(14917): Accepted stdout connection: 53
+11-24 10:34:34.666 W/monodroid-gc(14917): GREF GC Threshold: 46080
+11-24 10:34:34.681 W/monodroid(14917): Calling into managed runtime init
+Loaded assembly: /storage/emulated/0/Android/data/com.companyname.app/files/.__override__/FastAndroidCamera.dll [External]
+Loaded assembly: /storage/emulated/0/Android/data/com.companyname.app/files/.__override__/FormsViewGroup.dll [External]
+Loaded assembly: /storage/emulated/0/Android/data/com.companyname.app/files/.__override__/Xamarin.Android.Arch.Core.Common.dll [External]
+Loaded assembly: /storage/emulated/0/Android/data/com.companyname.app/files/.__override__/Xamarin.Android.Arch.Lifecycle.Common.dll [External]
+Loaded assembly: /storage/emulated/0/Android/data/com.companyname.app/files/.__override__/Xamarin.Android.Arch.Lifecycle.Runtime.dll [External]
+Loaded assembly: /storage/emulated/0/Android/data/com.companyname.app/files/.__override__/Xamarin.Android.Support.Animated.Vector.Drawable.dll [External]
+Loaded assembly: /storage/emulated/0/Android/data/com.companyname.app/files/.__override__/Xamarin.Android.Support.Annotations.dll [External]
+Loaded assembly: /storage/emulated/0/Android/data/com.companyname.app/files/.__override__/Xamarin.Android.Support.Compat.dll [External]
+Loaded assembly: /storage/emulated/0/Android/data/com.companyname.app/files/.__override__/Xamarin.Android.Support.Core.UI.dll [External]
+Loaded assembly: /storage/emulated/0/Android/data/com.companyname.app/files/.__override__/Xamarin.Android.Support.Core.Utils.dll [External]
+Loaded assembly: /storage/emulated/0/Android/data/com.companyname.app/files/.__override__/Xamarin.Android.Support.Design.dll [External]
+Loaded assembly: /storage/emulated/0/Android/data/com.companyname.app/files/.__override__/Xamarin.Android.Support.Fragment.dll [External]
+Loaded assembly: /storage/emulated/0/Android/data/com.companyname.app/files/.__override__/Xamarin.Android.Support.Media.Compat.dll [External]
+Loaded assembly: /storage/emulated/0/Android/data/com.companyname.app/files/.__override__/Xamarin.Android.Support.Transition.dll [External]
+Loaded assembly: /storage/emulated/0/Android/data/com.companyname.app/files/.__override__/Xamarin.Android.Support.v4.dll [External]
+Loaded assembly: /storage/emulated/0/Android/data/com.companyname.app/files/.__override__/Xamarin.Android.Support.v7.AppCompat.dll [External]
+Loaded assembly: /storage/emulated/0/Android/data/com.companyname.app/files/.__override__/Xamarin.Android.Support.v7.CardView.dll [External]
+Loaded assembly: /storage/emulated/0/Android/data/com.companyname.app/files/.__override__/Xamarin.Android.Support.v7.MediaRouter.dll [External]
+Loaded assembly: /storage/emulated/0/Android/data/com.companyname.app/files/.__override__/Xamarin.Android.Support.v7.Palette.dll [External]
+Loaded assembly: /storage/emulated/0/Android/data/com.companyname.app/files/.__override__/Xamarin.Android.Support.v7.RecyclerView.dll [External]
+Loaded assembly: /storage/emulated/0/Android/data/com.companyname.app/files/.__override__/Xamarin.Android.Support.Vector.Drawable.dll [External]
+Loaded assembly: /storage/emulated/0/Android/data/com.companyname.app/files/.__override__/Xamarin.Forms.Core.dll [External]
+Loaded assembly: /storage/emulated/0/Android/data/com.companyname.app/files/.__override__/Xamarin.Forms.Platform.Android.dll [External]
+Loaded assembly: /storage/emulated/0/Android/data/com.companyname.app/files/.__override__/Xamarin.Forms.Platform.dll [External]
+Loaded assembly: /storage/emulated/0/Android/data/com.companyname.app/files/.__override__/Xamarin.Forms.Xaml.dll [External]
+Loaded assembly: /storage/emulated/0/Android/data/com.companyname.app/files/.__override__/ZXing.Net.Mobile.Core.dll [External]
+Loaded assembly: /storage/emulated/0/Android/data/com.companyname.app/files/.__override__/ZXing.Net.Mobile.Forms.Android.dll [External]
+Loaded assembly: /storage/emulated/0/Android/data/com.companyname.app/files/.__override__/ZXing.Net.Mobile.Forms.dll [External]
+Loaded assembly: /storage/emulated/0/Android/data/com.companyname.app/files/.__override__/zxing.portable.dll [External]
+Loaded assembly: /storage/emulated/0/Android/data/com.companyname.app/files/.__override__/ZXingNetMobile.dll [External]
+Loaded assembly: /storage/emulated/0/Android/data/com.companyname.app/files/.__override__/Newtonsoft.Json.dll [External]
+Loaded assembly: Mono.Android.dll [External]
+Loaded assembly: Java.Interop.dll [External]
+Loaded assembly: System.Runtime.dll [External]
+Loaded assembly: System.Collections.Concurrent.dll [External]
+Loaded assembly: System.Threading.dll [External]
+Loaded assembly: System.Runtime.InteropServices.dll [External]
+Loaded assembly: System.Reflection.dll [External]
+Loaded assembly: System.Collections.dll [External]
+Loaded assembly: System.Linq.dll [External]
+Loaded assembly: System.Core.dll [External]
+Loaded assembly: System.Runtime.Extensions.dll [External]
+Loaded assembly: System.Reflection.Extensions.dll [External]
+Loaded assembly: System.ObjectModel.dll [External]
+Loaded assembly: System.dll [External]
+11-24 10:34:37.315 I/HwCust  (14917): Constructor found for class android.app.HwCustActivityImpl
+Loaded assembly: MonoDroidConstructors [External]
+Loaded assembly: System.Xml.ReaderWriter.dll [External]
+Loaded assembly: System.Xml.dll [External]
+11-24 10:34:37.556 I/HwCust  (14917): Constructor found for class android.app.HwCustHwWallpaperManagerImpl
+Loaded assembly: System.Threading.Tasks.dll [External]
+11-24 10:34:37.804 W/art     (14917): Before Android 4.1, method android.graphics.PorterDuffColorFilter android.support.graphics.drawable.VectorDrawableCompat.updateTintFilter(android.graphics.PorterDuffColorFilter, android.content.res.ColorStateList, android.graphics.PorterDuff$Mode) would have incorrectly overridden the package-private method in android.graphics.drawable.Drawable
+Loaded assembly: System.IO.dll [External]
+Loaded assembly: System.Linq.Expressions.dll [External]
+Loaded assembly: System.Resources.ResourceManager.dll [External]
+Loaded assembly: System.Diagnostics.Debug.dll [External]
+Loaded assembly: System.Globalization.dll [External]
+Loaded assembly: System.Dynamic.Runtime.dll [External]
+Loaded assembly: System.Text.RegularExpressions.dll [External]
+11-24 10:34:38.872 W/Mono    (14917): The request to load the assembly mscorlib v4.0.0.0 was remapped to v2.0.5.0
+Loaded assembly: System.ComponentModel.dll [External]
+Thread started: <Thread Pool> #2
+Thread started: <Thread Pool> #3
+Thread started: <Thread Pool> #4
+Thread started: <Thread Pool> #5
+Loaded assembly: System.Runtime.Serialization.Primitives.dll [External]
+Loaded assembly: System.Runtime.Serialization.dll [External]
+Loaded assembly: Anonymously Hosted DynamicMethods Assembly [External]
+11-24 10:34:39.984 W/art     (14917): JNI RegisterNativeMethods: attempt to register 0 native methods for md5270abb39e60627f0f200893b490a1ade.ViewRenderer_2
+11-24 10:34:40.060 W/art     (14917): JNI RegisterNativeMethods: attempt to register 0 native methods for md5b60ffeb829f638581ab2bb9b1a7f4f3f.ActivityIndicatorRenderer
+11-24 10:34:40.117 I/HwSecImmHelper(14917): mSecurityInputMethodService is null
+11-24 10:34:40.123 I/HwPointEventFilter(14917): do not support AFT because of no config
+11-24 10:34:40.236 I/OpenGLRenderer(14917): Initialized EGL, version 1.4
+WARNING: linker: 
+11-24 10:34:40.247 W/linker  (14917): /vendor/lib/libhwuibp.so: unused DT entry: type 0xf arg 0xeb5
+/vendor/lib/libhwuibp.so: unused DT entry: type 0xf arg 0xeb5
+11-24 10:34:41.142 I/Choreographer(14917): Skipped 31 frames!  The application may be doing too much work on its main thread.
+11-24 10:34:41.243 W/art     (14917): JNI RegisterNativeMethods: attempt to register 0 native methods for md5b60ffeb829f638581ab2bb9b1a7f4f3f.CellRenderer_RendererHolder
+11-24 10:34:41.688 E/Camera  (14917): Camera new cameraInitNormal:0
+Loaded assembly: System.Text.Encoding.dll [External]
+An unhandled exception occured.
+
+Thread finished: <Thread Pool> #4
+The thread 'Unknown' (0x4) has exited with code 0 (0x0).
+Thread finished: <Thread Pool> #3
+The thread 'Unknown' (0x3) has exited with code 0 (0x0).
+Thread finished: <Thread Pool> #2
+The thread 'Unknown' (0x2) has exited with code 0 (0x0).
+Thread finished: <Thread Pool> #5
+The thread 'Unknown' (0x5) has exited with code 0 (0x0).
+
