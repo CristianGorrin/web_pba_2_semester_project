@@ -9,6 +9,7 @@
     <Import_RootNamespace>app_lib</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Geolocator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Paths.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataStructure.cs" />
