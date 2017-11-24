@@ -426,7 +426,7 @@ namespace app_lib.Datasource {
             string latitude, string longitude) {
             var result = new QrcodeValidateResult();
 
-            var temp = AbsenceWebServic.Presence(qr_code, student_id, latitude, latitude);
+            var temp = AbsenceWebServic.Presence(qr_code, student_id, latitude, longitude);
 
             if (!temp.IsSuccessStatusCode) {
                 return null;
