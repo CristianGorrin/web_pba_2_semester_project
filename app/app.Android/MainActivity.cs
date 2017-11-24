@@ -6,6 +6,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+
 using app_lib;
 
 namespace app.Droid {
@@ -25,14 +26,20 @@ namespace app.Droid {
             base.OnCreate(bundle);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
+
             SetupPaths();
+            SetupGeolocator();
 
             LoadApplication(new App());
         }
 
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, 
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions,
             Permission[] grantResults) {
             global::ZXing.Net.Mobile.Android.PermissionsHandler.OnRequestPermissionsResult(
+                requestCode, permissions, grantResults
+            );
+
+            Plugin.Permissions.PermissionsImplementation.Current.OnRequestPermissionsResult(
                 requestCode, permissions, grantResults
             );
         }
@@ -64,6 +71,12 @@ namespace app.Droid {
                 return BaseContext.DeleteFile(path);
             });
         }
+
+
+        #region Geolocator
+        private void SetupGeolocator() {
+            Plugin.Geolocator.CrossGeolocator.Current.DesiredAccuracy = 10;
+        }
+        #endregion
     }
 }
-

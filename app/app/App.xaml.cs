@@ -29,7 +29,7 @@ namespace app {
                 MainPage = new Page.LoginPage();
             } else if (Session.LastUpdateDay != 1 && day == 1) {
                 MainPage = new Page.LoginPage();
-            } else if (Session.Cache == null) {
+            } else if (Session.CacheHistrory == null || Session.CacheStatistics == null) {
                 MainPage = new Page.LoginPage();
             } else if (Session.DeviceUuid == null) {
                 MainPage = new Page.LoginPage();

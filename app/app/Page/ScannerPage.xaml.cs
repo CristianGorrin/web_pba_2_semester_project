@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using ZXing.Net.Mobile.Forms;
@@ -14,17 +8,13 @@ namespace app.Page {
 	public partial class ScannerPage : ContentPage {
         private ZXingScannerView m_zxing;
 
-        public ScannerPage () {
+        public ScannerPage() {
 			InitializeComponent();
         }
 
-        private void DoResult(ZXing.Result result) {
-            Device.BeginInvokeOnMainThread(async () => {
-                m_zxing.IsAnalyzing = false;
-                await DisplayAlert("Scanned Barcode", result.Text, "OK");
-                m_zxing.IsAnalyzing = true;
-            });
-        }
+        private void DoResult(ZXing.Result result) => Device.BeginInvokeOnMainThread(async () => {
+            await Navigation.PushModalAsync(new ScanneResultPage(result.Text));
+        });
 
         private void CreateQrScanner() {
             m_zxing = new ZXingScannerView {
