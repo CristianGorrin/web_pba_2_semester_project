@@ -360,7 +360,7 @@ $router->addRoutes(array(
 
         if ($result['validate_qrcode']) {
             $result['result'] = LogClass::RollCall($result['class_uuid'],
-                intval($_POST['student_id']), $_POST['latitude'], $_POST['latitude']);
+                intval($_POST['student_id']), $_POST['latitude'], $_POST['longitude']);
         }
 
         echo json_encode($result);
