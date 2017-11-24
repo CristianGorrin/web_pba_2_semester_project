@@ -6,15 +6,40 @@ using Newtonsoft.Json;
 
 namespace app_lib {
     public static class Session {
+        private static SerializeSession ThisSession {
+            get {
+                return new SerializeSession() {
+                    DeviceUuid      = DeviceUuid,
+                    Email           = Email,
+                    AccId           = AccId,
+                    CacheStatistics = CacheStatistics,
+                    CacheHistrory   = CacheHistrory,
+                    LastUpdateDay   = LastUpdateDay,
+                    FullName        = FullName
+                };
+            }
+            set {
+                DeviceUuid = value.DeviceUuid;
+                Email = value.Email;
+                AccId = value.AccId;
+                CacheHistrory = value.CacheHistrory;
+                CacheStatistics = value.CacheStatistics;
+                LastUpdateDay = value.LastUpdateDay;
+                FullName = value.FullName;
+            }
+        }
+        private static DateTime UnixTimeSart { get; set; }
         public static string DeviceUuid { get; set; }
         public static string Email { get; set; }
         public static int AccId { get; set; }
-        public static List<IStatisticsEntity> Cache { get; set; }
+        public static List<IStatisticsEntity> CacheStatistics { get; set; }
+        public static List<IHistroryEntity> CacheHistrory { get; set; }
         public static int LastUpdateDay { get; set; }
         public static string FullName { get; set; }
         
         static Session() {
             Reset();
+            UnixTimeSart = new DateTime(1970, 1, 1);
         }
 
         public static bool Login(string email, string password) {
@@ -22,12 +47,13 @@ namespace app_lib {
 
             if (!result_login.result) return false;
 
-            AccId         = result_login.acc_id;
-            DeviceUuid    = result_login.device_uuid;
-            Cache         = Datasource.Datasource.GetStatistics(DeviceUuid);
-            LastUpdateDay = DateTime.Now.Day;
-            Email         = email;
-            FullName      = result_login.full_name;
+            AccId           = result_login.acc_id;
+            DeviceUuid      = result_login.device_uuid;
+            CacheStatistics = Datasource.Datasource.GetStatistics(DeviceUuid);
+            CacheHistrory   = Datasource.Datasource.GetListHistrory(CacheStatistics);
+            LastUpdateDay   = DateTime.Now.Day;
+            Email           = email;
+            FullName        = result_login.full_name;
 
             Save();
 
@@ -41,7 +67,7 @@ namespace app_lib {
             using (var sw = new StreamWriter(Paths.GetStream(Paths.SessionFile, 
                 Paths.StreamType.Output))) {
 
-                var json = JsonConvert.SerializeObject(SerializeSession.ThisSession);
+                var json = JsonConvert.SerializeObject(ThisSession);
                 sw.Write(json);
                 sw.Flush();
             }
@@ -58,23 +84,24 @@ namespace app_lib {
                 Paths.StreamType.Input))) {
                 var result = sr.ReadToEnd();
                 if (result.Length > 0)
-                    SerializeSession.ThisSession = 
-                        JsonConvert.DeserializeObject<SerializeSession>(result);
+                    ThisSession = JsonConvert.DeserializeObject<SerializeSession>(result);
             }
         }
 
         private static void Reset() {
-            DeviceUuid    = null;
-            Email         = null;
-            AccId         = -1;
-            Cache         = null;
-            LastUpdateDay = -1;
-            FullName      = null;
+            DeviceUuid      = null;
+            Email           = null;
+            AccId           = -1;
+            CacheStatistics = null;
+            CacheHistrory   = null;
+            LastUpdateDay   = -1;
+            FullName        = null;
         }
 
         public static void Update() {
-            Cache         = Datasource.Datasource.GetStatistics(DeviceUuid);
-            LastUpdateDay = DateTime.Now.Day;
+            CacheStatistics = Datasource.Datasource.GetStatistics(DeviceUuid);
+            CacheHistrory   = Datasource.Datasource.GetListHistrory(CacheStatistics);
+            LastUpdateDay   = DateTime.Now.Day;
 
             Save();
         }
@@ -83,35 +110,31 @@ namespace app_lib {
             //TODO The login validate in session
             return true;
         }
+
+        public static bool AddToCacheHistrory(string uuid, string _class, string subject) {
+            if (CacheHistrory.Exists((x) => x.Uuid == uuid)) return false;
+            DateTime dt = DateTime.Now;
+
+            CacheHistrory.Add(new DataStructure.Histrory() {
+                Absence  = false,
+                Class    = _class,
+                Date     = dt.ToString(@"dd/MM-yyyy"),
+                Subject  = subject,
+                Time     = dt.ToString("HH:mm"),
+                Unixtime = (int)(DateTime.UtcNow.Subtract(UnixTimeSart)).TotalSeconds,
+                Uuid     = uuid
+            });
+            return true;
+        }
     }
 
     class SerializeSession {
         public string DeviceUuid { get; set; }
         public string Email { get; set; }
         public int AccId { get; set; }
-        public List<IStatisticsEntity> Cache { get; set; }
+        public List<IStatisticsEntity> CacheStatistics { get; set; }
+        public List<IHistroryEntity> CacheHistrory { get; set; }
         public int LastUpdateDay { get; set; }
         public string FullName { get; set; }
-
-        public static SerializeSession ThisSession {
-            get {
-                return new SerializeSession() {
-                    DeviceUuid    = Session.DeviceUuid,
-                    Email         = Session.Email,
-                    AccId         = Session.AccId,
-                    Cache         = Session.Cache,
-                    LastUpdateDay = Session.LastUpdateDay,
-                    FullName      = Session.FullName
-                };
-            }
-            set {
-                Session.DeviceUuid    = value.DeviceUuid;
-                Session.Email         = value.Email;
-                Session.AccId         = value.AccId;
-                Session.Cache         = value.Cache;
-                Session.LastUpdateDay = value.LastUpdateDay;
-                Session.FullName      = value.FullName;
-            }
-        }
     }
 }
