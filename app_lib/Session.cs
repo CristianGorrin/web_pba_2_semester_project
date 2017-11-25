@@ -20,13 +20,13 @@ namespace app_lib {
                 };
             }
             set {
-                DeviceUuid = value.DeviceUuid;
-                Email = value.Email;
-                AccId = value.AccId;
-                CacheHistrory = value.CacheHistrory;
+                DeviceUuid      = value.DeviceUuid;
+                Email           = value.Email;
+                AccId           = value.AccId;
+                CacheHistrory   = value.CacheHistrory;
                 CacheStatistics = value.CacheStatistics;
-                LastUpdateDay = value.LastUpdateDay;
-                FullName = value.FullName;
+                LastUpdateDay   = value.LastUpdateDay;
+                FullName        = value.FullName;
             }
         }
         private static DateTime UnixTimeSart { get; set; }
