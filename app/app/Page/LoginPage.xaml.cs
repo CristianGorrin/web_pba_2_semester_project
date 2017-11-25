@@ -15,7 +15,9 @@ namespace app.Page {
             DisableGui();
             Task.Run(() => {
                 if (Paths.FileExist(Paths.SessionFile)) {
-                    Session.Load();
+                    if (Session.DeviceUuid == null) {
+                        Session.Load();
+                    }
                     if (Session.Validate()) {
                         Device.BeginInvokeOnMainThread(() => {
                             App.Current.MainPage = new StartMasterDetailPage();

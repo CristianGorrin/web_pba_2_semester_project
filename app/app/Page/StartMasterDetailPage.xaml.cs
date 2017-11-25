@@ -10,9 +10,16 @@ using Xamarin.Forms.Xaml;
 namespace app.Page {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class StartMasterDetailPage : MasterDetailPage {
+        private static StartMasterDetailPage m_current;
+
         public StartMasterDetailPage() {
             InitializeComponent();
             MasterPage.m_list_view.ItemSelected += ListView_ItemSelected;
+            m_current = this;
+        }
+
+        public static void PopupMenu() {
+            m_current.IsPresented = true;
         }
 
         private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e) {

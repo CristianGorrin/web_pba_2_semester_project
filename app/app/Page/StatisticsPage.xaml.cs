@@ -37,6 +37,11 @@ namespace app.Page
         private void ItemSelected(object sender, SelectedItemChangedEventArgs e) {
             ((ListView)sender).SelectedItem = null;
         }
+
+        protected override bool OnBackButtonPressed() {
+            StartMasterDetailPage.PopupMenu();
+            return true;
+        }
     }
 
     struct StatiscsItem {

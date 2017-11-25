@@ -17,7 +17,7 @@ namespace app.Page {
 
         public StartMasterDetailPageMaster() {
             InitializeComponent();
-
+            
             lab_user_full_name.Text = app_lib.Session.FullName;
 
             BindingContext = new StartMasterDetailPageMasterViewModel();

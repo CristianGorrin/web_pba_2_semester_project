@@ -16,6 +16,11 @@ namespace app.Page {
             await Navigation.PushModalAsync(new ScanneResultPage(result.Text));
         });
 
+        protected override bool OnBackButtonPressed() {
+            StartMasterDetailPage.PopupMenu();
+            return true;
+        }
+
         private void CreateQrScanner() {
             m_zxing = new ZXingScannerView {
                 HorizontalOptions = LayoutOptions.FillAndExpand,
