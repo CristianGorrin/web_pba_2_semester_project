@@ -11,7 +11,7 @@ namespace app_lib {
                 locator.DesiredAccuracy = 10;
 
                 return await locator.GetLastKnownLocationAsync();
-            } catch (Exception ex) {
+            } catch (Exception) {
                 return null;
             }
         }

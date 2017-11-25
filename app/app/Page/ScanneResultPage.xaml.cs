@@ -45,9 +45,9 @@ namespace app.Page {
 
                     } else {
                         if (m_result.ValidateQrcode) {
-                            txt_result.Text = "We are having problems check you in";
+                            txt_result.Text = "We are having problems check you in...";
                         } else {
-                            txt_result.Text = "The qr code you saned valid";
+                            txt_result.Text = "The qr code you used is not valid...";
                         }
                     }
 
@@ -55,7 +55,6 @@ namespace app.Page {
                         txt_details.Text = string.Format("Class: {0}\nSubject: {1}", 
                             m_result.Class, m_result.Subject);
                     }
-                    
 
                     sl_aci.IsVisible      = false;
                     grid_result.IsVisible = true;

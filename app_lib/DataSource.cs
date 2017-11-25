@@ -256,6 +256,7 @@ namespace app_lib.Datasource {
                             reader.Read();
                             while (reader.Read()) {
                                 if (reader.TokenType == JsonToken.EndObject) break;
+                                if (reader.TokenType == JsonToken.EndArray) break;
                                 if (reader.TokenType == JsonToken.StartObject) continue;
 
                                 var temp_class_subject_lookup = new KeyValuePair<int, int[]>(
@@ -286,6 +287,7 @@ namespace app_lib.Datasource {
                             reader.Read();
                             while (reader.Read()) {
                                 if (reader.TokenType == JsonToken.EndObject) break;
+                                if (reader.TokenType == JsonToken.EndArray) break;
 
                                 var temp_id = Convert.ToInt32((string)reader.Value);
                                 reader.Read();
@@ -300,6 +302,7 @@ namespace app_lib.Datasource {
                             reader.Read();
                             while (reader.Read()) {
                                 if (reader.TokenType == JsonToken.EndObject) break;
+                                if (reader.TokenType == JsonToken.EndArray) break;
 
                                 var temp_id = Convert.ToInt32((string)reader.Value);
                                 reader.Read();
@@ -317,10 +320,12 @@ namespace app_lib.Datasource {
 
                             while (reader.Read()) {
                                 if (reader.TokenType == JsonToken.EndObject) break;
-                                                                
+                                if (reader.TokenType == JsonToken.EndArray) break;
+
                                 //A class log
-                                var temp  = new Histrory();
-                                temp.Uuid = (string)reader.Value;
+                                var temp = new Histrory {
+                                    Uuid = (string)reader.Value
+                                };
                                 while (reader.Read()) {
                                     if (reader.TokenType == JsonToken.EndObject) break;
                                     if (reader.TokenType == JsonToken.StartObject) continue;

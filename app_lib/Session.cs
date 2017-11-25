@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
+using app_lib.Extensions;
 
 namespace app_lib {
     public static class Session {
@@ -82,9 +83,159 @@ namespace app_lib {
         public static void Load() {
             using (var sr = new StreamReader(Paths.GetStream(Paths.SessionFile, 
                 Paths.StreamType.Input))) {
-                var result = sr.ReadToEnd();
-                if (result.Length > 0)
-                    ThisSession = JsonConvert.DeserializeObject<SerializeSession>(result);
+                var reader = new JsonTextReader(sr);
+                reader.Read();
+                while (reader.Read()) {
+                    if (reader.TokenType == JsonToken.EndObject) break;
+
+                    switch ((string)reader.Value) {
+                        case "DeviceUuid":
+                            reader.Read();
+                            DeviceUuid = (string)reader.Value;
+                            break;
+                        case "Email":
+                            reader.Read();
+                            Email = (string)reader.Value;
+                            break;
+                        case "AccId":
+                            reader.Read();
+                            AccId = Convert.ToInt32((long)reader.Value);
+                            break;
+                        case "LastUpdateDay":
+                            reader.Read();
+                            LastUpdateDay = Convert.ToInt32((long)reader.Value);
+                            break;
+                        case "FullName":
+                            reader.Read();
+                            FullName = (string)reader.Value;
+                            break;
+                        case "CacheStatistics":
+                            reader.Read();
+                            var buffer_statistics = new DataStructure.StatisticsEntity();
+                            while (reader.Read()) {
+                                if (reader.TokenType == JsonToken.EndArray) break;
+                                if (reader.TokenType == JsonToken.StartObject) continue;
+                                if (reader.TokenType == JsonToken.EndObject) {
+                                    CacheStatistics.Add(buffer_statistics);
+                                    buffer_statistics = new DataStructure.StatisticsEntity();
+                                    continue;
+                                }
+
+                                switch ((string)reader.Value) {
+                                    case "Subject":
+                                        reader.Read();
+                                        buffer_statistics.Subject = (string)reader.Value;
+                                        break;
+                                    case "SubjectId":
+                                        reader.Read();
+                                        buffer_statistics.SubjectId = Convert.ToInt32(
+                                            (long)reader.Value);
+                                        break;
+                                    case "Total":
+                                        reader.Read();
+                                        buffer_statistics.Total = Convert.ToInt32(
+                                            (long)reader.Value);
+                                        break;
+                                    case "Absences":
+                                        reader.Read();
+                                        buffer_statistics.Absences = Convert.ToInt32(
+                                            (long)reader.Value);
+                                        break;
+                                    case "Class":
+                                        reader.Read();
+                                        reader.Read();
+                                        string buffer_key = "";
+                                        bool buffer_value = false;
+                                        while (reader.Read()) {
+                                            if (reader.TokenType == JsonToken.EndArray)
+                                                break;
+
+                                            if (reader.TokenType == JsonToken.StartObject)
+                                                continue;
+
+                                            if (reader.TokenType == JsonToken.EndObject) {
+                                                buffer_statistics.Class.Add(
+                                                    new KeyValuePair<string, bool>(buffer_key,
+                                                        buffer_value
+                                                    )
+                                                );
+                                                continue;
+                                            }
+
+                                            switch ((string)reader.Value) {
+                                                case "Key":
+                                                    reader.Read();
+                                                    buffer_key = (string)reader.Value;
+                                                    break;
+                                                case "Value":
+                                                    reader.Read();
+                                                    buffer_value = (bool)reader.Value;
+                                                    break;
+                                                default:
+                                                    break;
+                                            }
+                                        }
+                                        break;
+                                    default:
+                                        ExtensionNewtonsoft.Skip(ref reader);
+                                        break;
+                                }
+                            }
+                            break;
+                        case "CacheHistrory":
+                            reader.Read();
+                            var buffer_histrory = new DataStructure.Histrory();
+                            while (reader.Read()) {
+                                if (reader.TokenType == JsonToken.EndArray) break;
+                                if (reader.TokenType == JsonToken.StartObject) continue;
+                                if (reader.TokenType == JsonToken.EndObject) {
+                                    CacheHistrory.Add(buffer_histrory);
+                                    buffer_histrory = new DataStructure.Histrory();
+                                    continue;
+                                }
+
+                                switch ((string)reader.Value) {
+                                    case "Class":
+                                        reader.Read();
+                                        buffer_histrory.Class = (string)reader.Value;
+                                        break;
+                                    case "Date":
+                                        reader.Read();
+                                        buffer_histrory.Date = (string)reader.Value;
+                                        break;
+                                    case "Subject":
+                                        reader.Read();
+                                        buffer_histrory.Subject = (string)reader.Value;
+                                        break;
+                                    case "Time":
+                                        reader.Read();
+                                        buffer_histrory.Time = (string)reader.Value;
+                                        break;
+                                    case "Uuid":
+                                        reader.Read();
+                                        buffer_histrory.Uuid = (string)reader.Value;
+                                        break;
+                                    case "Absence":
+                                        reader.Read();
+                                        buffer_histrory.Absence = !(bool)reader.Value;
+                                        break;
+                                    case "Unixtime":
+                                        reader.Read();
+                                        buffer_histrory.Unixtime = Convert.ToInt32(
+                                            (long)reader.Value);
+                                        break;
+                                    default:
+                                        ExtensionNewtonsoft.Skip(ref reader);
+                                        break;
+                                }
+                            }
+                            break;
+                        default:
+                            ExtensionNewtonsoft.Skip(ref reader);
+                            break;
+                    }
+                }
+                reader.Close();
             }
         }
 
@@ -92,8 +243,8 @@ namespace app_lib {
             DeviceUuid      = null;
             Email           = null;
             AccId           = -1;
-            CacheStatistics = null;
-            CacheHistrory   = null;
+            CacheStatistics = new List<IStatisticsEntity>();
+            CacheHistrory   = new List<IHistroryEntity>();
             LastUpdateDay   = -1;
             FullName        = null;
         }
@@ -124,6 +275,8 @@ namespace app_lib {
                 Unixtime = (int)(DateTime.UtcNow.Subtract(UnixTimeSart)).TotalSeconds,
                 Uuid     = uuid
             });
+            Save();
+
             return true;
         }
     }
