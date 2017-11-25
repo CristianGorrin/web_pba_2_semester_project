@@ -12,7 +12,9 @@
                 <StackLayout Padding="0,0,0,25">
                     <Label x:Name="lab_total"
                         FontSize="Large" />
-                    <Label x:Name="lab_procent"
+                    <Label x:Name="lab_absence_total"
+                        FontSize="Large" />
+                    <Label x:Name="lab_absence_procent"
                         FontSize="Large" />
                 </StackLayout>
             </ListView.Header>
@@ -39,7 +41,7 @@
                                 <Label 
                                     Grid.Row="0"
                                     Grid.Column="1"
-                                    Text="{Binding total, StringFormat='Total: {0} lectures'}" />
+                                    Text="{Binding total, StringFormat='Total lecture: {0}'}" />
                                 <Label 
                                     Grid.Row="1"
                                     Grid.Column="1"

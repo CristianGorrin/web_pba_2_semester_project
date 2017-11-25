@@ -1,4 +1,5 @@
-﻿using System;
+﻿using app_lib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,20 +17,27 @@ namespace app.Page
 		public StatisticsPage () {
             InitializeComponent ();
 
-            lab_total.Text   = string.Format("Total absence: {0} lectures", "34");
-            lab_procent.Text = string.Format("Procent absence: {0} %", "60");
-
             m_list = new List<StatiscsItem>();
-            m_list.Add(new StatiscsItem() {
-                subject = "test_subject0",
-                total   = "test_total0",
-                procent = "test_procent0"
-            });
-            m_list.Add(new StatiscsItem() {
-                subject = "test_subject1",
-                total   = "test_total1",
-                procent = "test_procent1"
-            });
+            int total = 0, absence = 0;
+            foreach (var item in Session.CacheStatistics) {
+                total   += item.Total;
+                absence += item.Absences;
+
+                m_list.Add(new StatiscsItem() {
+                    subject = item.Subject,
+                    total   = item.Total.ToString("F0"),
+                    procent = item.Absences == 0 ? 
+                        "0" : (100 / ((double)item.Total / item.Absences)).ToString("F2")
+                });
+            }
+
+            lab_total.Text = string.Format("Total lecture: {0} units", total.ToString("F0"));
+
+            lab_absence_total.Text = string.Format("Total absence: {0} units", 
+                total.ToString("F0"));
+
+            lab_absence_procent.Text = string.Format("Procent absence: {0} %", 
+                absence == 0 ? "0" : (100 / ((double)total / absence)).ToString("F2"));
 
             list_view_statiscs.ItemsSource = m_list;
         }
