@@ -22,15 +22,10 @@ namespace app {
         }
 
         protected override void OnResume() {
-            //Testing if the Session.Cache needs to be update
             var day = DateTime.Now.Day;
             
-            if (Session.LastUpdateDay > 1 || day > Session.LastUpdateDay) {
-                MainPage = new Page.LoginPage();
-            } else if (Session.LastUpdateDay != 1 && day == 1) {
-                MainPage = new Page.LoginPage();
-            } else if (Session.CacheHistrory == null || Session.CacheStatistics == null) {
-                MainPage = new Page.LoginPage();
+            if (day > Session.LastUpdateDay || (Session.LastUpdateDay != 1 && day == 1)) {
+                Session.Update();
             } else if (Session.DeviceUuid == null) {
                 MainPage = new Page.LoginPage();
             }
