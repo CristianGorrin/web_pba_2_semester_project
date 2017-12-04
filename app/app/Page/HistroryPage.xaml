@@ -31,7 +31,8 @@
                                 <Label
                                     Grid.Column="0"
                                     Grid.Row="0"
-                                    Text="{Binding Class}">
+                                    Text="{Binding Class}"
+                                    TextColor="Green">
                                     <Label.Triggers>
                                         <DataTrigger TargetType="Label" Binding="{Binding Absence}" Value="True">
                                             <Setter Property="TextColor" Value="Red"/>
@@ -41,7 +42,8 @@
                                 <Label
                                     Grid.Column="0"
                                     Grid.Row="1"
-                                    Text="{Binding Subject}">
+                                    Text="{Binding Subject}"
+                                    TextColor="Green">
                                     <Label.Triggers>
                                         <DataTrigger TargetType="Label" Binding="{Binding Absence}" Value="True">
                                             <Setter Property="TextColor" Value="Red"/>
@@ -53,7 +55,8 @@
                                     Grid.Row="0"
                                     Text="{Binding Date}" 
                                     HorizontalOptions="End" 
-                                    VerticalOptions="Center">
+                                    VerticalOptions="Center"
+                                    TextColor="Green">
                                     <Label.Triggers>
                                         <DataTrigger TargetType="Label" Binding="{Binding Absence}" Value="True">
                                             <Setter Property="TextColor" Value="Red"/>
@@ -65,7 +68,8 @@
                                     Grid.Row="1"
                                     Text="{Binding Time}" 
                                     HorizontalOptions="End" 
-                                    VerticalOptions="Center">
+                                    VerticalOptions="Center"
+                                    TextColor="Green">
                                     <Label.Triggers>
                                         <DataTrigger TargetType="Label" Binding="{Binding Absence}" Value="True">
                                             <Setter Property="TextColor" Value="Red"/>
