@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="app.Page.StartMasterDetailPageMaster"
+             Title="Master">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <ListView x:Name="MenuItemsListView"
+              Grid.Row="0"
+              SeparatorVisibility="None"
+              HasUnevenRows="true"
+              ItemsSource="{Binding MenuItems}">
+            <ListView.Header>
+                <Grid BackgroundColor="#03A9F4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="55"/>
+                    </Grid.RowDefinitions>
+                    <Label x:Name="lab_user_full_name"
+                        Grid.Column="1"
+                        Style="{DynamicResource SubtitleStyle}"
+                        VerticalOptions="Center" 
+                        FontSize="Large"/>
+                </Grid>
+            </ListView.Header>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="15,10" HorizontalOptions="FillAndExpand">
+                            <Label VerticalOptions="FillAndExpand" 
+                    VerticalTextAlignment="Center" 
+                    Text="{Binding Title}" 
+                    FontSize="24"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <StackLayout 
+                Grid.Row="1"
+                VerticalOptions="End"
+                Padding="15,20"
+            Spacing="20">
+            <Label x:Name="lab_about"
+                Style="{DynamicResource SubtitleStyle}" 
+                Text="About EAL Check-In"
+                FontSize="Large"/>
+            <Label x:Name="lab_logout"
+                Style="{DynamicResource SubtitleStyle}" 
+                Text="Logout" 
+                FontSize="Large"
+                 />
+        </StackLayout>
+    </Grid>
+</ContentPage>

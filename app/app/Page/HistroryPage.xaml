@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="app.Page.HistroryPage">
+    <ContentPage.Content>
+        <ListView x:Name="list_view_history"
+              ItemSelected="ListItemSelected"
+              Grid.Row="0"
+              HasUnevenRows="true">
+            <ListView.Header>
+                <Grid HeightRequest="0" />
+            </ListView.Header>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="5,10,5,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="1" />
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition Width="1*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="2" />
+                                </Grid.RowDefinitions>
+                                <Label
+                                    Grid.Column="0"
+                                    Grid.Row="0"
+                                    Text="{Binding Class}"
+                                    TextColor="Green">
+                                    <Label.Triggers>
+                                        <DataTrigger TargetType="Label" Binding="{Binding Absence}" Value="True">
+                                            <Setter Property="TextColor" Value="Red"/>
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+                                <Label
+                                    Grid.Column="0"
+                                    Grid.Row="1"
+                                    Text="{Binding Subject}"
+                                    TextColor="Green">
+                                    <Label.Triggers>
+                                        <DataTrigger TargetType="Label" Binding="{Binding Absence}" Value="True">
+                                            <Setter Property="TextColor" Value="Red"/>
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+                                <Label
+                                    Grid.Column="1"
+                                    Grid.Row="0"
+                                    Text="{Binding Date}" 
+                                    HorizontalOptions="End" 
+                                    VerticalOptions="Center"
+                                    TextColor="Green">
+                                    <Label.Triggers>
+                                        <DataTrigger TargetType="Label" Binding="{Binding Absence}" Value="True">
+                                            <Setter Property="TextColor" Value="Red"/>
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+                                <Label
+                                    Grid.Column="1"
+                                    Grid.Row="1"
+                                    Text="{Binding Time}" 
+                                    HorizontalOptions="End" 
+                                    VerticalOptions="Center"
+                                    TextColor="Green">
+                                    <Label.Triggers>
+                                        <DataTrigger TargetType="Label" Binding="{Binding Absence}" Value="True">
+                                            <Setter Property="TextColor" Value="Red"/>
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+                            </Grid>
+                            <!--<BoxView
+                                Grid.Row="1"
+                                BackgroundColor="Gray"
+                                Opacity="0.4" />-->
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ContentPage.Content>
+</ContentPage>

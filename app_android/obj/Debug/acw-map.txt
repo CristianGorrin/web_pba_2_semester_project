@@ -1,4 +1,0 @@
-app_android.MainActivity, app_android;md5f70f29fbf44a160693ba3e29d168ebc6.MainActivity
-app_android.MainActivity, app_android, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5f70f29fbf44a160693ba3e29d168ebc6.MainActivity
-app_android.MainActivity;md5f70f29fbf44a160693ba3e29d168ebc6.MainActivity
-app_android.MainActivity;md5f70f29fbf44a160693ba3e29d168ebc6.MainActivity

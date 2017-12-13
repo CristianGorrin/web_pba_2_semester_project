@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="app.Page.LoginPage">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="4*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="10*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Label 
+                Grid.Row="1" 
+                Grid.Column="1"
+                Text="Eal CheckIn" 
+                HorizontalOptions="Center"
+                VerticalOptions="Center" 
+                FontSize="38"/>
+            <StackLayout 
+                Grid.Row="2"
+                Grid.Column="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="10*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <Label 
+                        Grid.Column="0" 
+                        Grid.Row="0" 
+                        Text="Email:"
+                        HorizontalTextAlignment="End" 
+                        VerticalTextAlignment="Center" 
+                        FontSize="Large" />
+                    <Entry 
+                        x:Name="txt_email"
+                        Grid.Column="1" 
+                        Grid.Row="0" 
+                        Placeholder="Enter email" 
+                        Keyboard="Email" />
+                    <Label 
+                        Grid.Column="0" 
+                        Grid.Row="1" 
+                        Text="Password:" 
+                        HorizontalTextAlignment="End" 
+                        VerticalTextAlignment="Center" 
+                        FontSize="Large" />
+                    <Entry 
+                        x:Name="txt_password"
+                        Grid.Column="1" 
+                        Grid.Row="1" 
+                        Placeholder="Enter password" 
+                        IsPassword="True" />
+                </Grid>
+                <Button x:Name="btn_login"
+                    Text="Login"
+                    Clicked="ClickLogin" />
+                <ActivityIndicator
+                    x:Name="aci_login" />
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
+    

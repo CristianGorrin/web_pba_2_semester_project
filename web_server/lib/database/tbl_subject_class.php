@@ -140,7 +140,7 @@ class RdgSubjectClass implements IRDG {
         if (is_null($input)) {
         	return null;
         }
-        
+
         return new TblSubjectClass(intval($input['id']), intval($input['class']),
             intval($input['subject']));
     }
@@ -175,5 +175,25 @@ class RdgSubjectClass implements IRDG {
                 DatabaseCMD::EscapeString($subject)
             )
         );
+    }
+
+    /**
+     * Summary of GetAll
+     * Gets all rows based on the class
+     *
+     * @param int $class_id
+     *
+     * @return TblSubjectClass[]
+     * @yield
+     *
+     */
+    public static function GetAll($class_id) {
+        $result = DatabaseCMD::ExecutedStatement(
+            sprintf(self::_SELECT_BY, 'class', DatabaseCMD::EscapeString($class_id))
+        );
+
+        foreach ($result as $value) {
+        	yield self::ResultToObject($value);
+        }
     }
 }

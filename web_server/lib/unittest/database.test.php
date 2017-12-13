@@ -404,7 +404,7 @@ class DatabaseTest implements ITest {
 
             Assert::AreEqual(
                 $value->class,
-                '4',
+                4,
                 "The class isn't as expected - " . $type
             );
 

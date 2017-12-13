@@ -8,4 +8,17 @@
   <PropertyGroup Label="Configuration">
     <Import_RootNamespace>app_lib</Import_RootNamespace>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\Newtonsoft.Json.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Geolocator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Paths.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataSource.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataStructure.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interface\IClassEntity.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interface\IHistroryEntity.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interface\ILoginResult.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interface\IQrcodeValidateResult.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interface\IStatistics.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Session.cs" />
+  </ItemGroup>
 </Project>

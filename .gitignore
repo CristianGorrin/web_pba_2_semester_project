@@ -1,5 +1,7 @@
 # VS
 .vs/
+*/*.phpproj.user
+packages/
 
 # VS Build results
 [Dd]ebug/
@@ -12,3 +14,6 @@ bld/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
+
+#The web server build
+web_server/build/

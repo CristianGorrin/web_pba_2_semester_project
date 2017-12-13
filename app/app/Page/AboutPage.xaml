@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="app.Page.AboutPage">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="3*" />
+                <RowDefinition Height="10*" />
+            </Grid.RowDefinitions>
+            <Label 
+                Grid.Row="1" 
+                Text="About EAL CheckIn" 
+                VerticalTextAlignment="Center"
+                HorizontalTextAlignment="Center"
+                FontSize="38" />
+            <ScrollView
+                Grid.Row="2">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="10" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="10" />
+                    </Grid.ColumnDefinitions>
+                    <Label 
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut semper non velit in eleifend. Praesent ut malesuada est, id dictum leo. Sed mattis ante ac egestas accumsan. Morbi rhoncus, purus eu egestas vehicula, quam sapien gravida eros, vulputate semper dolor nisi eget arcu. Phasellus rutrum, lectus ac tristique varius, odio ligula facilisis nisl, ut pulvinar risus est sagittis tortor. Phasellus placerat, odio nec mollis maximus, nulla risus porta tellus, et viverra enim augue non neque. Pellentesque non varius purus. Ut odio mauris, mollis vel nisl quis, fringilla accumsan lacus. Praesent dictum iaculis ligula bibendum blandit. Phasellus sit amet turpis justo. Suspendisse interdum interdum leo, a euismod orci scelerisque ut.Duis euismod tincidunt purus at hendrerit. Praesent fermentum molestie sapien, nec efficitur magna bibendum et. Quisque eros leo, pharetra vitae ante quis, feugiat tincidunt eros. Cras ante mauris, vehicula ut mi ut, tincidunt aliquam ante. Curabitur porta neque in velit molestie viverra. Nunc et aliquam arcu. Fusce gravida dignissim condimentum. Proin non semper augue. Praesent et leo vitae nunc auctor efficitur non sed tellus. Praesent metus nisi, tincidunt non mollis at, lobortis non urna. Etiam ut ante sed magna auctor vulputate. Cras efficitur consequat iaculis.Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse nisi felis, suscipit auctor cursus ac, consequat eget leo. Phasellus lobortis, diam sed hendrerit posuere, enim felis posuere nisl, ac tincidunt ex libero vestibulum est. Donec convallis sollicitudin interdum. Cras sed maximus lectus. Integer venenatis sed enim vel consectetur. Pellentesque laoreet porta fermentum. Suspendisse potenti.Proin aliquet vitae sem a tincidunt. Maecenas lacinia posuere fermentum. Curabitur finibus malesuada purus, in eleifend turpis iaculis in. Aliquam gravida vel massa id cursus. Suspendisse sed tempus ipsum. Cras faucibus lectus hendrerit lorem varius feugiat. Proin varius faucibus condimentum. Phasellus vitae nulla id dui venenatis placerat vitae nec arcu. Aenean scelerisque luctus dapibus. Etiam ac hendrerit magna.Phasellus eu fermentum risus. Vivamus quis laoreet massa, eu placerat ligula. In a magna magna. Suspendisse vitae mi malesuada, molestie justo vitae, rutrum arcu. Morbi posuere finibus est non consectetur. Quisque lacus augue, eleifend eget dolor id, ultricies scelerisque lorem. Pellentesque mollis varius rutrum. In ultricies ullamcorper leo, eget condimentum magna commodo eu. Etiam quis fringilla turpis, a tempor nunc. Mauris eu efficitur mi. Aenean vehicula metus ut aliquet rutrum. Vestibulum tempus magna sed lacus vehicula bibendum. Donec cursus diam a mauris convallis pretium. Curabitur et ligula suscipit tellus ultricies imperdiet. Nullam quis volutpat nunc."
+                        HorizontalOptions="Center"
+                        VerticalTextAlignment="Start"
+                        FontSize="Large" />
+                </Grid>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

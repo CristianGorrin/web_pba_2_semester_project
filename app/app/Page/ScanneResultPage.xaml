@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="app.Page.ScanneResultPage">
+    <ContentPage.Content>
+        <Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="10" />
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="1" x:Name="grid_result"
+                      IsVisible="False">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                    </Grid.RowDefinitions>
+                    <Label x:Name="txt_result"
+                        Grid.Row="1"
+                        VerticalTextAlignment="Center"
+                        HorizontalTextAlignment="Center"
+                        FontSize="Large" />
+                    <Label x:Name="txt_details" 
+                        Grid.Row="2"
+                        HorizontalTextAlignment="Center"
+                        FontSize="Large" />
+                    <Button x:Name="btn_close"
+                        Clicked="BtnCloseClicked"
+                        Text="Close"
+                        Grid.Row="3"
+                        HorizontalOptions="Center" />
+                </Grid>
+            </Grid>
+            <StackLayout x:Name="sl_aci"
+                VerticalOptions="Center">
+                <ActivityIndicator
+                    HorizontalOptions="Center"
+                    IsRunning="True" />
+                <Label
+                    HorizontalOptions="Center"
+                    Text="Please wait..." 
+                    FontSize="Large"/>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
