@@ -37,7 +37,7 @@ namespace app.Page {
                 }
             };
 
-            lab.Text                    = "Scan the qr code to check in";
+            lab.Text                    = "Scan QR code to check in";
             lab.HorizontalTextAlignment = TextAlignment.Center;
             lab.VerticalTextAlignment   = TextAlignment.Center;
             lab.BackgroundColor         = new Color(255, 255, 255, 0.3);

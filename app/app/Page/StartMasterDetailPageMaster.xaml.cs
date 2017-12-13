@@ -26,8 +26,8 @@ namespace app.Page {
             lab_logout.GestureRecognizers.Add(new TapGestureRecognizer {
                 Command = new Command(async () => {
                     var result = await DisplayAlert(
-                        "Logout", 
-                        "Do you really want to Logout?", 
+                        "Log out", 
+                        "Do you really want to log out?", 
                         "Yes", "No"
                     );
 
@@ -53,7 +53,7 @@ namespace app.Page {
                 MenuItems = new ObservableCollection<StartMasterDetailPageMenuItem>(new[] {
                     new StartMasterDetailPageMenuItem {
                         Id         = 0,
-                        Title      = "QR scanner",
+                        Title      = "Scan QR code",
                         TargetType = typeof(ScannerPage)
                     },
                     new StartMasterDetailPageMenuItem {

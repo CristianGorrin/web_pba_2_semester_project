@@ -41,13 +41,13 @@ namespace app.Page {
 
                 Device.BeginInvokeOnMainThread(() => {
                     if (m_result.Result) {
-                        txt_result.Text = "You are now check in";
+                        txt_result.Text = "You are now checked in";
 
                     } else {
                         if (m_result.ValidateQrcode) {
-                            txt_result.Text = "We are having problems check you in...";
+                            txt_result.Text = "We are having problems checking you in";
                         } else {
-                            txt_result.Text = "The qr code you used is not valid...";
+                            txt_result.Text = "The QR code you used is not valid";
                         }
                     }
 

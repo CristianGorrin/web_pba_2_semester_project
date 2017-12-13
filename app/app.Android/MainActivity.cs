@@ -11,7 +11,7 @@ using app_lib;
 
 namespace app.Droid {
     [Activity(
-        Label = "app", 
+        Label = "EAL Check-In", 
         Icon = "@drawable/icon", 
         Theme = "@style/MainTheme", 
         MainLauncher = true, 

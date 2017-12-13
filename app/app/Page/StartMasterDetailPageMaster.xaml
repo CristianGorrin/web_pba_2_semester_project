@@ -14,7 +14,7 @@
               HasUnevenRows="true"
               ItemsSource="{Binding MenuItems}">
             <ListView.Header>
-                <Grid BackgroundColor="#03A9F4">
+                <Grid BackgroundColor="#329099">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="10"/>
                         <ColumnDefinition Width="*"/>
@@ -27,7 +27,8 @@
                         Grid.Column="1"
                         Style="{DynamicResource SubtitleStyle}"
                         VerticalOptions="Center" 
-                        FontSize="Large"/>
+                        FontSize="Large"
+                        TextColor="#FFFFFF"/>
                 </Grid>
             </ListView.Header>
             <ListView.ItemTemplate>
@@ -54,7 +55,7 @@
                 FontSize="Large"/>
             <Label x:Name="lab_logout"
                 Style="{DynamicResource SubtitleStyle}" 
-                Text="Logout" 
+                Text="Log out" 
                 FontSize="Large"
                  />
         </StackLayout>
