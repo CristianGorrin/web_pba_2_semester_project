@@ -45,7 +45,7 @@
                                 <Label 
                                     Grid.Row="1"
                                     Grid.Column="1"
-                                    Text="{Binding procent, StringFormat='Procent: {0}%'}" />
+                                    Text="{Binding procent, StringFormat='Absence: {0}%'}" />
                             </Grid>
                         </Grid>
                     </ViewCell>

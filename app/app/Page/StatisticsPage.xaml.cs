@@ -34,7 +34,7 @@ namespace app.Page
             lab_total.Text = string.Format("Total lecture: {0} units", total.ToString("F0"));
 
             lab_absence_total.Text = string.Format("Total absence: {0} units", 
-                total.ToString("F0"));
+                absence.ToString("F0"));
 
             lab_absence_procent.Text = string.Format("Procent absence: {0} %", 
                 absence == 0 ? "0" : (100 / ((double)total / absence)).ToString("F2"));
