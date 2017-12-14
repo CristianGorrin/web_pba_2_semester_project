@@ -1,0 +1,29 @@
+Maximum length of generated hash when using password_hash? - https://stackoverflow.com/questions/21479655/maximum-length-of-generated-hash-when-using-password-hash
+
+Measuring accuracy of latitude and longitude? - https://gis.stackexchange.com/questions/8650/measuring-accuracy-of-latitude-and-longitude
+
+What is the maximum length of latitude and longitude? - https://stackoverflow.com/questions/15965166/what-is-the-maximum-length-of-latitude-and-longitude
+
+QR code - https://en.wikipedia.org/wiki/QR_code
+
+Smartphone OS Market Share, 2017 Q1 - https://www.idc.com/promo/smartphone-market-share/os
+
+ACID database - https://en.wikipedia.org/wiki/ACID
+
+AltoRouter - https://github.com/dannyvankooten/AltoRouter
+
+newtonsoft.json - https://www.newtonsoft.com/json/help/html/Introduction.htm
+
+GeolocatorPlugin - https://jamesmontemagno.github.io/GeolocatorPlugin/GettingStarted.html
+
+ZXing.Net - https://github.com/micjahn/ZXing.Net
+
+think-aloud-testing - http://practicaluxmethods.com/product/think-aloud-testing/
+
+Class Diagram Relationships in UML with Examples - http://creately.com/blog/diagrams/class-diagram-relationships/
+
+Concepts of Three-Tier Architecture - https://alitarhini.wordpress.com/2011/01/22/concepts-of-three-tier-architecture/
+
+What do low coupling and high cohesion mean? -https://500internalservererror.wordpress.com/2009/02/23/what-do-low-coupling-and-high-cohesion-mean-what-does-the-principle-of-encapsulation-mean/
+
+
